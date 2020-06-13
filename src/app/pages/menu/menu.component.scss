@@ -1,0 +1,110 @@
+/* SEARCH */
+.search {
+  margin-top: 50px;
+}
+
+.search h2 {
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.search span {
+  color: #3949ab;
+  font-weight: 600;
+}
+
+.search p {
+  opacity: 0.7;
+  font-size: 18px;
+}
+
+.app-search {
+  display: flex;
+  flex-direction: row;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+  padding: 6px 25px;
+  border-radius: 25px;
+}
+
+.mat-flat-button {
+  height: 42px;
+  border-radius: 25px;
+  padding: 0 2em;
+  font-size: 16px;
+}
+
+/* DISCOUNT */
+.discount {
+  padding: 20px 40px;
+  margin: 30px 0;
+  border-radius: 25px;
+  background-color: #fff5e9;
+}
+
+.discount h3 {
+  font-size: 30px;
+}
+
+.discount span {
+  font-size: 20px;
+}
+
+.discount img {
+  width: 25%;
+}
+
+@media (min-width: 1200px) {
+}
+
+/* Medium screen : 992px. */
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Tablet :768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Large Mobile :480px. */
+
+@media only screen and (max-width: 767px) {
+  .discount h3 {
+    font-size: 26px;
+  }
+
+  .discount span {
+    font-size: 15px;
+  }
+  .discount img {
+    width: 45%;
+  }
+}
+
+/* Small Mobile :320px. */
+
+@media only screen and (max-width: 479px) {
+  .search h2 {
+    font-size: 32px;
+  }
+
+  .discount {
+    padding: 14px 20px;
+    margin: 15px 0;
+    border-radius: 20px;
+  }
+
+  .discount h3 {
+    font-size: 24px;
+  }
+
+  .discount span {
+    font-size: 12px;
+  }
+  .discount img {
+    width: 45%;
+  }
+}

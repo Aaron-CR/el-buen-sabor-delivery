@@ -1,1 +1,160 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+// Bootstrap
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/utilities";
+// Saturn Datepicker
+// @import "~saturn-datepicker/theming";
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+$custom-typography: mat-typography-config(
+  $font-family: '"Poppins", sans-serif;',
+);
+@include mat-core($custom-typography);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$el-buen-sabor-delivery-primary: mat-palette($mat-indigo, 600);
+// $el-buen-sabor-delivery-accent: mat-palette($mat-deep-purple, 600, A200, A100, A400);
+$el-buen-sabor-delivery-accent: mat-palette($mat-amber);
+
+// The warn palette is optional (defaults to red).
+$el-buen-sabor-delivery-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$el-buen-sabor-delivery-theme: mat-light-theme(
+  $el-buen-sabor-delivery-primary,
+  $el-buen-sabor-delivery-accent,
+  $el-buen-sabor-delivery-warn
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($el-buen-sabor-delivery-theme);
+
+// Saturn Datepicker theme
+// @include sat-datepicker-theme($el-buen-sabor-admin-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  color: #0a183d;
+  font-weight: 600;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 15px;
+  color: #6a7080;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+/*---------------------
+Helper CSS
+ -----------------------*/
+
+.section-title {
+  margin-bottom: 60px;
+}
+
+.section-title h2 {
+  font-size: 60px;
+}
+
+.set-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+}
+
+.spad {
+  padding-top: 105px;
+  padding-bottom: 105px;
+}
+
+.text-white h2,
+.text-white h4,
+.text-white p {
+  color: #fff;
+}
+
+/* RESET */
+button:focus {
+  outline: 0 !important;
+}
+
+/* *:focus {
+  outline: none !important;
+  border: 0 !important;
+} */
+
+/* CHROME SCROLLBAR */
+::-webkit-scrollbar {
+  width: 8px;
+  // display: none;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(200, 200, 200);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(170, 170, 170);
+}

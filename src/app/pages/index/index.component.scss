@@ -1,0 +1,208 @@
+h2,
+h4,
+h5 {
+  margin: 0;
+  color: #0a183d;
+  font-weight: 600;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 15px;
+  color: #6a7080;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+}
+
+/*---------------------
+Helper CSS
+ -----------------------*/
+
+.section-title {
+  margin-bottom: 60px;
+}
+
+.section-title h2 {
+  font-size: 60px;
+}
+
+.set-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+}
+
+.spad {
+  padding-top: 105px;
+  padding-bottom: 105px;
+}
+
+/*------------------
+Hero section
+ ---------------------*/
+
+.hero-section {
+  overflow: hidden;
+}
+
+.hs-item {
+  height: 624px;
+  padding-bottom: 90px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.hs-item h2 {
+  font-size: 70px;
+  margin-bottom: 25px;
+  line-height: 0.9;
+  position: relative;
+  top: 50px;
+}
+
+.hs-item h2 span {
+  color: #3949ab;
+}
+
+.hs-item p {
+  opacity: 0.6;
+  margin-bottom: 50px;
+  position: relative;
+  top: 50px;
+}
+
+.hs-item .hs-text {
+  padding-top: 90px;
+  max-width: 475px;
+}
+
+.mat-flat-button {
+  text-transform: uppercase;
+  position: relative;
+  top: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  min-width: 195px;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  border-radius: 50px;
+}
+
+.hr-img img {
+  min-width: 602px;
+  position: relative;
+  left: -34px;
+  top: 50px;
+}
+
+/* ----------------
+How section
+ -------------------*/
+
+.how-item .hi-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ffc107;
+  margin-bottom: 25px;
+}
+
+.how-item .hi-icon img {
+  position: absolute;
+  right: -8px;
+  bottom: 0;
+}
+
+.how-item h4 {
+  margin-bottom: 25px;
+}
+
+.how-item p {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+/* ----------------
+Concept section
+ -------------------*/
+
+.concept-section p {
+  padding-top: 5px;
+}
+
+.concept-item {
+  text-align: center;
+  padding-top: 35px;
+}
+
+.concept-item img {
+  border-radius: 40px;
+  margin-bottom: 15px;
+}
+
+/* ----------------
+Responsive
+ -------------------*/
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1176px;
+  }
+}
+
+/* Medium screen : 992px. */
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .hr-img img {
+    min-width: 500px;
+    position: relative;
+  }
+}
+
+/* Tablet :768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hr-img {
+    display: none;
+  }
+}
+
+/* Large Mobile :480px. */
+
+@media only screen and (max-width: 767px) {
+  .hr-img {
+    display: none;
+  }
+}
+
+/* Small Mobile :320px. */
+
+@media only screen and (max-width: 479px) {
+  .hs-item h2 {
+    font-size: 56px;
+  }
+  .section-title h2 {
+    font-size: 36px;
+  }
+}
