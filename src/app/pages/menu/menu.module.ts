@@ -5,10 +5,11 @@ import { MenuRoutingModule } from './menu-routing.module';
 import { MenuComponent } from './menu.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CardComponent } from './card/card.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 @NgModule({
-  declarations: [MenuComponent, CardComponent],
+  declarations: [MenuComponent, CardComponent, DialogComponent],
   imports: [
     CommonModule,
     MenuRoutingModule,

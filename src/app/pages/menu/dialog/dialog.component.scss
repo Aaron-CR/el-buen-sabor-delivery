@@ -1,0 +1,92 @@
+.app-dialog {
+  background-color: #e4e4e4;
+  color: #000000bb;
+  margin-bottom: 0;
+}
+
+.dialog-img {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  height: 330px;
+  width: 100%;
+}
+
+img {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  min-height: 330px;
+}
+
+.card-time {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  opacity: 75%;
+  font-weight: 600;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-top-right-radius: 15px;
+}
+
+.dialog-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.mat-icon-button {
+  background-color: #fff;
+  opacity: 75%;
+}
+
+.card-title {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 22px;
+  width: 100%;
+}
+
+.card-price {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.card-quantity {
+  width: 10%;
+}
+
+.card-ingredients {
+  font-size: 14px;
+}
+
+/* Large Mobile :480px. */
+
+@media only screen and (max-width: 767px) {
+  .card-button {
+    width: 100%;
+  }
+}
+
+/* Small Mobile :320px. */
+
+@media only screen and (max-width: 479px) {
+  .dialog-img {
+    height: 210px;
+  }
+
+  img {
+    min-height: 210px;
+  }
+
+  .card-button {
+    width: 100%;
+  }
+}

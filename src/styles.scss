@@ -136,6 +136,21 @@ Helper CSS
   color: #fff;
 }
 
+/* DIALOGS */
+.app-dialog .mat-dialog-container {
+  padding: 0;
+  color: #00000096;
+  border-radius: 20px;
+}
+
+.app-dialog .subtitle {
+  font-size: 20px;
+}
+
+.app-dialog-title {
+  font-size: 30px;
+}
+
 /* RESET */
 button:focus {
   outline: 0 !important;

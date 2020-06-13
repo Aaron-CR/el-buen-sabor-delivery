@@ -27,46 +27,8 @@
   <!-- Discount section end -->
 
   <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <app-card></app-card>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let item of [].constructor(15); let i = index"
+      (click)="openDialog()">
       <app-card></app-card>
     </div>
   </div>
