@@ -1,0 +1,32 @@
+<app-dialog [title]="'Ingresar'">
+  <form novalidate [formGroup]="signInFormGroup">
+    <mat-form-field class="w-100">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput type="email" required formControlName="email" placeholder="Ingrese su correo electrónico.">
+    </mat-form-field>
+    <mat-form-field class="pb-2 w-100">
+      <mat-label>Contraseña</mat-label>
+      <input matInput required [type]="hide ? 'password' : 'text'" formControlName="password"
+        placeholder="Ingrese su contraseña.">
+      <mat-icon class="material-icons-outlined" matSuffix (click)="hide = !hide">
+        {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="w-100 mb-4" routerLink="/menu">Ingresar</button>
+  </form>
+  <div class="text-center">
+    <div class="d-flex align-content-center">
+      <hr class="flex-fill">
+      <p class="m-0 px-3">O ingresa con</p>
+      <hr class="flex-fill">
+    </div>
+    <div class="my-3">
+      <button mat-fab class="facebook-button mx-2">
+        <img src="assets/img/icons/facebook-logo.png">
+      </button>
+      <button mat-fab class="google-button mx-2">
+        <img src="assets/img/icons/google-logo.png">
+      </button>
+    </div>
+    <p>¿Necesitas una cuenta? <a [routerLink]="[]" (click)="signUp()">Registrate</a> </p>
+  </div>
+</app-dialog>

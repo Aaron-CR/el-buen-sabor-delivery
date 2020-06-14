@@ -8,11 +8,21 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { SignUpComponent } from './components/dialogs/sign-up/sign-up.component';
+import { SignInComponent } from './components/dialogs/sign-in/sign-in.component';
+import { FormAddressComponent } from './components/dialogs/form-address/form-address.component';
+import { SelectAddressComponent } from './components/dialogs/select-address/select-address.component';
+import { BaseComponent } from './components/dialogs/base/base.component';
 
 @NgModule({
   declarations: [
     NavigationComponent,
-    FooterComponent
+    FooterComponent,
+    SignUpComponent,
+    SignInComponent,
+    FormAddressComponent,
+    SelectAddressComponent,
+    BaseComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +38,11 @@ import { FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    NavigationComponent
+    NavigationComponent,
+    SignUpComponent,
+    SignInComponent,
+    FormAddressComponent,
+    SelectAddressComponent
   ]
 })
 export class SharedModule { }

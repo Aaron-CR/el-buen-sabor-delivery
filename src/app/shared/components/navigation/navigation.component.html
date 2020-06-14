@@ -1,15 +1,17 @@
 <!-- Toolbar Start -->
-<mat-toolbar class="mat-elevation-z2" color="primary" class="px-0">
+<mat-toolbar class="px-0">
   <!-- Logo Image -->
   <img class="logo-icon ml-4" src="assets/images/logos/angular.png">
   <span class="mx-2">Delivery</span>
   <!-- Spacer -->
   <div class="mr-auto"></div>
+  <a mat-stroked-button class="text-decoration-none" (click)="signUp()">Registrate</a>
+  <a mat-flat-button class="text-decoration-none ml-3" color="primary" (click)="signIn()">Ingresar</a>
   <!-- User Button -->
   <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
     <div class="mat-button-wrapper">
-      <img src="assets/images/avatars/Velazquez.jpg" class="avatar">
-      <span class="mx-2"> Charlie Adams </span>
+      <img src="assets/images/avatars/profile.jpg" class="avatar">
+      <span class="mx-2"> Nombre Apellido </span>
       <mat-icon class="material-icons-outlined s-16">keyboard_arrow_down</mat-icon>
     </div>
     <div matripple="" class="mat-ripple mat-button-ripple"></div>

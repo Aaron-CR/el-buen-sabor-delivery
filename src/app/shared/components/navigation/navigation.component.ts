@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { SignUpComponent } from '../dialogs/sign-up/sign-up.component';
+import { SignInComponent } from '../dialogs/sign-in/sign-in.component';
 
 @Component({
   selector: 'app-navigation',
@@ -13,7 +16,10 @@ export class NavigationComponent implements OnInit {
   fixedInViewport = true;
   opened = false;
 
-  public constructor(private breakpointObserver: BreakpointObserver) { }
+  public constructor(
+    private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog
+  ) { }
 
   public ngOnInit(): void {
     const breakpoints = Object.keys(Breakpoints).map(key => Breakpoints[key]);
@@ -24,6 +30,21 @@ export class NavigationComponent implements OnInit {
         this.determineLayoutGap();
       });
   }
+
+  signUp() {
+    this.dialog.open(SignUpComponent, {
+      panelClass: 'app-dialog',
+      width: '420px'
+    });
+  }
+
+  signIn() {
+    this.dialog.open(SignInComponent, {
+      panelClass: 'app-dialog',
+      width: '420px'
+    });
+  }
+
 
   private determineSidenavMode(): void {
     if (this.isExtraSmallDevice() || this.isSmallDevice()) {
