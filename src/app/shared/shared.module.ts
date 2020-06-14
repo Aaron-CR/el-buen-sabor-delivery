@@ -13,6 +13,7 @@ import { SignInComponent } from './components/dialogs/sign-in/sign-in.component'
 import { FormAddressComponent } from './components/dialogs/form-address/form-address.component';
 import { SelectAddressComponent } from './components/dialogs/select-address/select-address.component';
 import { BaseComponent } from './components/dialogs/base/base.component';
+import { DialogService } from './components/dialogs/dialog.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,6 @@ import { BaseComponent } from './components/dialogs/base/base.component';
     FormsModule,
     MaterialModule,
     RouterModule
-
   ],
   exports: [
     HttpClientModule,
@@ -43,6 +43,9 @@ import { BaseComponent } from './components/dialogs/base/base.component';
     SignInComponent,
     FormAddressComponent,
     SelectAddressComponent
+  ],
+  providers: [
+    DialogService
   ]
 })
 export class SharedModule { }

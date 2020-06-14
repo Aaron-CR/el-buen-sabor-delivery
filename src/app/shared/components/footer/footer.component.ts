@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from '../dialogs/dialog.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,9 +10,17 @@ export class FooterComponent implements OnInit {
 
   public year = new Date().getFullYear();
 
-  constructor() { }
+  constructor(private dialogService: DialogService) { }
 
   ngOnInit(): void {
+  }
+
+  onFormAddress() {
+    this.dialogService.formAddress();
+  }
+
+  onSelectAddress() {
+    this.dialogService.selectAddress();
   }
 
 }

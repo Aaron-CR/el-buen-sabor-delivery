@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { SignUpComponent } from '../sign-up/sign-up.component';
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,8 +14,7 @@ export class SignInComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<SignInComponent>,
-    public dialog: MatDialog
+    public dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -30,14 +28,9 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  signUp() {
-    this.dialogRef.close();
-    this.dialog.open(SignUpComponent, {
-      panelClass: 'app-dialog',
-      width: '420px'
-    });
+  onSignUp() {
+    this.dialogService.signUp();
   }
-
 
 }
 
