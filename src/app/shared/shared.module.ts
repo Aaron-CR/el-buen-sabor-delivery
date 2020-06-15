@@ -14,6 +14,7 @@ import { FormAddressComponent } from './components/dialogs/form-address/form-add
 import { SelectAddressComponent } from './components/dialogs/select-address/select-address.component';
 import { BaseComponent } from './components/dialogs/base/base.component';
 import { DialogService } from './components/dialogs/dialog.service';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,11 @@ import { DialogService } from './components/dialogs/dialog.service';
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyARaDrtQwfk6Ql8byHHSJtAAJGswf9ueds',
+      libraries: ['places']
+    })
   ],
   exports: [
     HttpClientModule,
