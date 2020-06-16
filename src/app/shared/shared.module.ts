@@ -15,6 +15,7 @@ import { SelectAddressComponent } from './components/dialogs/select-address/sele
 import { BaseComponent } from './components/dialogs/base/base.component';
 import { DialogService } from './components/dialogs/dialog.service';
 import { AgmCoreModule } from '@agm/core';
+import { ScheduleComponent } from './components/dialogs/schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AgmCoreModule } from '@agm/core';
     SignInComponent,
     FormAddressComponent,
     SelectAddressComponent,
-    BaseComponent
+    BaseComponent,
+    ScheduleComponent
   ],
   imports: [
     CommonModule,

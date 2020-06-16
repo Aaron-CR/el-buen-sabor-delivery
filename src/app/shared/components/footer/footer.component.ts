@@ -15,12 +15,20 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onMenu() {
+    this.dialogService.formAddress();
+  }
+
   onFormAddress() {
     this.dialogService.formAddress();
   }
 
   onSelectAddress() {
     this.dialogService.selectAddress();
+  }
+
+  onSchedule() {
+    this.dialogService.schedule();
   }
 
 }
