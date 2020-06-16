@@ -1,1 +1,70 @@
-<p>my-profile works!</p>
+<div class="page">
+  <div class="header-image">
+    <img src="assets/img/concept/2.jpg">
+    <div class="bottom-left">Mi perfil</div>
+  </div>
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-center" *ngIf="!edit; else editForm">
+      <div class="m-4 d-flex flex-row">
+        <img src="assets/images/avatars/profile.jpg" class="avatar">
+      </div>
+      <div class="flex-row ml-4 mt-4 mr-auto">
+        <h2>
+          Nombre Apellido
+        </h2>
+        <span>
+          nombreapellido@gmail.com
+        </span>
+        <button mat-stroked-button class="ml-3" (click)="toggleEdit()">
+          Editar datos
+        </button>
+      </div>
+    </div>
+    <ng-template #editForm>
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="m-4 d-flex flex-row">
+          <img src="assets/images/avatars/profile.jpg" class="avatar">
+        </div>
+        <div class="m-4 flex-row flex-grow-1">
+          <mat-form-field class="w-100">
+            <mat-label>Nombre</mat-label>
+            <input matInput disabled value="Nombre Apellido">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Email</mat-label>
+            <input matInput disabled value="nombreapellido@gmail.com">
+          </mat-form-field>
+          <div class="d-flex">
+            <div class="flex-grow-1">
+              <mat-form-field class="w-100">
+                <mat-label>Telefono</mat-label>
+                <input matInput disabled value="+54 9 2614567890">
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-stroked-button class="ml-3">
+                <mat-icon class="material-icons-outlined" [inline]="true">edit</mat-icon> Editar
+              </button>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="flex-grow-1">
+              <mat-form-field class="w-100">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" disabled value="•••••••••••••">
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-stroked-button class="ml-3">
+                <mat-icon class="material-icons-outlined" [inline]="true">edit</mat-icon> Editar
+              </button>
+            </div>
+          </div>
+          <button mat-stroked-button (click)="toggleEdit()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

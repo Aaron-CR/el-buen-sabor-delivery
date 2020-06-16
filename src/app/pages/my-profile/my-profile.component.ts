@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyProfileComponent implements OnInit {
 
+  public edit = false;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  toggleEdit() {
+    this.edit = !this.edit;
   }
 
 }
