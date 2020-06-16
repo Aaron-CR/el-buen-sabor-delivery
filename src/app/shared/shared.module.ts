@@ -16,6 +16,7 @@ import { BaseComponent } from './components/dialogs/base/base.component';
 import { DialogService } from './components/dialogs/dialog.service';
 import { AgmCoreModule } from '@agm/core';
 import { ScheduleComponent } from './components/dialogs/schedule/schedule.component';
+import { BillingDetailsComponent } from './components/dialogs/billing-details/billing-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ScheduleComponent } from './components/dialogs/schedule/schedule.compon
     FormAddressComponent,
     SelectAddressComponent,
     BaseComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    BillingDetailsComponent
   ],
   imports: [
     CommonModule,

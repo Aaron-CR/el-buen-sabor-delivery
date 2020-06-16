@@ -5,6 +5,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { FormAddressComponent } from './form-address/form-address.component';
 import { SelectAddressComponent } from './select-address/select-address.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { BillingDetailsComponent } from './billing-details/billing-details.component';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,11 @@ export class DialogService {
     });
   }
 
+  billingDetails() {
+    this.matDialog.open(BillingDetailsComponent, {
+      panelClass: 'app-dialog'
+    });
+  }
   schedule() {
     this.matDialog.open(ScheduleComponent, {
       panelClass: 'app-dialog',

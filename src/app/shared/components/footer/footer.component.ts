@@ -27,6 +27,10 @@ export class FooterComponent implements OnInit {
     this.dialogService.selectAddress();
   }
 
+  onBillingDetails() {
+    this.dialogService.billingDetails();
+  }
+
   onSchedule() {
     this.dialogService.schedule();
   }
