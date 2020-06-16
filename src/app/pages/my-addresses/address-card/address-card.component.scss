@@ -1,0 +1,35 @@
+.address-card {
+  cursor: default;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #cccccc75;
+
+  &:hover {
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 2px 6px rgba(38, 38, 38, 0.2);
+  }
+}
+
+.mat-icon.icon {
+  height: 32px;
+  width: 32px;
+  font-size: 32px;
+  margin-right: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+span {
+  font-size: 28px;
+}
+
+.address {
+  font-size: 18px;
+  padding-top: 10px;
+  min-height: 50px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
