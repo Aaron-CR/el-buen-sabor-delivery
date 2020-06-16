@@ -37,15 +37,15 @@ export class DialogService {
 
   selectAddress() {
     this.matDialog.open(SelectAddressComponent, {
-      panelClass: 'app-dialog'
+      panelClass: 'app-dialog',
+      width: '420px'
     });
   }
 
   schedule() {
     this.matDialog.open(ScheduleComponent, {
       panelClass: 'app-dialog',
-      width: '420px',
-      height: 'auto'
+      width: '420px'
     });
   }
 

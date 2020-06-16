@@ -1,1 +1,12 @@
-<p>select-address works!</p>
+<app-dialog title="¡Bienvenido!">
+  <mat-form-field color="accent" class="w-100">
+    <mat-label>Seleccionar dirección de envío</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let direccion of direcciones" [value]="direccion">
+        <span>{{direccion.alias}}</span> |
+        <small>Dirección: {{direccion.calle}}</small>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-flat-button color="primary" class="w-100 mb-4" [mat-dialog-close]="true">Continuar</button>
+</app-dialog>
