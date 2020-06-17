@@ -17,7 +17,8 @@
   left: 16px;
 }
 
-img {
+img:not(.avatar) {
+  filter: brightness(70%);
   position: relative;
   top: 50%;
   transform: translateY(-50%);

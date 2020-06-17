@@ -19,6 +19,14 @@ export class FooterComponent implements OnInit {
     this.dialogService.formAddress();
   }
 
+  onSignUp() {
+    this.dialogService.signUp();
+  }
+
+  onSignIn() {
+    this.dialogService.signIn();
+  }
+
   onFormAddress() {
     this.dialogService.formAddress();
   }

@@ -9,8 +9,8 @@
               <h2>Header 1</h2>
               <ul>
                 <li><a routerLink="/menu">Menu</a></li>
-                <li><a [routerLink]="[]" (click)="onFormAddress()">Form Address</a></li>
-                <li><a [routerLink]="[]" (click)="onSelectAddress()">Select Address</a></li>
+                <li><a [routerLink]="[]" (click)="onSignUp()">Sign Up</a></li>
+                <li><a [routerLink]="[]" (click)="onSignIn()">Sign In</a></li>
               </ul>
             </div>
           </div>
@@ -18,10 +18,10 @@
             <div class="footer-widget">
               <h2>Header 2</h2>
               <ul>
+                <li><a [routerLink]="[]" (click)="onFormAddress()">Form Address</a></li>
+                <li><a [routerLink]="[]" (click)="onSelectAddress()">Select Address</a></li>
                 <li><a [routerLink]="[]" (click)="onBillingDetails()">Billing Details</a></li>
-                <li><a href="">Item 2</a></li>
                 <li><a [routerLink]="[]" (click)="onSchedule()">Schedule</a></li>
-                <li><a href="">Item 4</a></li>
               </ul>
             </div>
           </div>

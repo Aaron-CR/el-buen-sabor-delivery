@@ -16,8 +16,7 @@ export class MenuComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(DialogComponent, {
-      panelClass: 'app-dialog',
-      width: '70%'
+      panelClass: 'app-dialog'
     });
   }
 }

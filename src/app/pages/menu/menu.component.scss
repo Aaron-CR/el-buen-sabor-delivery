@@ -72,6 +72,10 @@
 /* Large Mobile :480px. */
 
 @media only screen and (max-width: 767px) {
+  .search h2 {
+    margin-top: 90px;
+  }
+
   .discount h3 {
     font-size: 26px;
   }
@@ -89,6 +93,7 @@
 @media only screen and (max-width: 479px) {
   .search h2 {
     font-size: 32px;
+    margin-top: 90px;
   }
 
   .discount {

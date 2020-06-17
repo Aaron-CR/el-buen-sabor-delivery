@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { DialogService } from '../dialogs/dialog.service';
 
@@ -8,61 +8,22 @@ import { DialogService } from '../dialogs/dialog.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnInit {
-  layoutGap = '64';
-  mode = 'side';
-  fixedInViewport = true;
-  opened = false;
+export class NavigationComponent implements OnDestroy {
+  mobileQuery: MediaQueryList;
 
-  public constructor(
-    private breakpointObserver: BreakpointObserver,
-    private dialogService: DialogService
-  ) { }
+  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
-  public ngOnInit(): void {
-    const breakpoints = Object.keys(Breakpoints).map(key => Breakpoints[key]);
-    this.breakpointObserver.observe(breakpoints)
-      .pipe(map(bst => bst.matches))
-      .subscribe(() => {
-        this.determineSidenavMode();
-        this.determineLayoutGap();
-      });
+  private mobileQueryListener: () => void;
+
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
   }
 
-  onSignUp() {
-    this.dialogService.signUp();
+  ngOnDestroy(): void {
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
 
-  onSignIn() {
-    this.dialogService.signIn();
-  }
-
-  private determineSidenavMode(): void {
-    if (this.isExtraSmallDevice() || this.isSmallDevice()) {
-      this.fixedInViewport = false;
-      this.mode = 'over';
-      this.opened = false;
-      return;
-    } else {
-      this.fixedInViewport = true;
-      this.mode = 'side';
-    }
-  }
-
-  private determineLayoutGap(): void {
-    if (this.isExtraSmallDevice() || this.isSmallDevice()) {
-      this.layoutGap = '0';
-      return;
-    } else {
-      this.layoutGap = '64';
-    }
-  }
-
-  public isExtraSmallDevice(): boolean {
-    return this.breakpointObserver.isMatched(Breakpoints.XSmall);
-  }
-
-  public isSmallDevice(): boolean {
-    return this.breakpointObserver.isMatched(Breakpoints.Small);
-  }
 }
+

@@ -60,11 +60,16 @@ img {
 }
 
 .card-quantity {
-  width: 10%;
+  width: 15%;
 }
 
 .card-ingredients {
   font-size: 14px;
+}
+
+.card-button {
+  border-radius: 4em !important;
+  font-weight: 600 !important;
 }
 
 /* Large Mobile :480px. */

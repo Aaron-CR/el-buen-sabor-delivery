@@ -13,8 +13,8 @@
 // Saturn Datepicker
 // @import "~saturn-datepicker/theming";
 // ngx-owl-carousel-o
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -51,6 +51,17 @@ $el-buen-sabor-delivery-theme: mat-light-theme(
 
 /* You can add global styles to this file, and also import other style files */
 
+/* RESET */
+button:focus {
+  outline: 0 !important;
+}
+
+/* GLOBAL */
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
 html,
 body {
   height: 100%;
@@ -60,83 +71,6 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-h2,
-h3,
-h4,
-h5 {
-  margin: 0;
-  color: #0a183d;
-  font-weight: 600;
-  line-height: 1;
-}
-
-h2 {
-  font-size: 36px;
-}
-
-h3 {
-  font-size: 30px;
-}
-
-h4 {
-  font-size: 24px;
-}
-
-h5 {
-  font-size: 18px;
-}
-
-p {
-  font-size: 15px;
-  color: #6a7080;
-  line-height: 1.8;
-  font-weight: 500;
-}
-
-img {
-  max-width: 100%;
-}
-
-a:hover,
-a:focus {
-  text-decoration: none;
-  outline: none;
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-}
-
-/*---------------------
-Helper CSS
- -----------------------*/
-
-.section-title {
-  margin-bottom: 60px;
-}
-
-.section-title h2 {
-  font-size: 60px;
-}
-
-.set-bg {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top center;
-}
-
-.spad {
-  padding-top: 105px;
-  padding-bottom: 105px;
-}
-
-.text-white h2,
-.text-white h4,
-.text-white p {
-  color: #fff;
 }
 
 /* DIALOGS */
@@ -154,15 +88,62 @@ Helper CSS
   font-size: 30px;
 }
 
-/* RESET */
-button:focus {
-  outline: 0 !important;
+/* BUTTONS */
+button:not(.mat-menu-item) {
+  border-radius: 4em !important;
+  font-weight: 600 !important;
 }
 
-/* *:focus {
-  outline: none !important;
-  border: 0 !important;
-} */
+/* CHIPS */
+.status-chip {
+  min-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 5em;
+  text-align: center;
+  align-items: center;
+  background-color: whitesmoke;
+  color: #000000bb;
+  box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+    0 1px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* STATUS */
+.pendiente {
+  background-color: #607d8b;
+  color: white;
+}
+
+.cancelado {
+  background-color: #f44336;
+  color: white;
+}
+
+.en-proceso {
+  background-color: #03a9f4;
+  color: white;
+}
+
+.demorado {
+  background-color: #ff4081;
+  color: white;
+}
+
+.terminado {
+  background-color: #8bc34a;
+  color: #000000bb;
+}
+
+.en-camino {
+  background-color: #9c27b0;
+  color: white;
+}
+
+.entregado {
+  background-color: #ffc107;
+  color: #000000bb;
+}
 
 /* CHROME SCROLLBAR */
 ::-webkit-scrollbar {

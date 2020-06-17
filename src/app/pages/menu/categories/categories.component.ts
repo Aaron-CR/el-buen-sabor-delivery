@@ -41,7 +41,7 @@ export class CategoriesComponent implements OnInit {
     navSpeed: 700,
     navText: ['<', '>'],
     responsive: {
-      0: { items: 3.5 },
+      0: { items: 3.2 },
       400: { items: 5 },
       740: { items: 8 },
       940: { items: 10 }
