@@ -1,7 +1,5 @@
-// Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";
-// Plus imports for other components in your app.
 // Bootstrap
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -10,9 +8,7 @@
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/utilities";
-// Saturn Datepicker
-// @import "~saturn-datepicker/theming";
-// ngx-owl-carousel-o
+// NGX Owl Carousel-o
 @import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
 @import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 
@@ -24,14 +20,12 @@ $custom-typography: mat-typography-config(
 );
 @include mat-core($custom-typography);
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
+// https://material.io/design/color/
+// Primary palette
 $el-buen-sabor-delivery-primary: mat-palette($mat-amber);
-// $el-buen-sabor-delivery-accent: mat-palette($mat-deep-purple, 600, A200, A100, A400);
-$el-buen-sabor-delivery-accent: mat-palette($mat-indigo, 600);
-
-// The warn palette is optional (defaults to red).
+// Accent palette
+$el-buen-sabor-delivery-accent: mat-palette($mat-indigo, 900);
+// Warn palette (defaults to red).
 $el-buen-sabor-delivery-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
@@ -41,27 +35,20 @@ $el-buen-sabor-delivery-theme: mat-light-theme(
   $el-buen-sabor-delivery-warn
 );
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
+// Angular Material theme
 @include angular-material-theme($el-buen-sabor-delivery-theme);
-
-// Saturn Datepicker theme
-// @include sat-datepicker-theme($el-buen-sabor-admin-theme);
-
-/* You can add global styles to this file, and also import other style files */
 
 /* RESET */
 button:focus {
   outline: 0 !important;
 }
 
-/* GLOBAL */
 *:focus {
   outline: none !important;
   border: 0 !important;
 }
 
+/* GLOBAL STYLES */
 html,
 body {
   height: 100%;
@@ -71,6 +58,12 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* BUTTONS */
+button:not(.mat-menu-item) {
+  border-radius: 4em !important;
+  font-weight: 600 !important;
 }
 
 /* DIALOGS */
@@ -86,12 +79,6 @@ body {
 
 .app-dialog-title {
   font-size: 30px;
-}
-
-/* BUTTONS */
-button:not(.mat-menu-item) {
-  border-radius: 4em !important;
-  font-weight: 600 !important;
 }
 
 /* CHIPS */
