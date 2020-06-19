@@ -1,4 +1,14 @@
 <app-dialog [title]="'Registrate'">
+  <div class="my-2">
+    <button mat-raised-button class="google-button w-100">
+      <img src="assets/images/icons/google-logo.png" class="mr-2"> Continuar con Google
+    </button>
+  </div>
+  <div class="d-flex align-content-center mt-4 mb-2">
+    <hr class="flex-fill">
+    <p class="m-0 px-3">O registrate con tu email</p>
+    <hr class="flex-fill">
+  </div>
   <form novalidate [formGroup]="signUpFormGroup">
     <mat-form-field class="w-100">
       <mat-label>Nombre Completo</mat-label>
@@ -21,20 +31,7 @@
     </mat-form-field>
     <button mat-flat-button color="primary" class="w-100 mb-4" routerLink="/menu">Registrarme</button>
   </form>
-  <div class="text-center">
-    <div class="d-flex align-content-center">
-      <hr class="flex-fill">
-      <p class="m-0 px-3">O regístrate con</p>
-      <hr class="flex-fill">
-    </div>
-    <div class="my-3">
-      <button mat-fab class="facebook-button mx-2">
-        <img src="assets/img/icons/facebook-logo.png">
-      </button>
-      <button mat-fab class="google-button mx-2">
-        <img src="assets/img/icons/google-logo.png">
-      </button>
-    </div>
+  <div class="text-center mb-4">
     <p>¿Ya tienes cuenta? <a [routerLink]="[]" (click)="onSignIn()">Inicia sesión</a> </p>
   </div>
 </app-dialog>

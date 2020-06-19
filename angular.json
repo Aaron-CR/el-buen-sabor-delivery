@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "el-buen-sabor-delivery"
+    }
+  },
+  "defaultProject": "el-buen-sabor-delivery",
+  "cli": {
+    "analytics": false
+  }
 }

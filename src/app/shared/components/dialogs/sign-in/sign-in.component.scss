@@ -5,7 +5,6 @@
 }
 
 .mat-flat-button {
-  border-radius: 15px;
   height: 48px;
   font-weight: 600;
   font-size: 16px;
@@ -15,10 +14,9 @@
   color: #ffb300;
 }
 
-.facebook-button {
-  background-color: #3b5998;
-}
-
 .google-button {
   background-color: #fff;
+  border-radius: 5px !important;
+  height: 48px;
+  font-size: 16px;
 }
