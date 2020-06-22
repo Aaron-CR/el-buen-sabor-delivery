@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
@@ -17,6 +18,11 @@ import { DialogService } from './components/dialogs/dialog.service';
 import { AgmCoreModule } from '@agm/core';
 import { ScheduleComponent } from './components/dialogs/schedule/schedule.component';
 import { BillingDetailsComponent } from './components/dialogs/billing-details/billing-details.component';
+
+/* FIREBASE */
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from './../../environments/environment';
 
 @NgModule({
   declarations: [
@@ -40,7 +46,8 @@ import { BillingDetailsComponent } from './components/dialogs/billing-details/bi
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyARaDrtQwfk6Ql8byHHSJtAAJGswf9ueds',
       libraries: ['places']
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   exports: [
     HttpClientModule,
@@ -54,7 +61,8 @@ import { BillingDetailsComponent } from './components/dialogs/billing-details/bi
     SelectAddressComponent
   ],
   providers: [
-    DialogService
+    DialogService,
+    AngularFireAuth
   ]
 })
 export class SharedModule { }
