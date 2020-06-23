@@ -30,10 +30,12 @@ export class AuthService {
     });
   }
 
+  /* Login y registro con google */
   loginGoogleUser() {
     return this.authService.signInWithPopup(new auth.GoogleAuthProvider());
   }
 
+  /* Cerrar sesión */
   logoutUser() {
     return this.authService.signOut();
   }
