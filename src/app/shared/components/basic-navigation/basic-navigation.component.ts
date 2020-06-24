@@ -1,16 +1,16 @@
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/authentication/auth.service';
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
+import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { DialogService } from '../dialogs/dialog.service';
+import { AuthService } from '../../authentication/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  selector: 'app-basic-navigation',
+  templateUrl: './basic-navigation.component.html',
+  styleUrls: ['./basic-navigation.component.scss']
 })
-export class NavigationComponent implements OnDestroy {
+export class BasicNavigationComponent implements OnDestroy {
+
   mobileQuery: MediaQueryList;
 
   fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
@@ -49,4 +49,3 @@ export class NavigationComponent implements OnDestroy {
   }
 
 }
-

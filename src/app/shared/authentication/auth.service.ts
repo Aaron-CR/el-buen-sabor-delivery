@@ -1,14 +1,28 @@
+import { UserService } from './../services/user.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { auth } from 'firebase';
+import { Observable, of } from 'rxjs';
+import { Usuario } from 'src/app/core/models/usuarios/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private authService: AngularFireAuth) { }
+  public user: Observable<Usuario>;
+
+  constructor(private authService: AngularFireAuth, private userService: UserService) {
+    this.user = this.authService.authState.pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.userService.findByUid(user.uid);
+        }
+        return of(null);
+      })
+    );
+  }
 
   /* Registra un usario con email y contraseña */
   registerUser(email: string, pass: string) {
@@ -45,4 +59,5 @@ export class AuthService {
     // tslint:disable-next-line: no-shadowed-variable
     return this.authService.authState.pipe(map( auth => auth));
   }
+
 }

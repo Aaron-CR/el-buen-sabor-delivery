@@ -23,6 +23,7 @@ import { BillingDetailsComponent } from './components/dialogs/billing-details/bi
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from './../../environments/environment';
+import { BasicNavigationComponent } from './components/basic-navigation/basic-navigation.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { environment } from './../../environments/environment';
     SelectAddressComponent,
     BaseComponent,
     ScheduleComponent,
-    BillingDetailsComponent
+    BillingDetailsComponent,
+    BasicNavigationComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { environment } from './../../environments/environment';
     FormsModule,
     MaterialModule,
     NavigationComponent,
+    BasicNavigationComponent,
     SignUpComponent,
     SignInComponent,
     FormAddressComponent,

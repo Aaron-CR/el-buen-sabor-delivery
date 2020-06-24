@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/core/models/usuarios/usuario';
 import { ApiService } from './api.service';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from '../authentication/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import { catchError } from 'rxjs/operators';
 export class UserService extends ApiService<Cliente> {
 
   protected endpoint = 'http://localhost:8080/api/v1/usuarios';
+
+  private authService: AuthService;
 
   findByUid(uid: string): Observable<Usuario>{
     return this.httpClient.get<Usuario>(`${this.endpoint}/current/${uid}`)

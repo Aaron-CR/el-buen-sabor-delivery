@@ -1,12 +1,11 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
   <mat-toolbar color="primary" class="example-toolbar">
     <!-- Logo Image -->
     <img class="logo-icon ml-4" routerLink="/menu" src="assets/images/logos/angular.png">
-    <span [hidden]="mobileQuery.matches" class="mx-2">Delivery</span>
+    <a><span [hidden]="mobileQuery.matches" class="mx-2" routerLink="/index">Delivery</span></a>
     <!-- Spacer -->
     <div class="mr-auto"></div>
-    <!-- <a mat-stroked-button class="text-decoration-none" (click)="onSignUp()">Registrate</a> -->
-    <!-- <a mat-flat-button class="text-decoration-none ml-3" color="primary" (click)="onSignIn()">Ingresar</a> -->
     <!-- User Button -->
     <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
       <div class="mat-button-wrapper">
@@ -32,7 +31,7 @@
         <mat-icon class="material-icons-outlined">account_circle</mat-icon>
         <span>Mi perfil</span>
       </button>
-      <button mat-menu-item routerLink="/">
+      <button mat-menu-item (click)="onSignOut()">
         <mat-icon class="material-icons-outlined">exit_to_app</mat-icon>
         <span>Cerrar sesión</span>
       </button>

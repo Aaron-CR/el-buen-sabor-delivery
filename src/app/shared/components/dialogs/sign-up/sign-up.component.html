@@ -1,6 +1,6 @@
 <app-dialog [title]="'Registrate'">
   <div class="my-2">
-    <button mat-raised-button class="google-button w-100">
+    <button mat-raised-button class="google-button w-100" (click)="onGoogleSignUp()">
       <img src="assets/images/icons/google-logo.png" class="mr-2"> Continuar con Google
     </button>
   </div>
@@ -9,14 +9,18 @@
     <p class="m-0 px-3">O registrate con tu email</p>
     <hr class="flex-fill">
   </div>
-  <form novalidate [formGroup]="signUpFormGroup">
+  <form novalidate [formGroup]="signUpFormGroup" (ngSubmit)="onSignUp(signUpFormGroup)">
     <mat-form-field class="w-100">
-      <mat-label>Nombre Completo</mat-label>
-      <input matInput type="text" required formControlName="displayName" placeholder="Ingrese su nombre completo.">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" required formControlName="nombre" placeholder="Ingrese su nombre.">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Apellido</mat-label>
+      <input matInput type="text" required formControlName="apellido" placeholder="Ingrese su apellido.">
     </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Teléfono</mat-label>
-      <input matInput type="text" required formControlName="phone" placeholder="Ingrese su número de teléfono.">
+      <input matInput type="text" required formControlName="telefono" placeholder="Ingrese su número de teléfono.">
     </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Correo electrónico</mat-label>
@@ -29,7 +33,7 @@
       <mat-icon class="material-icons-outlined" matSuffix (click)="hide = !hide">
         {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </mat-form-field>
-    <button mat-flat-button color="primary" class="w-100 mb-4" routerLink="/menu">Registrarme</button>
+    <button mat-flat-button color="primary" class="w-100 mb-4" type="submit">Registrarme</button>
   </form>
   <div class="text-center mb-4">
     <p>¿Ya tienes cuenta? <a [routerLink]="[]" (click)="onSignIn()">Inicia sesión</a> </p>
