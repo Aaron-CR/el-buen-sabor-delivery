@@ -1,4 +1,7 @@
+import { DialogService } from 'src/app/shared/components/dialogs/dialog.service';
+import { AuthService } from 'src/app/shared/authentication/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  public userExists = false;
+
+  constructor( private authService: AuthService, private router: Router, private dialogService: DialogService) { }
 
   ngOnInit(): void {
+    this.authService.user.subscribe(
+      user => {
+        if (!!user){
+          this.userExists = true;
+        }
+      }
+    );
+  }
+
+  onSignIn(){
+    this.dialogService.signIn();
   }
 
 }

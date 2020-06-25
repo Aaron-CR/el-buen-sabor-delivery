@@ -10,13 +10,38 @@ ul {
   margin: 0;
 }
 
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid #fff;
+}
+
 /* ----------------
 Responsive
  -------------------*/
+.titulo-footer{
+   color: #fff;
+   width: bold;
+   font-size: 60px;
+   padding-left: 20px;
+   line-height: 0px;
+   margin-top: 10px;
+}
+
+.logo-align-middle{
+  width: 80px;
+  vertical-align: middle;
+}
 
 .footer-section {
-  background: #ffc107;
-  padding: 40px 0 85px;
+  background: #040918;
+  padding: 40px 0 40px;
+  color: #fff;
+   width: bold;
+   font-size: 32px;
+   line-height: 0px;
+   margin-top: 10px;
 }
 
 .footer-widget {
@@ -35,22 +60,22 @@ Responsive
 
 .footer-widget ul li a {
   display: inline-block;
-  color: #00000086;
+  color: #fff;
   font-size: 14px;
   margin-bottom: 10px;
 }
 
 .copyright {
   font-size: 11px;
+  text-align: center;
   text-transform: uppercase;
-  font-weight: 600;
-  color: #00000086;
-  padding: 10px 0 25px;
+  font-weight: 500;
+  color: #fff;
 }
 
 .social-links a {
   display: inline-block;
-  color: #00000086;
+  color: #fff;
   font-size: 18px;
   margin-right: 35px;
 }
@@ -79,7 +104,7 @@ Responsive
 
 @media only screen and (max-width: 767px) {
   .footer-widget {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 }
 

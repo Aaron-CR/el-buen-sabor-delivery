@@ -20,8 +20,9 @@ export class AuthGuard implements CanActivate {
       map((user) => !!user && (user.rol.denominacion === 'cliente' || user.rol.denominacion === 'administrador') ),
       tap((auth) => {
         if (!auth) {
-          this.router.navigate(['/not-found']);
-          this.snackBar.open('¡No tienes los permisos necesarios para acceder!', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+          this.router.navigate(['/index']);
+          /* this.snackBar.open
+          ('¡No tienes los permisos necesarios para acceder!', 'OK', { duration: 10000, panelClass: ['app-snackbar'] }); */
         }
       })
     );

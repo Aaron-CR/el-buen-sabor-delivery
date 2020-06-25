@@ -6,11 +6,9 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="footer-widget">
-              <h2>Header 1</h2>
+              <h2>SOBRE NOSOTROS</h2>
               <ul>
-                <li><a routerLink="/menu">Menu</a></li>
-                <li><a [routerLink]="[]" (click)="onSignUp()">Sign Up</a></li>
-                <li><a [routerLink]="[]" (click)="onSignIn()">Sign In</a></li>
+                <li><a routerLink="/index">Homepage</a></li>
               </ul>
             </div>
           </div>
@@ -39,8 +37,9 @@
         </div>
       </div>
       <div class="col-xl-6 col-lg-5 order-lg-1">
-        <img src="assets/images/logos/angular.png" style="width: 30px;">
-        <div class="copyright"> el buen sabor | Copyright &copy; {{ year }} </div>
+        <div>
+          <img src="assets/images/logos/logo-white.png" class="logo-align-middle"> El buen sabor
+        </div>
         <div class="social-links">
           <a href=""><i class="fa fa-instagram"></i></a>
           <a href=""><i class="fa fa-pinterest"></i></a>
@@ -48,6 +47,12 @@
           <a href=""><i class="fa fa-twitter"></i></a>
           <a href=""><i class="fa fa-youtube"></i></a>
         </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col copyright">
+        El buen sabor | Copyright &copy; {{ year }}
       </div>
     </div>
   </div>

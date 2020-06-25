@@ -2,15 +2,15 @@
 
   <mat-toolbar color="primary" class="example-toolbar">
     <!-- Logo Image -->
-    <img class="logo-icon ml-4" routerLink="/menu" src="assets/images/logos/angular.png">
-    <a><span [hidden]="mobileQuery.matches" class="mx-2" routerLink="/index">Delivery</span></a>
+    <a><img class="logo-icon ml-4" routerLink="/menu" src="assets/images/logos/logo.png">
+    <span [hidden]="mobileQuery.matches" class="mx-2" routerLink="/menu">El buen sabor</span></a>
     <!-- Spacer -->
     <div class="mr-auto"></div>
     <!-- User Button -->
     <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
       <div class="mat-button-wrapper">
         <img src="assets/images/avatars/customer.png" class="avatar">
-        <span [hidden]="mobileQuery.matches" class="mx-2"> Nombre Apellido </span>
+        <span [hidden]="mobileQuery.matches" class="mx-2"> {{userName}} {{userLastName}}</span>
         <mat-icon [hidden]="mobileQuery.matches" class="material-icons-round" [inline]="true">keyboard_arrow_down
         </mat-icon>
       </div>

@@ -10,10 +10,10 @@
       </div>
       <div class="flex-row ml-4 mt-4 mr-auto">
         <h2>
-          Nombre Apellido
+          {{this.usuario.nombre}} {{this.usuario.apellido}}
         </h2>
         <span>
-          nombreapellido@gmail.com
+          {{this.usuario.email}}
         </span>
         <button mat-raised-button color="primary" class="ml-3" (click)="toggleEdit()">
           Editar datos
@@ -28,17 +28,21 @@
         <div class="m-4 flex-row flex-grow-1">
           <mat-form-field class="w-100">
             <mat-label>Nombre</mat-label>
-            <input matInput disabled value="Nombre Apellido">
+            <input matInput disabled value="{{this.usuario.nombre}}">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Apellido</mat-label>
+            <input matInput disabled value="{{this.usuario.apellido}}">
           </mat-form-field>
           <mat-form-field class="w-100">
             <mat-label>Email</mat-label>
-            <input matInput disabled value="nombreapellido@gmail.com">
+            <input matInput disabled value="{{this.usuario.email}}">
           </mat-form-field>
           <div class="d-flex">
             <div class="flex-grow-1">
               <mat-form-field class="w-100">
                 <mat-label>Telefono</mat-label>
-                <input matInput disabled value="+54 9 2614567890">
+                <input matInput disabled value="{{this.usuario.telefono}}">
               </mat-form-field>
             </div>
             <div>

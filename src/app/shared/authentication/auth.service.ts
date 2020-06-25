@@ -1,3 +1,4 @@
+import { CustomerService } from './../services/customer.service';
 import { UserService } from './../services/user.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -5,6 +6,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { auth } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { Usuario } from 'src/app/core/models/usuarios/usuario';
+import { Cliente } from 'src/app/core/models/usuarios/cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class AuthService {
 
   public user: Observable<Usuario>;
 
-  constructor(private authService: AngularFireAuth, private userService: UserService) {
+  constructor(private authService: AngularFireAuth, private userService: UserService, private customerService: CustomerService) {
     this.user = this.authService.authState.pipe(
       switchMap((user) => {
         if (user) {

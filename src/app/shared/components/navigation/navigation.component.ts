@@ -10,12 +10,15 @@ import { DialogService } from '../dialogs/dialog.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnDestroy {
+export class NavigationComponent implements OnDestroy, OnInit {
   mobileQuery: MediaQueryList;
 
   fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
   public userExists = false;
+
+  public userName = '';
+  public userLastName = '';
 
   private mobileQueryListener: () => void;
 
@@ -29,6 +32,17 @@ export class NavigationComponent implements OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+  }
+
+  ngOnInit(): void {
+    this.authService.user.subscribe(
+      user => {
+        if (!!user) {
+          this.userName = user.nombre;
+          this.userLastName = user.apellido;
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {

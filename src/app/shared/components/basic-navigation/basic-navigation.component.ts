@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { DialogService } from '../dialogs/dialog.service';
 import { AuthService } from '../../authentication/auth.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './basic-navigation.component.html',
   styleUrls: ['./basic-navigation.component.scss']
 })
-export class BasicNavigationComponent implements OnDestroy {
+export class BasicNavigationComponent implements OnDestroy, OnInit {
 
   mobileQuery: MediaQueryList;
 
@@ -29,6 +29,10 @@ export class BasicNavigationComponent implements OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+  }
+
+  ngOnInit(): void {
+    this.dialogService.signIn();
   }
 
   ngOnDestroy(): void {
