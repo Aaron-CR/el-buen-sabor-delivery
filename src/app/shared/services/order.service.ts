@@ -17,13 +17,4 @@ export class OrderService extends ApiService<Orden> {
       .pipe(catchError(error => this.handleError(error)));
   }
 
-  /* updateEstado(estado: Estado, ordenId: number): Observable<Orden> {
-    return this.httpClient.put<Orden>(`${this.endpoint}/estado/${ordenId}`, estado)
-      .pipe(catchError(error => this.handleError(error)));
-  }
-
-  addRepartidor(repartidor: Empleado, ordenId: number): Observable<Orden> {
-    return this.httpClient.put<Orden>(`${this.endpoint}/repartidor/${ordenId}`, repartidor)
-      .pipe(catchError(error => this.handleError(error)));
-  } */
 }

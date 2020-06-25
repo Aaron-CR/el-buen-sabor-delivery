@@ -80,6 +80,14 @@ button:not(.mat-menu-item) {
   font-size: 30px;
 }
 
+/* SNACKBAR */
+.app-snackbar {
+  background: whitesmoke;
+  color: #00000096;
+  font-weight: 600;
+  border-radius: 20px !important;
+}
+
 /* CHIPS */
 .status-chip {
   min-height: 32px;

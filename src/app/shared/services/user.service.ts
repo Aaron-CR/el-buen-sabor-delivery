@@ -13,8 +13,6 @@ export class UserService extends ApiService<Cliente> {
 
   protected endpoint = 'http://localhost:8080/api/v1/usuarios';
 
-  private authService: AuthService;
-
   findByUid(uid: string): Observable<Usuario>{
     return this.httpClient.get<Usuario>(`${this.endpoint}/current/${uid}`)
       .pipe(catchError(error => this.handleError(error)));
