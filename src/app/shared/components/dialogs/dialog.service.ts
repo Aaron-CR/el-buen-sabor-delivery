@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { FormAddressComponent } from './form-address/form-address.component';
@@ -30,8 +30,8 @@ export class DialogService {
     });
   }
 
-  formAddress(object: any) {
-    this.matDialog.open(FormAddressComponent, {
+  formAddress(object: any): MatDialogRef<FormAddressComponent> {
+    return this.matDialog.open(FormAddressComponent, {
       panelClass: 'app-dialog',
       data: object,
     });

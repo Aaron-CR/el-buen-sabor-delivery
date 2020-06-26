@@ -14,11 +14,13 @@ import { Cliente } from 'src/app/core/models/usuarios/cliente';
 export class AuthService {
 
   public user: Observable<Usuario>;
+  public uid: string;
 
   constructor(private authService: AngularFireAuth, private userService: UserService, private customerService: CustomerService) {
     this.user = this.authService.authState.pipe(
       switchMap((user) => {
         if (user) {
+          this.uid = user.uid;
           return this.userService.findByUid(user.uid);
         }
         return of(null);
@@ -30,10 +32,10 @@ export class AuthService {
   registerUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.authService.createUserWithEmailAndPassword(email, pass)
-      .then( userData => {
-        resolve(userData);
-      }).catch(
-        err => console.log(reject(err)));
+        .then(userData => {
+          resolve(userData);
+        }).catch(
+          err => console.log(reject(err)));
     });
   }
 
@@ -41,8 +43,8 @@ export class AuthService {
   loginEmailUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.authService.signInWithEmailAndPassword(email, pass)
-        .then( userData => resolve(userData),
-        err => reject(err));
+        .then(userData => resolve(userData),
+          err => reject(err));
     });
   }
 
@@ -59,7 +61,7 @@ export class AuthService {
   /* Averigua si hay un usuario conectado o no */
   isAuth() {
     // tslint:disable-next-line: no-shadowed-variable
-    return this.authService.authState.pipe(map( auth => auth));
+    return this.authService.authState.pipe(map(auth => auth));
   }
 
 }

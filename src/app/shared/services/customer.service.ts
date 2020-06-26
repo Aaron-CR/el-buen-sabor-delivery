@@ -43,11 +43,8 @@ export class CustomerService extends ApiService<Cliente> {
   }
 
   removeDireccion(direccionId: number, clienteUid: string): Observable<Cliente> {
-    return this.httpClient.put<Cliente>(`${this.endpoint}/direccion/remove`, {
-      params: new HttpParams()
-        .set('clienteUid', clienteUid)
-        .set('direccionId', direccionId.toString())
-    }).pipe(catchError(error => this.handleError(error)));
+    return this.httpClient.put<Cliente>(`${this.endpoint}/direccion/remove?direccionId=${direccionId}&clienteUid=${clienteUid}`, {})
+      .pipe(catchError(error => this.handleError(error)));
   }
 
 }
