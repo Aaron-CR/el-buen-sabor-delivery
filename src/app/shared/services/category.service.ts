@@ -8,4 +8,5 @@ import { ApiService } from './api.service';
 export class CategoryService extends ApiService<Categoria> {
 
   protected endpoint = 'http://localhost:8080/api/v1/articulos/categorias';
+
 }

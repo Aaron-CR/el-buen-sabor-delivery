@@ -1,5 +1,5 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Localidad } from 'src/app/core/models/direccion/localidad';
 import { HttpClient } from '@angular/common/http';
 import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-delivery';
@@ -16,12 +16,18 @@ export class FormAddressComponent implements OnInit {
   public action: string;
   public addressFormGroup: FormGroup;
   public localidades: Array<Localidad>;
-  public latitude: number;
-  public longitude: number;
   public zoom = 15;
 
   get address(): string {
     return `${this.addressFormGroup.get('calle').value ? this.addressFormGroup.get('calle').value : 'A completar'}, ${this.addressFormGroup.get('numero').value ? this.addressFormGroup.get('numero').value : ''}`;
+  }
+
+  get latitude(): number {
+    return this.addressFormGroup.get('latitud').value;
+  }
+
+  get longitude(): number {
+    return this.addressFormGroup.get('longitud').value;
   }
 
   constructor(
@@ -36,15 +42,23 @@ export class FormAddressComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.setAction();
-    this.setCurrentLocation();
+    this.setInitialLocation();
     this.getLocalidades();
+  }
+
+  private setInitialLocation() {
+    if (this.action === 'Añadir') {
+      this.setCurrentLocation();
+    }
   }
 
   private setCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
+        this.addressFormGroup.patchValue({
+          latitud: position.coords.latitude,
+          longitud: position.coords.longitude
+        });
       });
     }
   }

@@ -6,6 +6,7 @@ import { catchError, finalize } from 'rxjs/operators';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AddressService } from 'src/app/shared/services/address.service';
 
 @Component({
   selector: 'app-my-addresses',
@@ -25,6 +26,7 @@ export class MyAddressesComponent implements OnInit {
     private customerService: CustomerService,
     private dialogService: DialogService,
     private authService: AuthService,
+    private addressService: AddressService,
     private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -48,7 +50,7 @@ export class MyAddressesComponent implements OnInit {
         if (result.event === 'Añadir') {
           this.create(result.data);
         } else if (result.event === 'Editar') {
-          this.create(result.data);
+          this.update(result.data);
         }
       });
   }
@@ -60,21 +62,32 @@ export class MyAddressesComponent implements OnInit {
   }
 
   update(object: any) {
-    console.log(object.id, 'editado');
-    /* this.customerService.update(object.id).subscribe(() => {
+    console.log(object, object.id);
+    this.addressService.update(object, object.id).subscribe(() => {
       this.successMessage('Actualizado! Se ha actualizado correctamente.');
-    }); */
+    });
   }
 
-  onDelete(object: number) {
-    console.log(object, this.authService.uid);
-    this.customerService.removeDireccion(object, this.authService.uid).subscribe(() => {
-      this.successMessage('Eliminado! Se ha eliminado correctamente.');
+  onDelete(object: any) {
+    this.addressService.delete(object, object.id).subscribe(() => {
+      this.deleteMessage('Eliminado! Se ha eliminado correctamente.', object);
+    });
+  }
+
+  undo(object: any) {
+    this.addressService.undo(object, object.id).subscribe(() => {
+      this.loadPage();
     });
   }
 
   successMessage(text: string) {
     this.snackBar.open(text, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+    this.loadPage();
+  }
+
+  deleteMessage(text: string, object: object) {
+    this.snackBar.open(text, 'DESHACER', { duration: 10000, panelClass: ['app-snackbar'] })
+      .onAction().subscribe(() => this.undo(object));
     this.loadPage();
   }
 

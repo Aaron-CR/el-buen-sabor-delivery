@@ -11,7 +11,7 @@ export class AddressCardComponent implements OnInit {
 
   @Input() public data: DireccionDelivery;
   @Output() public update = new EventEmitter<DireccionDelivery>();
-  @Output() public delete = new EventEmitter<number>();
+  @Output() public delete = new EventEmitter<object>();
 
   get address() {
     return `${this.data.calle} ${this.data.numero}, ${this.data.localidad.nombre}, ${this.data.localidad.provincia.nombre}`;
@@ -26,7 +26,7 @@ export class AddressCardComponent implements OnInit {
     this.update.emit(item);
   }
 
-  onDelete(item: number) {
+  onDelete(item: object) {
     this.delete.emit(item);
   }
 
