@@ -13,7 +13,7 @@ export class CustomerService extends ApiService<Cliente> {
 
   protected endpoint = 'http://localhost:8080/api/v1/usuarios/clientes';
 
-  findByUid(uid: string): Observable<Cliente>{
+  findByUid(uid: string): Observable<Cliente> {
     return this.httpClient.get<Cliente>(`${this.endpoint}/current/${uid}`)
       .pipe(catchError(error => this.handleError(error)));
   }
@@ -36,13 +36,13 @@ export class CustomerService extends ApiService<Cliente> {
   }
 
   addDireccion(direccion: DireccionDelivery, clienteUid: string): Observable<Cliente> {
-    return this.httpClient.put<Cliente>(`${this.endpoint}/direccion/add`, direccion , {
+    return this.httpClient.put<Cliente>(`${this.endpoint}/direccion/add`, direccion, {
       params: new HttpParams()
         .set('clienteUid', clienteUid)
     }).pipe(catchError(error => this.handleError(error)));
   }
 
-  removeDireccion(direccionId: number, clienteUid: string): Observable<Cliente>{
+  removeDireccion(direccionId: number, clienteUid: string): Observable<Cliente> {
     return this.httpClient.put<Cliente>(`${this.endpoint}/direccion/remove`, {
       params: new HttpParams()
         .set('clienteUid', clienteUid)

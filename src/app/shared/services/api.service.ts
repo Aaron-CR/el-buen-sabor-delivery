@@ -25,7 +25,7 @@ export class ApiService<E extends Base> {
     }).pipe(catchError(error => this.handleError(error)));
   }
 
-  findAllUnpaged(filter= ''): Observable<E[]>{
+  findAllUnpaged(filter = ''): Observable<E[]> {
     return this.httpClient.get<E[]>(`${this.endpoint}/all`, {
       params: new HttpParams()
         .set('filter', filter)
@@ -34,6 +34,26 @@ export class ApiService<E extends Base> {
 
   findById(id: number): Observable<E> {
     return this.httpClient.get<E>(`${this.endpoint}/${id}`)
+      .pipe(catchError(error => this.handleError(error)));
+  }
+
+  create(object: object): Observable<object> {
+    return this.httpClient.post(this.endpoint, object)
+      .pipe(catchError(error => this.handleError(error)));
+  }
+
+  update(object: object, id: number): Observable<object> {
+    return this.httpClient.put(`${this.endpoint}/${id}`, object)
+      .pipe(catchError(error => this.handleError(error)));
+  }
+
+  delete(object: object, id: number): Observable<object> {
+    return this.httpClient.delete(`${this.endpoint}/${id}`, object)
+      .pipe(catchError(error => this.handleError(error)));
+  }
+
+  undo(object: object, id: number): Observable<object> {
+    return this.httpClient.put(`${this.endpoint}/undoDelete/${id}`, object)
       .pipe(catchError(error => this.handleError(error)));
   }
 

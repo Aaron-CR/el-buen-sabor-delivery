@@ -12,6 +12,8 @@ export class RubroService extends ApiService<Rubro> {
   protected endpoint = 'http://localhost:8080/api/v1/articulos/rubros';
 
   getRubrosBebidas(): Observable<Rubro[]> {
-    return this.httpClient.get<Rubro[]>(`${this.endpoint}/bebidas`).pipe(catchError(error => this.handleError(error)));
+    return this.httpClient.get<Rubro[]>(`${this.endpoint}/bebidas`)
+      .pipe(catchError(error => this.handleError(error)));
   }
+
 }

@@ -1,4 +1,3 @@
-import { Estado } from './../../core/models/comprobantes/estado';
 import { Orden } from './../../core/models/comprobantes/orden';
 import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';

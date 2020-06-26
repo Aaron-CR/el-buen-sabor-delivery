@@ -22,4 +22,5 @@ export class SupplyService extends ApiService<ArticuloInsumo> {
         .set('direction', direction)
     }).pipe(catchError(error => this.handleError(error)));
   }
+
 }

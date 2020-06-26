@@ -30,9 +30,10 @@ export class DialogService {
     });
   }
 
-  formAddress() {
+  formAddress(object: any) {
     this.matDialog.open(FormAddressComponent, {
-      panelClass: 'app-dialog'
+      panelClass: 'app-dialog',
+      data: object,
     });
   }
 
