@@ -1,3 +1,7 @@
+import { ArticuloManufacturado } from './../../core/models/articulos/articulo-manufacturado';
+import { ArticuloInsumo } from './../../core/models/articulos/articulo-insumo';
+import { SupplyService } from './../../shared/services/supply.service';
+import { ManufacturedService } from './../../shared/services/manufactured.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
@@ -9,7 +13,11 @@ import { DialogComponent } from './dialog/dialog.component';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  public drinks: ArticuloInsumo[] = [];
+  public manufactured: ArticuloManufacturado[] = [];
+  public allProducts: object[] = [];
+
+  constructor(public dialog: MatDialog, private manufacturedService: ManufacturedService, private supplyService: SupplyService) { }
 
   ngOnInit(): void {
   }
@@ -18,5 +26,11 @@ export class MenuComponent implements OnInit {
     this.dialog.open(DialogComponent, {
       panelClass: 'app-dialog'
     });
+  }
+
+  findAllManufactured(){
+  }
+
+  findAllDrinks(){
   }
 }
