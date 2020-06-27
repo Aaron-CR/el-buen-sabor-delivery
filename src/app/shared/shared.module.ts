@@ -24,6 +24,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from './../../environments/environment';
 import { BasicNavigationComponent } from './components/basic-navigation/basic-navigation.component';
+import { ForgotPasswordComponent } from './components/dialogs/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BasicNavigationComponent } from './components/basic-navigation/basic-na
     BaseComponent,
     ScheduleComponent,
     BillingDetailsComponent,
-    BasicNavigationComponent
+    BasicNavigationComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,

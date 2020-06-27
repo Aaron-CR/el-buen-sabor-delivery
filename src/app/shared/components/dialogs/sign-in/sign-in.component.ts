@@ -61,5 +61,9 @@ export class SignInComponent implements OnInit {
     this.router.navigate(['/menu']);
   }
 
+  onForgotPassword(){
+    this.dialogService.forgotPassword();
+  }
+
 }
 

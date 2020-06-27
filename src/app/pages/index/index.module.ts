@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './index.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
-  declarations: [IndexComponent],
+  declarations: [IndexComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     IndexRoutingModule,

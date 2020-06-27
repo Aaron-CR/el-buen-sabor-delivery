@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/shared/components/dialogs/dialog.service';
 import { Usuario } from 'src/app/core/models/usuarios/usuario';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
@@ -28,7 +29,7 @@ export class MyProfileComponent implements OnInit {
     rol: null
   };
 
-  constructor( private authService: AuthService) { }
+  constructor( private authService: AuthService, private dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.authService.user.subscribe(
@@ -43,6 +44,10 @@ export class MyProfileComponent implements OnInit {
 
   toggleEdit() {
     this.edit = !this.edit;
+  }
+
+  onForgotPassword(){
+    this.dialogService.forgotPassword();
   }
 
 }

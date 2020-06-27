@@ -6,6 +6,7 @@ import { FormAddressComponent } from './form-address/form-address.component';
 import { SelectAddressComponent } from './select-address/select-address.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BillingDetailsComponent } from './billing-details/billing-details.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,13 @@ export class DialogService {
     this.matDialog.open(ScheduleComponent, {
       panelClass: 'app-dialog',
       width: '420px'
+    });
+  }
+
+  forgotPassword() {
+    this.matDialog.open(ForgotPasswordComponent, {
+      panelClass: 'app-dialog',
+      width: '500px'
     });
   }
 

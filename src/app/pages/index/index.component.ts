@@ -19,6 +19,8 @@ export class IndexComponent implements OnInit {
       user => {
         if (!!user){
           this.userExists = true;
+        } else {
+          this.dialogService.signIn();
         }
       }
     );
