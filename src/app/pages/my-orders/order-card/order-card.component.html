@@ -15,10 +15,10 @@
   <div class="details"> {{ orderDetail }} </div>
   <div class="d-flex pt-3">
     <button mat-stroked-button class="w-100 mr-2">
-      <mat-icon class="material-icons-round" [inline]="true">receipt</mat-icon> Ver factura
+      <mat-icon class="material-icons" [inline]="true">sync</mat-icon> Repetir orden
     </button>
-    <button mat-stroked-button class="w-100 ml-2">
-      <mat-icon class="material-icons-round" [inline]="true">sync</mat-icon> Repetir orden
+    <button mat-stroked-button class="w-100 ml-2" [class]="getHiddenClass(data.estado.denominacion)">
+      <mat-icon class="material-icons" [inline]="true">receipt</mat-icon> Ver factura
     </button>
   </div>
 </div>

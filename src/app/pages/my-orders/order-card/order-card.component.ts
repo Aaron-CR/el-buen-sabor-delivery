@@ -28,4 +28,10 @@ export class OrderCardComponent implements OnInit {
     return status.replace(/\s+/g, '-');
   }
 
+  getHiddenClass(status: string) {
+    if (status === 'cancelado') {
+      return 'hide';
+    }
+  }
+
 }

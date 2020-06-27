@@ -62,7 +62,6 @@ export class MyAddressesComponent implements OnInit {
   }
 
   update(object: any) {
-    console.log(object, object.id);
     this.addressService.update(object, object.id).subscribe(() => {
       this.successMessage('Actualizado! Se ha actualizado correctamente.');
     });

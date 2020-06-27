@@ -32,7 +32,7 @@ export class BasicNavigationComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.dialogService.signIn();
+    // this.dialogService.signIn();
   }
 
   ngOnDestroy(): void {
