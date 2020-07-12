@@ -1,5 +1,5 @@
 <!-- Footer section -->
-<footer class="footer-section">
+<!-- <footer class="footer-section">
   <div class="container">
     <div class="row">
       <div class="col-xl-6 col-lg-7 order-lg-2">
@@ -56,5 +56,67 @@
       </div>
     </div>
   </div>
-</footer>
+</footer> -->
 <!-- Footer section end -->
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 footer-about">
+          <!-- Logo Image -->
+          <div routerLink="/menu" class="d-flex align-items-center mb-2">
+            <img class="logo-icon" src="assets/images/logos/logo-white.png" alt="logo-footer">
+            <span class="logo-text mx-2">El buen sabor</span>
+          </div>
+          <p>
+            En El buen sabor, amamos la comida tanto como vos, llevamos tu comida favorita directamente desde la cocina
+            del mejor restaurante.
+          </p>
+        </div>
+        <div class="col-md-4 offset-md-1 footer-contact">
+          <h3>Contact</h3>
+          <p><i class="fas fa-map-marker-alt"></i> San Martín 454, Mendoza, Mendoza</p>
+          <p><i class="fas fa-phone"></i> Teléfono: (261) 458-7454</p>
+          <p><i class="fas fa-envelope"></i> Email: <a
+              href="mailto:contacto@elbuensabor.com">contacto@elbuensabor.com</a></p>
+        </div>
+        <div class="col-md-4 footer-links">
+          <div class="row">
+            <div class="col">
+              <h3>Links</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <p><a class="scroll-link" href="/index">Inicio</a></p>
+              <p><a href="/index#como-funciona">Cómo funciona</a></p>
+              <p><a href="/index#nosotros">Nosotros</a></p>
+            </div>
+            <div class="col-md-6">
+              <p><a [routerLink]="[]" (click)="onSelectAddress()">Select Address</a></p>
+              <p><a [routerLink]="[]" (click)="onBillingDetails()">Billing Details</a></p>
+              <p><a [routerLink]="[]" (click)="onSchedule()">Schedule</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 footer-copyright">
+          Copyright &copy; {{ year }} - El buen sabor
+        </div>
+        <div class="col-md-6 footer-social">
+          <a href="https://www.facebook.com/ElBuenSaborOK" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/ElBuenSaborOK" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/ElBuenSaborOK" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.pinterest.es/ElBuenSaborOK" target="_blank"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
