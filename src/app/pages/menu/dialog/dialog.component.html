@@ -1,32 +1,33 @@
 <div mat-dialog-title class="d-flex justify-content-between align-items-end app-dialog">
   <div class="dialog-img">
-    <img onerror="this.src='assets/images/cards/card.jpg'" [src]="image">
+    <img onerror="this.src='assets/images/cards/card.jpg'" [src]="localData.imagen">
     <div class="dialog-button">
       <button mat-button mat-icon-button [mat-dialog-close]="true">
         <mat-icon class="material-icons-outlined"> close </mat-icon>
       </button>
     </div>
     <div class="card-time">
-      <span>20-25 min</span>
+      <span>{{ time }}</span>
     </div>
   </div>
 </div>
 <mat-dialog-content class="app-content mx-0 py-4">
   <div class="d-flex justify-content-between">
     <div class="card-title">
-      Titulo del Plato
+      {{ data.denominacion | titlecase }}
     </div>
     <div class="card-price">
-      {{ '20' | currency}}
+      {{ data.precio | currency:"ARS":"symbol" }}
     </div>
   </div>
   <div class="my-2">
-    <span>Burger</span>
-    <span class="ml-2">Vegana</span>
+    {{ categoria | titlecase }}
   </div>
-  <p class="card-ingredients">Ingredients: Dr. Praeger's Black Bean Burger, Focaccia bun, Balsamic Vinaigrette, Pesto,
-    Tomato, Swiss Cheese</p>
-  <div class="d-flex flex-wrap justify-content-between align-items-center pt-4">
+  <div class="my-2">
+    {{ localData.descripcion | titlecase }}
+  </div>
+  <p class="card-ingredients" *ngIf="ingredientes">Ingredientes: {{ ingredientes }}</p>
+  <div class="d-flex flex-wrap justify-content-between align-items-center">
     <div class="d-flex flex-grow-1 align-items-center">
       <p class="m-0 mr-3">Cantidad</p>
       <mat-form-field class="card-quantity">

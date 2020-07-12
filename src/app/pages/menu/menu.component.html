@@ -27,8 +27,8 @@
   <app-categories></app-categories>
 
   <div class="row mb-5">
-    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let item of [].constructor(15); let i = index">
-      <app-card (click)="openDialog()"> </app-card>
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let item of manufactured">
+      <app-card [data]="item" (click)="openDialog(item)"> </app-card>
     </div>
   </div>
 

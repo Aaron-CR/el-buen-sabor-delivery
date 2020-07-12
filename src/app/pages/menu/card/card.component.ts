@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
+import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 
 @Component({
   selector: 'app-card',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  image = 'https://images.unsplash.com/photo-1460306855393-0410f61241c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80';
+  @Input()
+  public data: any;
+
+  get time() {
+    return this.data.tiempoEstimadoCocina ? `${this.data.tiempoEstimadoCocina} - ${this.data.tiempoEstimadoCocina + 5} min` : '5 - 10 min';
+  }
+
+  get categoria() {
+    return this.data.categoria ? `${this.data.categoria.denominacion}` : `${this.data.rubro.denominacion}`;
+  }
 
   constructor() { }
 

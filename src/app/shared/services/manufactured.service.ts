@@ -7,6 +7,6 @@ import { Injectable } from '@angular/core';
 })
 export class ManufacturedService extends ApiService<ArticuloManufacturado> {
 
-  protected endpoint: 'http://localhost:8080/api/v1/articulos/manufacturados';
+  protected endpoint = 'http://localhost:8080/api/v1/articulos/manufacturados';
 
 }

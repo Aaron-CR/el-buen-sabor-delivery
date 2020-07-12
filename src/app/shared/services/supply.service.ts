@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class SupplyService extends ApiService<ArticuloInsumo> {
 
-  protected endpoint: 'http://localhost:8080/api/v1/articulos/insumos';
+  protected endpoint = 'http://localhost:8080/api/v1/articulos/insumos';
 
   getBebidas(filter = '', page = 0, size = 8, sortBy = 'ultimaActualizacion', direction = 'desc'): Observable<object> {
     return this.httpClient.get(`${this.endpoint}/bebidas`, {

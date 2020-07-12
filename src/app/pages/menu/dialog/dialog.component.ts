@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
 
 @Component({
   selector: 'app-dialog',
@@ -7,10 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogComponent implements OnInit {
 
-  image = 'https://images.unsplash.com/photo-1460306855393-0410f61241c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80';
-  selected = '1';
+  public localData: ArticuloManufacturado;
+  public selected = '1';
 
-  constructor() { }
+  get time() {
+    return this.data.tiempoEstimadoCocina ? `${this.data.tiempoEstimadoCocina} - ${this.data.tiempoEstimadoCocina + 5} min` : '5 - 10 min';
+  }
+
+  get categoria() {
+    return this.data.categoria ? `${this.data.categoria.denominacion}` : `${this.data.rubro.denominacion}`;
+  }
+
+  get ingredientes() {
+    if (this.localData.detallesReceta) {
+      return this.localData.detallesReceta.map((detalle) => {
+        if (!detalle.oculto) {
+          return `${detalle.insumo.denominacion} `;
+        }
+      });
+    }
+  }
+
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<DialogComponent>
+  ) {
+    this.localData = { ...data };
+  }
 
   ngOnInit(): void {
   }
