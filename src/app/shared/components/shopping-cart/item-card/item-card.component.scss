@@ -1,0 +1,25 @@
+.item-card {
+  padding: 10px 0;
+}
+
+.item-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.item-name {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.item-price {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.item-count {
+  font-size: 18px;
+  font-weight: 500;
+}

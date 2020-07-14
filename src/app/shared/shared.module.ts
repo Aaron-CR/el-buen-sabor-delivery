@@ -25,6 +25,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from './../../environments/environment';
 import { BasicNavigationComponent } from './components/basic-navigation/basic-navigation.component';
 import { ForgotPasswordComponent } from './components/dialogs/forgot-password/forgot-password.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ItemCardComponent } from './components/shopping-cart/item-card/item-card.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ForgotPasswordComponent } from './components/dialogs/forgot-password/fo
     ScheduleComponent,
     BillingDetailsComponent,
     BasicNavigationComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ShoppingCartComponent,
+    ItemCardComponent
   ],
   imports: [
     CommonModule,

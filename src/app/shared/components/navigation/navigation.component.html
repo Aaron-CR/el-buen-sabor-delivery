@@ -3,7 +3,7 @@
   <mat-toolbar color="primary" class="example-toolbar">
     <!-- Logo Image -->
     <a><img class="logo-icon ml-4" routerLink="/menu" src="assets/images/logos/logo.png">
-    <span [hidden]="mobileQuery.matches" class="mx-2" routerLink="/menu">El buen sabor</span></a>
+      <span [hidden]="mobileQuery.matches" class="mx-2" routerLink="/menu">El buen sabor</span></a>
     <!-- Spacer -->
     <div class="mr-auto"></div>
     <!-- User Button -->
@@ -45,9 +45,7 @@
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
       position="end">
-      <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
-      </mat-nav-list>
+      <app-shopping-cart></app-shopping-cart>
     </mat-sidenav>
     <mat-sidenav-content>
       <ng-content></ng-content>
