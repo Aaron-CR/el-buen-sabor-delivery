@@ -1,7 +1,47 @@
 <div class="shopping-cart">
-  <h2>Mi Orden</h2>
-  <app-item-card></app-item-card>
-  <app-item-card></app-item-card>
-  <app-item-card></app-item-card>
-  <h2>Entrega</h2>
+  <h2 class="px-3">Mi Orden</h2>
+  <div class="order">
+    <app-item-card></app-item-card>
+    <app-item-card></app-item-card>
+    <app-item-card></app-item-card>
+    <app-item-card></app-item-card>
+    <app-item-card></app-item-card>
+    <app-item-card></app-item-card>
+    <app-item-card></app-item-card>
+  </div>
+</div>
+<h2 class="px-3">Entrega</h2>
+<div class="d-flex px-3">
+  <button mat-flat-button color="primary" class="w-100 mr-3">En tienda</button>
+  <button mat-flat-button color="primary" class="w-100">Delivery</button>
+</div>
+<div class="d-flex align-items-center justify-content-between p-3">
+  <div class="d-flex">
+    <div class="app-icon d-flex align-items-center justify-content-center">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">place</mat-icon>
+    </div>
+    <div class="pl-3">
+      <div class="my-1 item-name">87 Coff...</div>
+      <div class="my-1 item-price">$ 180.00</div>
+    </div>
+  </div>
+  <div class="d-flex flex-column align-content-center">
+    <button mat-flat-button color="primary" class="w-100">Cambiar</button>
+  </div>
+</div>
+<div class="px-3">
+  <div class="d-flex justify-content-between h5">
+    <div>Subtotal:</div>
+    <div>$ 480</div>
+  </div>
+  <div class="d-flex justify-content-between font-weight-light h6">
+    <div>Delivery:</div>
+    <div>$ 50</div>
+  </div>
+  <div class="d-flex justify-content-between h3">
+    <div class="">Total:</div>
+    <div>$ 530</div>
+  </div>
+  <button mat-flat-button color="primary" class="w-100">Continuar</button>
+  <button mat-flat-button>Cancelar el pedido</button>
 </div>
