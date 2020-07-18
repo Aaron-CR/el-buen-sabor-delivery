@@ -31,7 +31,7 @@
     <div class="d-flex flex-grow-1 align-items-center">
       <p class="m-0 mr-3">Cantidad</p>
       <mat-form-field class="card-quantity">
-        <mat-select [(value)]="selected">
+        <mat-select [(value)]="cantidad">
           <ng-container *ngFor="let quantity of [].constructor(15); let i=index">
             <mat-option value="{{ i + 1 }}">{{ i + 1 }}</mat-option>
           </ng-container>
@@ -39,7 +39,10 @@
       </mat-form-field>
     </div>
     <div class="d-flex flex-fill">
-      <button mat-raised-button color="primary" class="card-button px-4 ml-auto">Agregar a mi orden</button>
+      <button mat-raised-button color="primary" class="card-button px-4 ml-auto" [mat-dialog-close]="true"
+        (click)="addProductToCart()">
+        Agregar a mi orden
+      </button>
     </div>
   </div>
 </mat-dialog-content>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Direccion {
-  alias: string;
-  calle: string;
-}
+import { AuthService } from 'src/app/shared/authentication/auth.service';
+import { CustomerService } from 'src/app/shared/services/customer.service';
+import { BehaviorSubject } from 'rxjs';
+import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-delivery';
+import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-select-address',
@@ -12,15 +12,23 @@ interface Direccion {
 })
 export class SelectAddressComponent implements OnInit {
 
-  direcciones: Direccion[] = [
-    { alias: 'Casa', calle: 'San Martín 454, Mendoza, Mendoza' },
-    { alias: 'Trabajo', calle: 'Calle 2312, Mendoza' },
-    { alias: 'Otro', calle: 'Segunda Calle 213, Mendoza, Mendoza' }
-  ];
+  private addressSubject = new BehaviorSubject<DireccionDelivery[]>([]);
+  public address$ = this.addressSubject.asObservable();
+  public direccion: DireccionDelivery;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private customerService: CustomerService,
+    public cartService: ShoppingCartService
+  ) { }
 
   ngOnInit(): void {
+    this.customerService.getDirecciones(this.authService.uid)
+      .subscribe((response) => this.addressSubject.next(response));
+  }
+
+  onSelect() {
+    this.cartService.orderSubject.next({ ...this.cartService.orderSubject.value, direccionEntrega: this.direccion });
   }
 
 }

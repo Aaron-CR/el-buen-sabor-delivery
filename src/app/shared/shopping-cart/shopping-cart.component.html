@@ -1,0 +1,72 @@
+<div class="shopping-cart">
+  <h2 class="px-3">Mi Orden</h2>
+  <div class="order" *ngFor="let item of cartService.detalles">
+    <app-cart-item [data]="item"></app-cart-item>
+  </div>
+</div>
+<h2 class="px-3">Entrega</h2>
+<div class="d-flex px-3">
+  <button mat-stroked-button class="w-100 mr-3" [disabled]="!cartService.delivery"
+    (click)="cartService.toggleDelivery()">
+    <mat-icon class="material-icons mr-1">storefront</mat-icon> En tienda
+  </button>
+  <button mat-stroked-button class="w-100" [disabled]="cartService.delivery" (click)="cartService.toggleDelivery()">
+    <mat-icon class="material-icons mr-1">moped</mat-icon> Delivery
+  </button>
+</div>
+<ng-container *ngIf="cartService.delivery; else enTienda">
+  <div class="d-flex align-items-center justify-content-between p-3">
+    <div class="d-flex">
+      <div class="app-icon d-flex align-items-center justify-content-center">
+        <mat-icon aria-hidden="false" aria-label="Direccion de entrega">place</mat-icon>
+      </div>
+      <div class="pl-3">
+        <div class="my-1 item-name"> {{ cartService.address }}</div>
+        <div class="my-1 item-price">{{ '50' | currency:"ARS":"symbol" }}</div>
+      </div>
+    </div>
+    <div class="d-flex flex-column align-content-center">
+      <button mat-stroked-button color="accent" class="w-100" (click)="selectAddress()">Cambiar</button>
+    </div>
+  </div>
+</ng-container>
+<ng-template #enTienda>
+  <div class="d-flex align-items-center justify-content-between p-3">
+    <div class="d-flex">
+      <div class="app-icon d-flex align-items-center justify-content-center">
+        <mat-icon aria-hidden="false" aria-label="Direccion del local">storefront</mat-icon>
+      </div>
+      <div class="pl-3">
+        <div class="my-1 item-name">San Martín 454, Mendoza</div>
+        <div class="my-1 item-price">-10%</div>
+      </div>
+    </div>
+    <div class="d-flex flex-column align-content-center">
+      <button mat-stroked-button color="accent" class="w-100" (click)="openMap()">Ver mapa</button>
+    </div>
+  </div>
+</ng-template>
+<div class="px-3">
+  <div class="d-flex justify-content-between h5">
+    <div>Subtotal:</div>
+    <div>{{ cartService.subtotal | currency:"ARS":"symbol" }}</div>
+  </div>
+  <ng-container *ngIf="cartService.delivery; else montoDescuento">
+    <div class="d-flex justify-content-between font-weight-light h6">
+      <div>Envío:</div>
+      <div>{{ '50' | currency:"ARS":"symbol" }}</div>
+    </div>
+  </ng-container>
+  <ng-template #montoDescuento>
+    <div class="d-flex justify-content-between font-weight-light h6">
+      <div>Descuento:</div>
+      <div>{{ cartService.montoDescuento | currency:"ARS":"symbol" }}</div>
+    </div>
+  </ng-template>
+  <div class="d-flex justify-content-between h3">
+    <div class="">Total:</div>
+    <div>{{ cartService.total | currency:"ARS":"symbol" }}</div>
+  </div>
+  <button mat-flat-button color="primary" class="w-100" (click)="continue()">Continuar</button>
+  <button mat-flat-button class="w-100 mt-3" (click)="cancelOrder()">Cancelar orden</button>
+</div>

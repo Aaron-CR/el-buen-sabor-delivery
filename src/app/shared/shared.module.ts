@@ -25,8 +25,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from './../../environments/environment';
 import { BasicNavigationComponent } from './components/basic-navigation/basic-navigation.component';
 import { ForgotPasswordComponent } from './components/dialogs/forgot-password/forgot-password.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { ItemCardComponent } from './components/shopping-cart/item-card/item-card.component';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +39,7 @@ import { ItemCardComponent } from './components/shopping-cart/item-card/item-car
     ScheduleComponent,
     BillingDetailsComponent,
     BasicNavigationComponent,
-    ForgotPasswordComponent,
-    ShoppingCartComponent,
-    ItemCardComponent
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +48,7 @@ import { ItemCardComponent } from './components/shopping-cart/item-card/item-car
     FormsModule,
     MaterialModule,
     RouterModule,
+    ShoppingCartModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyARaDrtQwfk6Ql8byHHSJtAAJGswf9ueds',
       libraries: ['places']

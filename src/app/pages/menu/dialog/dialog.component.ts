@@ -1,6 +1,8 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
+import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.service';
+import { DetalleOrden } from 'src/app/core/models/comprobantes/detalle-orden';
 
 @Component({
   selector: 'app-dialog',
@@ -9,8 +11,8 @@ import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-ma
 })
 export class DialogComponent implements OnInit {
 
-  public localData: ArticuloManufacturado;
-  public selected = '1';
+  public localData: any;
+  public cantidad = '1';
 
   get time() {
     return this.data.tiempoEstimadoCocina ? `${this.data.tiempoEstimadoCocina} - ${this.data.tiempoEstimadoCocina + 5} min` : '5 - 10 min';
@@ -32,12 +34,23 @@ export class DialogComponent implements OnInit {
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<DialogComponent>
+    private dialogRef: MatDialogRef<DialogComponent>,
+    private cartService: ShoppingCartService
   ) {
     this.localData = { ...data };
   }
 
   ngOnInit(): void {
+  }
+
+  addProductToCart() {
+    const detail: DetalleOrden = {
+      cantidad: Number(this.cantidad),
+      precioTotal: this.localData.precio * Number(this.cantidad),
+      articuloManufacturado: this.localData,
+      insumo: null
+    };
+    this.cartService.addDetail(detail);
   }
 
 }

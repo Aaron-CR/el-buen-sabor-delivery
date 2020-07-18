@@ -1,0 +1,21 @@
+<div class="d-flex align-items-center justify-content-between py-1 px-3">
+  <div class="d-flex">
+    <img [src]="imagen" alt="" class="item-img">
+    <div class="pl-3">
+      <div class="my-1 item-name">{{ denominacion }}</div>
+      <div class="my-1 item-price">{{ precio | currency:"ARS":"symbol" }}</div>
+    </div>
+  </div>
+  <div class="d-flex flex-column align-content-center">
+    <div class="d-flex align-items-center mb-2">
+      <button mat-button mat-icon-button (click)="removeOne()">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <div class="mx-2 item-count">{{ cantidad }}</div>
+      <button mat-button mat-icon-button (click)="addOne()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <button mat-flat-button color="primary" class="w-100" (click)="removeItem()">Eliminar</button>
+  </div>
+</div>
