@@ -1,57 +1,51 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-
-  <mat-toolbar color="primary" class="example-toolbar">
-    <!-- Logo Image -->
-    <a><img class="logo-icon ml-4" routerLink="/menu" src="assets/images/logos/logo.png">
-      <span [hidden]="mobileQuery.matches" class="mx-2" routerLink="/menu">El buen sabor</span></a>
-    <!-- Spacer -->
-    <div class="mr-auto"></div>
-    <!-- User Button -->
-    <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
-      <div class="mat-button-wrapper">
-        <img src="assets/images/avatars/customer.png" class="avatar">
-        <span [hidden]="mobileQuery.matches" class="mx-2"> {{userName}} {{userLastName}}</span>
-        <mat-icon [hidden]="mobileQuery.matches" class="material-icons-round" [inline]="true">keyboard_arrow_down
-        </mat-icon>
-      </div>
-      <div matripple="" class="mat-ripple mat-button-ripple"></div>
-      <div class="mat-button-focus-overlay"></div>
-    </button>
-    <!-- User Menu -->
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/my-addresses">
-        <mat-icon class="material-icons-outlined">place</mat-icon>
-        <span>Mis direcciones</span>
-      </button>
-      <button mat-menu-item routerLink="/my-orders">
-        <mat-icon class="material-icons-outlined">assignment</mat-icon>
-        <span>Mis ordenes</span>
-      </button>
-      <button mat-menu-item routerLink="/my-profile">
-        <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-        <span>Mi perfil</span>
-      </button>
-      <button mat-menu-item (click)="onSignOut()">
-        <mat-icon class="material-icons-outlined">exit_to_app</mat-icon>
-        <span>Cerrar sesión</span>
-      </button>
-    </mat-menu>
-    <div class="toolbar-separator"></div>
-    <!-- Cart menu -->
-    <button mat-icon-button class="toolbar-button" (click)="snav.toggle()">
-      <mat-icon class="material-icons-outlined" [matBadge]="cartService.itemsLength" matBadgeColor="warn">
-        shopping_bag
-      </mat-icon>
-    </button>
-  </mat-toolbar>
-  <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-      position="end">
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="(isHandset$ | async) ? 'true' : 'false'">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false" position="end">
+    <mat-nav-list>
       <app-shopping-cart></app-shopping-cart>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <ng-content></ng-content>
-      <app-footer></app-footer>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="example-toolbar">
+      <a><img class="logo-icon ml-4" routerLink="/menu" src="assets/images/logos/logo.png">
+        <span [hidden]="(isHandset$ | async)" class="mx-2" routerLink="/menu">El buen sabor</span></a>
+      <div class="mr-auto"></div>
+      <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
+        <div class="mat-button-wrapper">
+          <img src="assets/images/avatars/customer.png" class="avatar">
+          <span [hidden]="(isHandset$ | async)" class="mx-2"> {{userName}} {{userLastName}}</span>
+          <mat-icon [hidden]="(isHandset$ | async)" class="material-icons-round" [inline]="true">keyboard_arrow_down
+          </mat-icon>
+        </div>
+        <div matripple="" class="mat-ripple mat-button-ripple"></div>
+        <div class="mat-button-focus-overlay"></div>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/my-addresses">
+          <mat-icon class="material-icons-outlined">place</mat-icon>
+          <span>Mis direcciones</span>
+        </button>
+        <button mat-menu-item routerLink="/my-orders">
+          <mat-icon class="material-icons-outlined">assignment</mat-icon>
+          <span>Mis ordenes</span>
+        </button>
+        <button mat-menu-item routerLink="/my-profile">
+          <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+          <span>Mi perfil</span>
+        </button>
+        <button mat-menu-item (click)="onSignOut()">
+          <mat-icon class="material-icons-outlined">exit_to_app</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+      </mat-menu>
+      <div class="toolbar-separator"></div>
+      <button mat-icon-button class="toolbar-button" (click)="drawer.toggle()">
+        <mat-icon class="material-icons-outlined" [matBadge]="cartService.itemsLength" matBadgeColor="warn">
+          shopping_bag
+        </mat-icon>
+      </button>
+    </mat-toolbar>
+    <ng-content></ng-content>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

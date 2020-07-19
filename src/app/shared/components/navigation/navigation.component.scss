@@ -101,3 +101,56 @@ h1.example-app-name {
 .logo-icon {
   width: 38px;
 }
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 25%;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* ----------------
+Responsive
+ -------------------*/
+
+/* Medium screen : 992px. */
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .sidenav {
+    width: 40%;
+  }
+}
+
+/* Tablet :768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .sidenav {
+    width: 50%;
+  }
+}
+
+/* Large Mobile :480px. */
+
+@media only screen and (max-width: 767px) {
+  .sidenav {
+    width: 90%;
+  }
+}
+
+/* Small Mobile :320px. */
+@media only screen and (max-width: 479px) {
+  .sidenav {
+    width: 90%;
+  }
+}

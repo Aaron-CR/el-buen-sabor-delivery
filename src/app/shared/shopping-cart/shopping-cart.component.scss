@@ -1,14 +1,9 @@
-.shopping-cart {
-  width: 500px;
-}
-
 h2 {
   font-size: 30px;
 }
 
 .order {
-  // max-height: 300px;
-  max-width: max-content;
+  min-height: 100vh;
   overflow: scroll;
 }
 
