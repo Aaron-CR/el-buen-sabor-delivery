@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Orden } from 'src/app/core/models/comprobantes/orden';
+import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.service';
 
 export interface Details {
   detalle: string;
@@ -18,12 +20,13 @@ const DETAILS_DATA: Details[] = [
 })
 export class BillingDetailsComponent implements OnInit {
 
-  detailColumns: string[] = ['detalle', 'precio'];
-  detailDataSource = DETAILS_DATA;
+  public orden: Orden;
+  public detailColumns: string[] = ['detalle', 'precio'];
 
-  constructor() { }
+  constructor(public cartService: ShoppingCartService) { }
 
   ngOnInit(): void {
+    this.cartService.order$.subscribe(orden => this.orden = orden);
   }
 
 }

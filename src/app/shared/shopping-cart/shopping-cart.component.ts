@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../components/dialogs/dialog.service';
 import { ShoppingCartService } from './shopping-cart.service';
+import { Orden } from 'src/app/core/models/comprobantes/orden';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,12 +10,15 @@ import { ShoppingCartService } from './shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  public orden: Orden;
+
   constructor(
     private dialogService: DialogService,
     public cartService: ShoppingCartService
   ) { }
 
   ngOnInit(): void {
+    this.cartService.order$.subscribe(orden => this.orden = orden);
   }
 
   selectAddress() {

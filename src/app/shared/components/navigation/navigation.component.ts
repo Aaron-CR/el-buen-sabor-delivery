@@ -4,6 +4,7 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { DialogService } from '../dialogs/dialog.service';
+import { ShoppingCartService } from '../../shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-navigation',
@@ -27,8 +28,9 @@ export class NavigationComponent implements OnDestroy, OnInit {
     media: MediaMatcher,
     public dialogService: DialogService,
     private authService: AuthService,
-    private router: Router
-    ) {
+    private router: Router,
+    public cartService: ShoppingCartService
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
@@ -57,7 +59,7 @@ export class NavigationComponent implements OnDestroy, OnInit {
     this.dialogService.signIn();
   }
 
-  onSignOut(){
+  onSignOut() {
     this.authService.logoutUser();
     this.router.navigate(['']);
   }

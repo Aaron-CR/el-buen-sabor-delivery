@@ -3,10 +3,10 @@ import { Estado } from './estado';
 import { DetalleOrden } from './detalle-orden';
 
 export interface Comprobante extends Base {
-  fecha: Date;
+  fecha?: Date;
   formaPago: string;
   montoDescuento: number;
   total: number;
-  estado: Estado;
+  estado?: Estado;
   detalles: Array<DetalleOrden>;
 }

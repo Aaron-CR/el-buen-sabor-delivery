@@ -1,26 +1,32 @@
 <app-dialog title="Mi Orden">
   <div class="title pb-3">Detalle de entrega</div>
-  <div class="address">Delivery • San Martín 454, Mendoza, Mendoza </div>
+  <div class="address">Delivery • {{ cartService.address }}</div>
   <mat-form-field color="accent" class="w-100 py-3">
     <mat-label>Agregar aclaraciones...</mat-label>
     <textarea matInput></textarea>
   </mat-form-field>
   <div class="order">Articulos</div>
-  <mat-table [dataSource]="detailDataSource" class="mb-4">
-    <ng-container *ngFor="let def of detailColumns" [matColumnDef]="def" [ngSwitch]="def">
-      <ng-container *ngSwitchCase="'precio'">
-        <mat-cell *matCellDef="let row"> {{ row[def] | currency }} </mat-cell>
-      </ng-container>
-      <ng-container *ngSwitchDefault>
-        <mat-cell *matCellDef="let row"> {{ row[def] }} </mat-cell>
-      </ng-container>
+  <mat-table [dataSource]="orden.detalles" class="mb-4">
+    <ng-container matColumnDef="detalle">
+      <mat-header-cell *matHeaderCellDef> DETALLE </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.cantidad}} x {{ row.articuloManufacturado ? row.articuloManufacturado.denominacion : row.insumo.denominacion }}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> Total: </mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="precio">
+      <mat-header-cell *matHeaderCellDef> PRECIO </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.precioTotal | currency:"ARS":"symbol"}} </mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{ cartService.total | currency:"ARS":"symbol" }} </mat-footer-cell>
     </ng-container>
     <mat-row *matRowDef="let row; columns: detailColumns"></mat-row>
+    <mat-footer-row *matFooterRowDef="detailColumns"></mat-footer-row>
   </mat-table>
   <mat-radio-group color="primary" class="d-flex flex-column">
-    <mat-radio-button value="1">Contra reembolso</mat-radio-button>
+    <mat-radio-button value="efectivo">Efectivo</mat-radio-button>
     <div class="d-flex flex-row justify-content-between">
-      <mat-radio-button value="2">Pago con tarjetas</mat-radio-button>
+      <mat-radio-button value="tarjetas">Pago con tarjetas</mat-radio-button>
       <img src="assets/images/icons/payment.png">
     </div>
   </mat-radio-group>

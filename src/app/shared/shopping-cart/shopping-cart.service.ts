@@ -10,19 +10,13 @@ import { DetalleOrden } from 'src/app/core/models/comprobantes/detalle-orden';
 export class ShoppingCartService {
 
   public orderSubject = new BehaviorSubject<Orden>({
-    fecha: null,
     formaPago: null,
     montoDescuento: null,
     total: 0,
-    estado: null,
     aclaraciones: null,
     detalles: [],
     delivery: false,
-    tiempoTotalPreparacion: null,
-    horarioEntrega: null,
-    cliente: null,
     direccionEntrega: null,
-    repartidor: null,
   });
   public order$ = this.orderSubject.asObservable();
 
@@ -31,22 +25,21 @@ export class ShoppingCartService {
   }
 
   get montoDescuento() {
-    let subtotal = this.subtotal;
-    return (subtotal * 10) / 100;
+    const subtotal = this.subtotal;
+    if (this.delivery) {
+      return this.orderSubject.value.montoDescuento = null;
+    } else {
+      return this.orderSubject.value.montoDescuento = (subtotal * 10) / 100;
+    }
   }
 
   get total(): number {
-    console.log('dsads');
-    let subtotal = this.subtotal;
+    const subtotal = this.subtotal;
     if (this.delivery) {
       return this.orderSubject.value.total = subtotal + 50;
     } else {
       return this.orderSubject.value.total = subtotal - this.montoDescuento;
     }
-  }
-
-  get detalles(): DetalleOrden[] {
-    return this.orderSubject.value.detalles;
   }
 
   get delivery(): boolean {
@@ -61,6 +54,10 @@ export class ShoppingCartService {
     return this.direccionEntrega
       ? `${this.direccionEntrega.calle} ${this.direccionEntrega.numero}, ${this.direccionEntrega.localidad.nombre}`
       : 'No seleccionaste ninguna dirección';
+  }
+
+  get itemsLength() {
+    return this.orderSubject.value.detalles.reduce((acc, val) => acc += val.cantidad, 0);
   }
 
   constructor() { }
@@ -93,19 +90,13 @@ export class ShoppingCartService {
 
   cancelOrden() {
     this.orderSubject.next({
-      fecha: null,
       formaPago: null,
       montoDescuento: null,
       total: 0,
-      estado: null,
       aclaraciones: null,
       detalles: [],
       delivery: false,
-      tiempoTotalPreparacion: null,
-      horarioEntrega: null,
-      cliente: null,
       direccionEntrega: null,
-      repartidor: null,
     });
   }
 

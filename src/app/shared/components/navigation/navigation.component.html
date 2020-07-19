@@ -39,7 +39,9 @@
     <div class="toolbar-separator"></div>
     <!-- Cart menu -->
     <button mat-icon-button class="toolbar-button" (click)="snav.toggle()">
-      <mat-icon class=" material-icons-outlined">shopping_bag</mat-icon>
+      <mat-icon class="material-icons-outlined" [matBadge]="cartService.itemsLength" matBadgeColor="warn">
+        shopping_bag
+      </mat-icon>
     </button>
   </mat-toolbar>
   <mat-sidenav-container class="example-sidenav-container">

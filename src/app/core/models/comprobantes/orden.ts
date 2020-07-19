@@ -9,9 +9,9 @@ export interface Orden extends Comprobante {
   aclaraciones: string;
   detalles: DetalleOrden[];
   delivery: boolean;
-  tiempoTotalPreparacion: number;
-  horarioEntrega: Date;
-  cliente: Cliente;
+  tiempoTotalPreparacion?: number;
+  horarioEntrega?: Date;
+  cliente?: Cliente;
   direccionEntrega: DireccionDelivery;
-  repartidor: Empleado;
+  repartidor?: Empleado;
 }
