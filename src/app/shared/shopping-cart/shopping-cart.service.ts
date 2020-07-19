@@ -1,102 +1,123 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Orden } from 'src/app/core/models/comprobantes/orden';
-import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-delivery';
 import { DetalleOrden } from 'src/app/core/models/comprobantes/detalle-orden';
+import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, FormArray } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
 
-  public orderSubject = new BehaviorSubject<Orden>({
-    formaPago: null,
-    montoDescuento: null,
-    total: 0,
-    aclaraciones: null,
-    detalles: [],
-    delivery: false,
-    direccionEntrega: null,
-  });
-  public order$ = this.orderSubject.asObservable();
+  public shoppingCartForm: FormGroup;
 
   get subtotal() {
-    return this.orderSubject.value.detalles.reduce((acc, val) => acc += val.precioTotal * val.cantidad, 0);
+    return this.shoppingCartForm.value.detalles.reduce((acc, val) => acc += val.precioTotal * val.cantidad, 0);
   }
 
   get montoDescuento() {
     const subtotal = this.subtotal;
     if (this.delivery) {
-      return this.orderSubject.value.montoDescuento = null;
+      return this.shoppingCartForm.value.montoDescuento = null;
     } else {
-      return this.orderSubject.value.montoDescuento = (subtotal * 10) / 100;
+      return this.shoppingCartForm.value.montoDescuento = (subtotal * 10) / 100;
     }
   }
 
   get total(): number {
     const subtotal = this.subtotal;
     if (this.delivery) {
-      return this.orderSubject.value.total = subtotal + 50;
+      return this.shoppingCartForm.value.total = subtotal + 50;
     } else {
-      return this.orderSubject.value.total = subtotal - this.montoDescuento;
+      return this.shoppingCartForm.value.total = subtotal - this.montoDescuento;
     }
   }
 
   get delivery(): boolean {
-    return this.orderSubject.value.delivery;
+    return this.shoppingCartForm.value.delivery;
   }
 
-  get direccionEntrega(): DireccionDelivery {
-    return this.orderSubject.value.direccionEntrega;
+  get detalles(): FormArray {
+    return this.shoppingCartForm.get('detalles') as FormArray;
+  }
+
+  get direccionEntrega(): FormControl {
+    return this.shoppingCartForm.get('direccionEntrega') as FormControl;
   }
 
   get address() {
-    return this.direccionEntrega
-      ? `${this.direccionEntrega.calle} ${this.direccionEntrega.numero}, ${this.direccionEntrega.localidad.nombre}`
+    return this.direccionEntrega.value
+      ? `${this.direccionEntrega.value.calle} ${this.direccionEntrega.value.numero}, ${this.direccionEntrega.value.localidad.nombre}`
       : 'No seleccionaste ninguna dirección';
   }
 
   get itemsLength() {
-    return this.orderSubject.value.detalles.reduce((acc, val) => acc += val.cantidad, 0);
+    return this.shoppingCartForm.value.detalles.reduce((acc, val) => acc += val.cantidad, 0);
   }
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
+  ) {
+    this.buildForm();
+  }
+
+  buildForm() {
+    this.shoppingCartForm = this.formBuilder.group({
+      total: [0],
+      formaPago: ['efectivo'],
+      aclaraciones: [null],
+      montoDescuento: [null],
+      delivery: [false],
+      direccionEntrega: [null, [Validators.required]],
+      detalles: this.formBuilder.array([])
+    });
+  }
 
   addDetail(detail: DetalleOrden) {
     const detailExistInCart = this.findDetail(detail);
     if (!detailExistInCart) {
-      this.orderSubject.value.detalles.push(detail);
-      return;
+      return this.shoppingCartForm.value.detalles.push(detail);
     }
     detailExistInCart.cantidad += detail.cantidad;
-  }
-
-  removeOne(detail: DetalleOrden) {
-    return detail.cantidad -= 1;
+    if (detailExistInCart.cantidad > 15) {
+      this.alert('Su orden necesitara confirmación telefónica');
+    }
   }
 
   addOne(detail: DetalleOrden) {
-    return detail.cantidad += 1;
+    detail.cantidad += 1;
+    if (detail.cantidad > 15) {
+      this.alert('Su orden necesitara confirmación telefónica');
+    }
   }
 
-  removeDetail(detail: DetalleOrden) {
-    this.orderSubject.value.detalles = this.orderSubject.value.detalles.filter(({ articuloManufacturado }) =>
-      articuloManufacturado.id !== detail.articuloManufacturado.id);
+  removeOne(detail: DetalleOrden, index: number) {
+    (detail.cantidad > 1)
+      ? detail.cantidad -= 1
+      : this.removeDetail(index);
+  }
+
+  removeDetail(index: number) {
+    this.detalles.setValue = this.detalles.value.splice(index, 1);
+  }
+
+  alert(text: string) {
+    this.snackBar.open(text, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
   }
 
   toggleDelivery() {
-    this.orderSubject.next({ ...this.orderSubject.value, delivery: !this.orderSubject.value.delivery });
+    this.shoppingCartForm.patchValue({ delivery: !this.shoppingCartForm.value.delivery });
   }
 
   cancelOrden() {
-    this.orderSubject.next({
-      formaPago: null,
-      montoDescuento: null,
+    this.shoppingCartForm.reset({
       total: 0,
+      formaPago: 'efectivo',
       aclaraciones: null,
-      detalles: [],
+      montoDescuento: null,
       delivery: false,
       direccionEntrega: null,
+      detalles: [],
     });
   }
 
@@ -106,7 +127,7 @@ export class ShoppingCartService {
 
   findManufacturado(detail: DetalleOrden) {
     if (detail.articuloManufacturado) {
-      return this.orderSubject.value.detalles.find(({ articuloManufacturado }) =>
+      return this.shoppingCartForm.value.detalles.find(({ articuloManufacturado }) =>
         articuloManufacturado.id === detail.articuloManufacturado.id);
     }
     return false;
@@ -114,10 +135,14 @@ export class ShoppingCartService {
 
   findInsumo(detail: DetalleOrden) {
     if (detail.insumo) {
-      return this.orderSubject.value.detalles.find(({ insumo }) =>
+      return this.shoppingCartForm.value.detalles.find(({ insumo }) =>
         insumo.id === detail.insumo.id);
     }
     return false;
+  }
+
+  errorHandling = (control: string, error: string) => {
+    return this.shoppingCartForm.controls[control].hasError(error);
   }
 
 }

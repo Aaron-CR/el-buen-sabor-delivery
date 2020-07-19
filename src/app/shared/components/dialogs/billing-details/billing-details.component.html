@@ -6,15 +6,15 @@
     <textarea matInput></textarea>
   </mat-form-field>
   <div class="order">Articulos</div>
-  <mat-table [dataSource]="orden.detalles" class="mb-4">
+  <mat-table [dataSource]="cartService.detalles.value" class="mb-4">
     <ng-container matColumnDef="detalle">
       <mat-header-cell *matHeaderCellDef> DETALLE </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        {{row.cantidad}} x {{ row.articuloManufacturado ? row.articuloManufacturado.denominacion : row.insumo.denominacion }}
+        {{row.cantidad}} x
+        {{ row.articuloManufacturado ? row.articuloManufacturado.denominacion : row.insumo.denominacion }}
       </mat-cell>
       <mat-footer-cell *matFooterCellDef> Total: </mat-footer-cell>
     </ng-container>
-
     <ng-container matColumnDef="precio">
       <mat-header-cell *matHeaderCellDef> PRECIO </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.precioTotal | currency:"ARS":"symbol"}} </mat-cell>
@@ -24,7 +24,7 @@
     <mat-footer-row *matFooterRowDef="detailColumns"></mat-footer-row>
   </mat-table>
   <mat-radio-group color="primary" class="d-flex flex-column">
-    <mat-radio-button value="efectivo">Efectivo</mat-radio-button>
+    <mat-radio-button value="efectivo" [checked]='true'>Efectivo</mat-radio-button>
     <div class="d-flex flex-row justify-content-between">
       <mat-radio-button value="tarjetas">Pago con tarjetas</mat-radio-button>
       <img src="assets/images/icons/payment.png">

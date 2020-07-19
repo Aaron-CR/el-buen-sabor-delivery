@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DetalleOrden } from 'src/app/core/models/comprobantes/detalle-orden';
 import { ShoppingCartService } from '../shopping-cart.service';
 
@@ -7,10 +7,12 @@ import { ShoppingCartService } from '../shopping-cart.service';
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss']
 })
-export class CartItemComponent implements OnInit {
+export class CartItemComponent {
 
   @Input()
   public data: DetalleOrden;
+  @Input()
+  public index: number;
 
   get imagen() {
     return this.data.articuloManufacturado ? this.data.articuloManufacturado.imagen : this.data.insumo.imagen;
@@ -30,18 +32,15 @@ export class CartItemComponent implements OnInit {
 
   constructor(private shoppingCartService: ShoppingCartService) { }
 
-  ngOnInit(): void {
-  }
-
-  removeOne() {
-    this.shoppingCartService.removeOne(this.data);
-  }
-
   addOne() {
     this.shoppingCartService.addOne(this.data);
   }
 
+  removeOne() {
+    this.shoppingCartService.removeOne(this.data, this.index);
+  }
+
   removeItem() {
-    this.shoppingCartService.removeDetail(this.data);
+    this.shoppingCartService.removeDetail(this.index);
   }
 }

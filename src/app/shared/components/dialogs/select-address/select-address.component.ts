@@ -28,7 +28,11 @@ export class SelectAddressComponent implements OnInit {
   }
 
   onSelect() {
-    this.cartService.orderSubject.next({ ...this.cartService.orderSubject.value, direccionEntrega: this.direccion });
+    this.cartService.shoppingCartForm.patchValue({ direccionEntrega: this.direccion });
+  }
+
+  compareWith(o1: any, o2: any): boolean {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
   }
 
 }

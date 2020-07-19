@@ -2,7 +2,8 @@
   cursor: pointer;
   border-radius: 25px;
   margin-bottom: 20px;
-  border: 1px solid #cccccc75;
+  // border: 1px solid #cccccc75;
+  color: #707070;
 
   &:hover {
     transition: all 0.2s ease-out;
@@ -31,7 +32,7 @@ img {
   left: 0px;
   bottom: 0px;
   opacity: 75%;
-  font-weight: 600;
+  font-weight: 500;
   padding: 10px 20px;
   background-color: #fff;
   border-top-right-radius: 15px;
@@ -50,7 +51,6 @@ img {
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-bottom: 0;
-  font-weight: 500;
   font-size: 20px;
   margin-top: 6px;
   width: 100%;
@@ -58,6 +58,6 @@ img {
 
 .card-price {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   margin-right: 10px;
 }

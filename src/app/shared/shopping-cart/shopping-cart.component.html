@@ -1,19 +1,20 @@
 <div class="shopping-cart">
   <h2 class="px-3">Mi Orden</h2>
-  <div class="order" *ngFor="let item of orden.detalles">
-    <app-cart-item [data]="item"></app-cart-item>
+  <div class="order" *ngFor="let item of cartService.detalles.value; let i=index">
+    <app-cart-item [data]="item" [index]="i"></app-cart-item>
   </div>
 </div>
 <h2 class="px-3">Entrega</h2>
 <div class="d-flex px-3">
-  <button mat-stroked-button class="w-100 mr-3" [disabled]="!orden.delivery" (click)="cartService.toggleDelivery()">
+  <button mat-stroked-button class="w-100 mr-3" [disabled]="!cartService.delivery"
+    (click)="cartService.toggleDelivery()">
     <mat-icon class="material-icons mr-1">storefront</mat-icon> En tienda
   </button>
-  <button mat-stroked-button class="w-100" [disabled]="orden.delivery" (click)="cartService.toggleDelivery()">
+  <button mat-stroked-button class="w-100" [disabled]="cartService.delivery" (click)="cartService.toggleDelivery()">
     <mat-icon class="material-icons mr-1">moped</mat-icon> Delivery
   </button>
 </div>
-<ng-container *ngIf="orden.delivery; else enTienda">
+<ng-container *ngIf="cartService.delivery; else enTienda">
   <div class="d-flex align-items-center justify-content-between p-3">
     <div class="d-flex">
       <div class="app-icon d-flex align-items-center justify-content-center">
@@ -50,7 +51,7 @@
     <div>Subtotal:</div>
     <div>{{ cartService.subtotal | currency:"ARS":"symbol" }}</div>
   </div>
-  <ng-container *ngIf="orden.delivery; else montoDescuento">
+  <ng-container *ngIf="cartService.delivery; else montoDescuento">
     <div class="d-flex justify-content-between font-weight-light h6">
       <div>Envío:</div>
       <div>{{ '50' | currency:"ARS":"symbol" }}</div>
@@ -59,16 +60,20 @@
   <ng-template #montoDescuento>
     <div class="d-flex justify-content-between font-weight-light h6">
       <div>Descuento:</div>
-      <div>{{ orden.montoDescuento | currency:"ARS":"symbol" }}</div>
+      <div>{{ cartService.montoDescuento | currency:"ARS":"symbol" }}</div>
     </div>
   </ng-template>
   <div class="d-flex justify-content-between h3">
     <div class="">Total:</div>
     <div>{{ cartService.total | currency:"ARS":"symbol" }}</div>
   </div>
-  <button mat-flat-button color="primary" class="w-100" (click)="continue()">Continuar</button>
-  <button mat-flat-button class="w-100 mt-3" (click)="cancelOrder()">Cancelar orden</button>
+  <button mat-flat-button color="primary" class="w-100" [disabled]="cartService.itemsLength === 0" (click)="continue()">
+    Continuar
+  </button>
+  <button mat-flat-button class="w-100 mt-3" (click)="cancelOrder()">
+    Cancelar orden
+  </button>
 </div>
 <div class="shopping-cart">
-  {{ orden | json }}
+  {{ cartService.shoppingCartForm.value | json }}
 </div>

@@ -10,7 +10,6 @@ import { Orden } from 'src/app/core/models/comprobantes/orden';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  public orden: Orden;
 
   constructor(
     private dialogService: DialogService,
@@ -18,7 +17,6 @@ export class ShoppingCartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cartService.order$.subscribe(orden => this.orden = orden);
   }
 
   selectAddress() {
