@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.service';
+import { OrderService } from 'src/app/shared/services/order.service';
+import { AuthService } from 'src/app/shared/authentication/auth.service';
 
 
 @Component({
@@ -10,10 +12,31 @@ import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.
 export class BillingDetailsComponent implements OnInit {
 
   public detailColumns: string[] = ['detalle', 'precio'];
+  public formaPago = 'Efectivo';
+  public aclaraciones: string;
 
-  constructor(public cartService: ShoppingCartService) { }
+  constructor(
+    private orderService: OrderService,
+    private authService: AuthService,
+    public cartService: ShoppingCartService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    this.patchValues();
+    this.orderService.post(this.cartService.shoppingCartForm.value, this.authService.uid).subscribe((res) => {
+      if (res.id) {
+        this.cartService.resetOrder();
+        alert('Añadido! Se ha añadido correctamente.');
+      }
+    });
+  }
+
+  patchValues() {
+    this.cartService.shoppingCartForm.patchValue({ formaPago: this.formaPago });
+    this.cartService.shoppingCartForm.patchValue({ aclaraciones: this.aclaraciones });
   }
 
 }

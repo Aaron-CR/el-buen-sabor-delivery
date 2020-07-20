@@ -1,9 +1,14 @@
 <app-dialog title="Mi Orden">
   <div class="title pb-3">Detalle de entrega</div>
-  <div class="address">Delivery • {{ cartService.address }}</div>
+  <ng-container *ngIf="cartService.delivery.value; else enTienda">
+    <div class="address"> Delivery • {{ cartService.address  }} </div>
+  </ng-container>
+  <ng-template #enTienda>
+    <div class="address"> Retiro en tienda • San Martín 454, Mendoza </div>
+  </ng-template>
   <mat-form-field color="accent" class="w-100 py-3">
     <mat-label>Agregar aclaraciones...</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput [(ngModel)]="aclaraciones"></textarea>
   </mat-form-field>
   <div class="order">Articulos</div>
   <mat-table [dataSource]="cartService.detalles.value" class="mb-4">
@@ -23,15 +28,16 @@
     <mat-row *matRowDef="let row; columns: detailColumns"></mat-row>
     <mat-footer-row *matFooterRowDef="detailColumns"></mat-footer-row>
   </mat-table>
-  <mat-radio-group color="primary" class="d-flex flex-column">
-    <mat-radio-button value="efectivo" [checked]='true'>Efectivo</mat-radio-button>
+  <mat-radio-group color="primary" class="d-flex flex-column" [(ngModel)]="formaPago">
+    <mat-radio-button value="Efectivo">Efectivo</mat-radio-button>
     <div class="d-flex flex-row justify-content-between">
-      <mat-radio-button value="tarjetas">Pago con tarjetas</mat-radio-button>
+      <mat-radio-button value="Tarjetas">Pago con tarjetas</mat-radio-button>
       <img src="assets/images/icons/payment.png">
     </div>
   </mat-radio-group>
   <div class="d-flex justify-content-center">
-    <button mat-flat-button color="primary" class="card-button my-4" [mat-dialog-close]="true">
+    <button mat-flat-button color="primary" class="card-button w-100 py-1 my-4" [mat-dialog-close]="true"
+      (click)="onSubmit()">
       Realizar orden
     </button>
   </div>

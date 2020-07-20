@@ -2,11 +2,9 @@ h2 {
   font-size: 24px;
 }
 
-.app-icon {
-  background-color: whitesmoke;
-  border-radius: 15px;
-  width: 48px;
-  height: 48px;
+.order {
+  flex-grow: 1;
+  overflow: scroll;
 }
 
 .app-icon {
@@ -14,6 +12,26 @@ h2 {
   border-radius: 15px;
   width: 48px;
   height: 48px;
+}
+
+.local-icon {
+  background-color: #fff8e1;
+  color: #ffb300;
+}
+
+.delivery-icon {
+  background-color: #ede7f6;
+  color: #5e35b1;
+}
+
+.cart-address {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .cancel-order {
@@ -21,6 +39,28 @@ h2 {
   cursor: pointer;
 
   &:hover {
-    color: #ffa000;
+    color: #311b92;
   }
+}
+
+/* EMPTY STATE */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25%;
+}
+
+.empty-state .mat-icon {
+  font-size: 90px;
+  height: 90px;
+  width: 90px;
+  color: #0000000f;
+}
+
+.empty-state span {
+  font-size: 18px;
+  font-weight: 500;
+  color: #00000080;
 }

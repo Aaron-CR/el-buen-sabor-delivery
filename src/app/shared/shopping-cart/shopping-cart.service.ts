@@ -10,30 +10,30 @@ export class ShoppingCartService {
 
   public shoppingCartForm: FormGroup;
 
-  get subtotal() {
-    return this.shoppingCartForm.value.detalles.reduce((acc, val) => acc += val.precioTotal * val.cantidad, 0);
-  }
-
   get montoDescuento() {
     const subtotal = this.subtotal;
-    if (this.delivery) {
-      return this.shoppingCartForm.value.montoDescuento = null;
+    if (this.delivery.value) {
+      this.shoppingCartForm.patchValue({ montoDescuento: null });
+      return null;
     } else {
-      return this.shoppingCartForm.value.montoDescuento = (subtotal * 10) / 100;
+      this.shoppingCartForm.patchValue({ montoDescuento: (subtotal * 10) / 100 });
+      return (subtotal * 10) / 100;
     }
   }
 
   get total(): number {
     const subtotal = this.subtotal;
-    if (this.delivery) {
-      return this.shoppingCartForm.value.total = subtotal + 50;
+    if (this.delivery.value) {
+      this.shoppingCartForm.patchValue({ total: subtotal + 50 });
+      return subtotal + 50;
     } else {
-      return this.shoppingCartForm.value.total = subtotal - this.montoDescuento;
+      this.shoppingCartForm.patchValue({ total: subtotal - this.montoDescuento });
+      return subtotal - this.montoDescuento;
     }
   }
 
-  get delivery(): boolean {
-    return this.shoppingCartForm.value.delivery;
+  get delivery(): FormArray {
+    return this.shoppingCartForm.get('delivery') as FormArray;
   }
 
   get detalles(): FormArray {
@@ -54,6 +54,10 @@ export class ShoppingCartService {
     return this.shoppingCartForm.value.detalles.reduce((acc, val) => acc += val.cantidad, 0);
   }
 
+  get subtotal() {
+    return this.shoppingCartForm.value.detalles.reduce((acc, val) => acc += val.precioTotal * val.cantidad, 0);
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar
@@ -70,6 +74,13 @@ export class ShoppingCartService {
       delivery: [false],
       direccionEntrega: [null, [Validators.required]],
       detalles: this.formBuilder.array([])
+    });
+    // this.onChanges();
+  }
+
+  onChanges(): void {
+    this.shoppingCartForm.valueChanges.subscribe(val => {
+      console.log(val);
     });
   }
 
@@ -109,7 +120,7 @@ export class ShoppingCartService {
     this.shoppingCartForm.patchValue({ delivery: !this.shoppingCartForm.value.delivery });
   }
 
-  cancelOrden() {
+  resetOrder() {
     this.shoppingCartForm.reset({
       total: 0,
       formaPago: 'efectivo',

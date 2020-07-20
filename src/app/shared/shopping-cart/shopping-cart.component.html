@@ -1,76 +1,88 @@
-<!-- Mi Orden -->
-<div>
-  <h2 class="p-3">Mi Orden</h2>
-  <div class="order" *ngFor="let item of cartService.detalles.value; let i=index">
-    <app-cart-item [data]="item" [index]="i"></app-cart-item>
-  </div>
-</div>
-<!-- Entrega -->
-<h2 class="p-3">Entrega</h2>
-<div class="d-flex flex-row px-3">
-  <button mat-stroked-button class="w-100 mr-3" [disabled]="!cartService.delivery"
-    (click)="cartService.toggleDelivery()">
-    <mat-icon class="material-icons mr-1">storefront</mat-icon> En tienda
-  </button>
-  <button mat-stroked-button class="w-100" [disabled]="cartService.delivery" (click)="cartService.toggleDelivery()">
-    <mat-icon class="material-icons mr-1">moped</mat-icon> Delivery
-  </button>
-</div>
-<ng-container *ngIf="cartService.delivery; else enTienda">
-  <div class="d-flex align-items-center justify-content-between p-3">
-    <div class="d-flex">
-      <div class="app-icon d-flex align-items-center justify-content-center">
-        <mat-icon aria-hidden="false" aria-label="Direccion de entrega">place</mat-icon>
-      </div>
-      <div class="pl-3">
-        <div class="my-1 item-name"> {{ cartService.address }}</div>
-        <div class="my-1 item-price">{{ '50' | currency:"ARS":"symbol" }}</div>
+<ng-container *ngIf="cartService.itemsLength > 0; else emptyState">
+  <div class="d-flex flex-column h-100">
+    <!-- Mi Orden -->
+    <h2 class="p-3">Mi Orden</h2>
+    <div class="order">
+      <div *ngFor="let item of cartService.detalles.value; let i=index">
+        <app-cart-item [data]="item" [index]="i"></app-cart-item>
       </div>
     </div>
-    <div class="d-flex flex-column align-content-center">
-      <button mat-stroked-button color="accent" class="w-100" (click)="selectAddress()">Cambiar</button>
+    <!-- Entrega -->
+    <h2 class="p-3">Entrega</h2>
+    <div class="d-flex flex-row px-3">
+      <button mat-stroked-button class="w-100 mr-3" [disabled]="!cartService.delivery.value"
+        (click)="cartService.toggleDelivery()">
+        <mat-icon class="material-icons mr-1">storefront</mat-icon> En tienda
+      </button>
+      <button mat-stroked-button class="w-100" [disabled]="cartService.delivery.value" (click)="cartService.toggleDelivery()">
+        <mat-icon class="material-icons mr-1">moped</mat-icon> Delivery
+      </button>
+    </div>
+    <ng-container *ngIf="cartService.delivery.value; else enTienda">
+      <div class="d-flex justify-content-between p-3">
+        <div class="d-flex align-items-center justify-content-center app-icon delivery-icon">
+          <mat-icon aria-hidden="false" aria-label="Direccion de entrega">place</mat-icon>
+        </div>
+        <div class="col">
+          <div class="cart-address">{{ cartService.address }}</div>
+          <div>{{ '50' | currency:"ARS":"symbol" }}</div>
+        </div>
+        <div class="d-flex flex-column align-content-center">
+          <button mat-stroked-button color="accent" class="w-100" (click)="selectAddress()">Cambiar</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #enTienda>
+      <div class="d-flex justify-content-between p-3">
+        <div class="d-flex align-items-center justify-content-center app-icon local-icon">
+          <mat-icon aria-hidden="false" aria-label="Direccion del local">storefront</mat-icon>
+        </div>
+        <div class="col">
+          <div class="cart-address">San Martín 454, Mendoza</div>
+          <div>-10%</div>
+        </div>
+        <div class="d-flex flex-column align-content-center">
+          <button mat-stroked-button color="accent" class="w-100" (click)="openMap()">Ver mapa</button>
+        </div>
+      </div>
+    </ng-template>
+    <!-- Detalle -->
+    <div class="px-3">
+      <div class="d-flex justify-content-between h5">
+        <span>Subtotal:</span> <span>{{ cartService.subtotal | currency:"ARS":"symbol" }}</span>
+      </div>
+      <ng-container *ngIf="cartService.delivery.value; else montoDescuento">
+        <div class="d-flex justify-content-between font-weight-light h6">
+          <span>Envío:</span> <span>{{ '50' | currency:"ARS":"symbol" }}</span>
+        </div>
+      </ng-container>
+      <ng-template #montoDescuento>
+        <div class="d-flex justify-content-between font-weight-light h6">
+          <span>Descuento:</span> <span>{{ cartService.montoDescuento | currency:"ARS":"symbol" }}</span>
+        </div>
+      </ng-template>
+      <div class="d-flex justify-content-between h3">
+        <span>Total:</span> <span>{{ cartService.total | currency:"ARS":"symbol" }}</span>
+      </div>
+      <button mat-flat-button color="primary" class="w-100 py-1 my-2" [disabled]="disabled" (click)="continue()">
+        Continuar
+      </button>
+      <div class="cancel-order py-3">
+        <a (click)="cancelOrder()" class="text-center d-inline mx-auto">Cancelar orden</a>
+      </div>
     </div>
   </div>
 </ng-container>
-<ng-template #enTienda>
-  <div class="d-flex align-items-center justify-content-between p-3">
-    <div class="d-flex">
-      <div class="app-icon d-flex align-items-center justify-content-center">
-        <mat-icon aria-hidden="false" aria-label="Direccion del local">storefront</mat-icon>
-      </div>
-      <div class="pl-3">
-        <div class="my-1 item-name">San Martín 454, Mendoza</div>
-        <div class="my-1 item-price">-10%</div>
-      </div>
-    </div>
-    <div class="d-flex flex-column align-content-center">
-      <button mat-stroked-button color="accent" class="w-100" (click)="openMap()">Ver mapa</button>
+<ng-template #emptyState>
+  <div class="d-flex flex-column h-100">
+    <!-- Mi Orden -->
+    <h2 class="p-3">Mi Orden</h2>
+    <div class="empty-state px-3 text-center">
+      <mat-icon class="material-icons">room_service</mat-icon>
+      <span>Aún no has agregado ningún producto</span>
+      <button mat-raised-button color="primary" class="mt-3" routerLink="/menu">
+        Empezar ahora
+      </button>
     </div>
   </div>
 </ng-template>
-<!-- Detalle -->
-<div class="px-3">
-  <div class="d-flex justify-content-between h5">
-    <span>Subtotal:</span> <span>{{ cartService.subtotal | currency:"ARS":"symbol" }}</span>
-  </div>
-  <ng-container *ngIf="cartService.delivery; else montoDescuento">
-    <div class="d-flex justify-content-between font-weight-light h6">
-      <span>Envío:</span> <span>{{ '50' | currency:"ARS":"symbol" }}</span>
-    </div>
-  </ng-container>
-  <ng-template #montoDescuento>
-    <div class="d-flex justify-content-between font-weight-light h6">
-      <span>Descuento:</span> <span>{{ cartService.montoDescuento | currency:"ARS":"symbol" }}</span>
-    </div>
-  </ng-template>
-  <div class="d-flex justify-content-between h3">
-    <span class="">Total:</span> <span>{{ cartService.total | currency:"ARS":"symbol" }}</span>
-  </div>
-  <button mat-flat-button color="primary" class="w-100 py-1 my-2" [disabled]="cartService.itemsLength === 0"
-    (click)="continue()">
-    Continuar
-  </button>
-  <div class="cancel-order py-2">
-    <a (click)="cancelOrder()" class="text-center d-inline mx-auto">Cancelar orden</a>
-  </div>
-</div>

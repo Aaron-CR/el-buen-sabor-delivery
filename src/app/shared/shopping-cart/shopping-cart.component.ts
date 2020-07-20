@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../components/dialogs/dialog.service';
 import { ShoppingCartService } from './shopping-cart.service';
-import { Orden } from 'src/app/core/models/comprobantes/orden';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,6 +9,9 @@ import { Orden } from 'src/app/core/models/comprobantes/orden';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  get disabled(): boolean {
+    return this.cartService.delivery.value && this.cartService.direccionEntrega.value === null;
+  }
 
   constructor(
     private dialogService: DialogService,
@@ -28,7 +30,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   cancelOrder() {
-    this.cartService.cancelOrden();
+    this.cartService.resetOrder();
   }
 
   openMap() {

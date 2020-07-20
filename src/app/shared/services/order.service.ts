@@ -12,8 +12,9 @@ export class OrderService extends ApiService<Orden> {
 
   protected endpoint = 'http://localhost:8080/api/v1/comprobantes/ordenes';
 
-  post(object: Orden, clienteUid: string): Observable<Orden> {
-    return this.httpClient.post<Orden>(`${this.endpoint}/save`, object)
+  post(object: any, clienteUid: string): Observable<Orden> {
+    console.log(`${this.endpoint}/save?clienteUid=${clienteUid}`);
+    return this.httpClient.post<Orden>(`${this.endpoint}/save?clienteUid=${clienteUid}`, object)
       .pipe(catchError(error => this.handleError(error)));
   }
 
