@@ -1,11 +1,13 @@
-<div class="shopping-cart">
-  <h2 class="px-3">Mi Orden</h2>
+<!-- Mi Orden -->
+<div>
+  <h2 class="p-3">Mi Orden</h2>
   <div class="order" *ngFor="let item of cartService.detalles.value; let i=index">
     <app-cart-item [data]="item" [index]="i"></app-cart-item>
   </div>
 </div>
-<h2 class="px-3">Entrega</h2>
-<div class="d-flex px-3">
+<!-- Entrega -->
+<h2 class="p-3">Entrega</h2>
+<div class="d-flex flex-row px-3">
   <button mat-stroked-button class="w-100 mr-3" [disabled]="!cartService.delivery"
     (click)="cartService.toggleDelivery()">
     <mat-icon class="material-icons mr-1">storefront</mat-icon> En tienda
@@ -46,31 +48,29 @@
     </div>
   </div>
 </ng-template>
+<!-- Detalle -->
 <div class="px-3">
   <div class="d-flex justify-content-between h5">
-    <div>Subtotal:</div>
-    <div>{{ cartService.subtotal | currency:"ARS":"symbol" }}</div>
+    <span>Subtotal:</span> <span>{{ cartService.subtotal | currency:"ARS":"symbol" }}</span>
   </div>
   <ng-container *ngIf="cartService.delivery; else montoDescuento">
     <div class="d-flex justify-content-between font-weight-light h6">
-      <div>Envío:</div>
-      <div>{{ '50' | currency:"ARS":"symbol" }}</div>
+      <span>Envío:</span> <span>{{ '50' | currency:"ARS":"symbol" }}</span>
     </div>
   </ng-container>
   <ng-template #montoDescuento>
     <div class="d-flex justify-content-between font-weight-light h6">
-      <div>Descuento:</div>
-      <div>{{ cartService.montoDescuento | currency:"ARS":"symbol" }}</div>
+      <span>Descuento:</span> <span>{{ cartService.montoDescuento | currency:"ARS":"symbol" }}</span>
     </div>
   </ng-template>
   <div class="d-flex justify-content-between h3">
-    <div class="">Total:</div>
-    <div>{{ cartService.total | currency:"ARS":"symbol" }}</div>
+    <span class="">Total:</span> <span>{{ cartService.total | currency:"ARS":"symbol" }}</span>
   </div>
-  <button mat-flat-button color="primary" class="w-100" [disabled]="cartService.itemsLength === 0" (click)="continue()">
+  <button mat-flat-button color="primary" class="w-100 py-1 my-2" [disabled]="cartService.itemsLength === 0"
+    (click)="continue()">
     Continuar
   </button>
-  <button mat-flat-button class="w-100 mt-3" (click)="cancelOrder()">
-    Cancelar orden
-  </button>
+  <div class="cancel-order py-2">
+    <a (click)="cancelOrder()" class="text-center d-inline mx-auto">Cancelar orden</a>
+  </div>
 </div>

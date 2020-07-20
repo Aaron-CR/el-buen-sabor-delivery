@@ -1,9 +1,7 @@
 <mat-sidenav-container class="sidenav-container" [hasBackdrop]="(isHandset$ | async) ? 'true' : 'false'">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false" position="end">
-    <mat-nav-list>
-      <app-shopping-cart></app-shopping-cart>
-    </mat-nav-list>
+    <app-shopping-cart></app-shopping-cart>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="example-toolbar">

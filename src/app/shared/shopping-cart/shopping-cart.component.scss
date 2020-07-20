@@ -1,10 +1,5 @@
 h2 {
-  font-size: 30px;
-}
-
-.order {
-  min-height: 100vh;
-  overflow: scroll;
+  font-size: 24px;
 }
 
 .app-icon {
@@ -12,4 +7,20 @@ h2 {
   border-radius: 15px;
   width: 48px;
   height: 48px;
+}
+
+.app-icon {
+  background-color: whitesmoke;
+  border-radius: 15px;
+  width: 48px;
+  height: 48px;
+}
+
+.cancel-order {
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    color: #ffa000;
+  }
 }
