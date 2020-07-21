@@ -4,15 +4,19 @@
     <ng-template carouselSlide>
       <a class="category-group-item" routerLink="/menu" routerLinkActive="router-link-active"
         [routerLinkActiveOptions]="{exact: true}">
-        <h1 class="category-icon"> 🍴 </h1>
+        <div class="category-image-background">
+          <img [src]="todos" class="category-image" alt="Todos">
+        </div>
         <p> Todos </p>
       </a>
     </ng-template>
     <ng-template carouselSlide *ngFor="let c of categories">
       <a class="category-group-item" routerLink="/menu" routerLinkActive="router-link-active"
-        [queryParams]="{ category: c.url }">
-        <h1 class="category-icon"> {{ c.icon }} </h1>
-        <p> {{ c.name }} </p>
+        [queryParams]="{ category:  c.denominacion|lowercase }">
+        <div class="category-image-background">
+          <img [src]="c.imagen" class="category-image" alt="icon">
+        </div>
+        <p> {{ c.denominacion }} </p>
       </a>
     </ng-template>
   </owl-carousel-o>

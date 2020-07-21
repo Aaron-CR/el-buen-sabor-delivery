@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-
-export class Category {
-  url: string;
-  name: string;
-  icon: string;
-}
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { Categoria } from 'src/app/core/models/articulos/categoria';
+const TODOS = 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/209/fork-and-knife-with-plate_1f37d.png';
 
 @Component({
   selector: 'app-categories',
@@ -15,23 +12,9 @@ export class Category {
 })
 export class CategoriesComponent implements OnInit {
 
-  public category: string;
-  public index: number;
-
-  public categories: Category[] = [
-    { url: 'pizzas', name: 'Pizzas', icon: '🍕' },
-    { url: 'burgers', name: 'Burgers', icon: '🍔' },
-    { url: 'panchos', name: 'Panchos', icon: '🌭' },
-    { url: 'carnes', name: 'Carnes', icon: '🍖' },
-    { url: 'ensalada', name: 'Ensalada', icon: '🥗' },
-    { url: 'pastas', name: 'Pastas', icon: '🍝' },
-    { url: 'asiatica', name: 'Asiatica', icon: '🍣' },
-    { url: 'postres', name: 'Postres', icon: '🧁' },
-    { url: 'desayuno', name: 'Desayuno', icon: '☕' },
-    { url: 'bebidas', name: 'Bebidas', icon: '🥤' }
-  ];
-
-  customOptions: OwlOptions = {
+  public categories: Categoria[] = [];
+  public todos = TODOS;
+  public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
     touchDrag: true,
@@ -48,12 +31,15 @@ export class CategoriesComponent implements OnInit {
     },
   };
 
-  constructor(public route: ActivatedRoute) { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(params => {
-      this.category = params.get('category');
-      this.index = this.categories.findIndex(i => i.url === this.category);
+    this.getPublicCategories();
+  }
+
+  getPublicCategories() {
+    this.categoryService.findAllUnpaged().subscribe((data) => {
+      this.categories = data;
     });
   }
 
