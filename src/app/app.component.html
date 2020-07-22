@@ -1,11 +1,3 @@
-<div *ngIf="userExists == true; else basicNav">
-  <app-navigation >
-    <router-outlet></router-outlet>
-  </app-navigation>
-</div>
-
-<ng-template #basicNav>
-  <app-basic-navigation>
-    <router-outlet></router-outlet>
-  </app-basic-navigation>
-</ng-template>
+<app-navigation>
+  <router-outlet></router-outlet>
+</app-navigation>

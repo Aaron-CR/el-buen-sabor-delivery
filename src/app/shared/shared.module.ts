@@ -23,15 +23,9 @@ import { BillingDetailsComponent } from './components/dialogs/billing-details/bi
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from './../../environments/environment';
-import { BasicNavigationComponent } from './components/basic-navigation/basic-navigation.component';
 import { ForgotPasswordComponent } from './components/dialogs/forgot-password/forgot-password.component';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +38,6 @@ import { MatListModule } from '@angular/material/list';
     BaseComponent,
     ScheduleComponent,
     BillingDetailsComponent,
-    BasicNavigationComponent,
     ForgotPasswordComponent
   ],
   imports: [
@@ -59,13 +52,7 @@ import { MatListModule } from '@angular/material/list';
       apiKey: 'AIzaSyARaDrtQwfk6Ql8byHHSJtAAJGswf9ueds',
       libraries: ['places']
     }),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   exports: [
     HttpClientModule,
@@ -73,7 +60,6 @@ import { MatListModule } from '@angular/material/list';
     FormsModule,
     MaterialModule,
     NavigationComponent,
-    BasicNavigationComponent,
     SignUpComponent,
     SignInComponent,
     FormAddressComponent,

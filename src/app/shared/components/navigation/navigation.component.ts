@@ -23,20 +23,19 @@ export class NavigationComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public dialogService: DialogService,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     public cartService: ShoppingCartService
   ) { }
 
   ngOnInit(): void {
-    this.authService.user.subscribe(
-      user => {
-        if (!!user) {
-          this.userName = user.nombre;
-          this.userLastName = user.apellido;
-        }
+    this.authService.user.subscribe(user => {
+      if (!!user) {
+        this.userExists = true;
+        this.userName = user.nombre;
+        this.userLastName = user.apellido;
       }
-    );
+    });
   }
 
   onSignUp() {
@@ -48,6 +47,7 @@ export class NavigationComponent implements OnInit {
   }
 
   onSignOut() {
+    this.userExists = false;
     this.authService.logoutUser();
     this.router.navigate(['']);
   }
