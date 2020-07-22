@@ -1,12 +1,13 @@
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
 import { DialogService } from '../dialogs/dialog.service';
 import { ShoppingCartService } from '../../shopping-cart/shopping-cart.service';
 import { Observable, Subscription } from 'rxjs';
 import { Usuario } from 'src/app/core/models/usuarios/usuario';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navigation',
@@ -20,6 +21,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
   public userExists = false;
   public isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset).pipe(map(result => result.matches), shareReplay());
+
+  @ViewChild('drawer') drawer: MatSidenav;
 
   constructor(
     public authService: AuthService,
@@ -52,6 +55,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   onSignOut() {
     this.userExists = false;
+    this.drawer.close();
     this.authService.logoutUser();
     this.router.navigate(['']);
   }
