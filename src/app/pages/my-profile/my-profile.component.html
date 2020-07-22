@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" *ngIf="userExists">
   <div class="header-image">
     <img src="assets/images/backgrounds/background.jpg">
     <div class="bottom-left">Mi perfil</div>
@@ -10,10 +10,10 @@
       </div>
       <div class="flex-row ml-4 mt-4 mr-auto">
         <h2>
-          {{this.usuario.nombre}} {{this.usuario.apellido}}
+          {{this.user.nombre}} {{this.user.apellido}}
         </h2>
         <span>
-          {{this.usuario.email}}
+          {{this.user.email}}
         </span>
         <button mat-raised-button color="primary" class="ml-3" (click)="toggleEdit()">
           Editar datos
@@ -28,26 +28,26 @@
         <div class="m-4 flex-row flex-grow-1">
           <mat-form-field class="w-100">
             <mat-label>Nombre</mat-label>
-            <input matInput disabled value="{{this.usuario.nombre}}">
+            <input matInput disabled value="{{this.user.nombre}}">
           </mat-form-field>
           <mat-form-field class="w-100">
             <mat-label>Apellido</mat-label>
-            <input matInput disabled value="{{this.usuario.apellido}}">
+            <input matInput disabled value="{{this.user.apellido}}">
           </mat-form-field>
           <mat-form-field class="w-100">
             <mat-label>Email</mat-label>
-            <input matInput disabled value="{{this.usuario.email}}">
+            <input matInput disabled value="{{this.user.email}}">
           </mat-form-field>
           <div class="d-flex">
             <div class="flex-grow-1">
               <mat-form-field class="w-100">
                 <mat-label>Telefono</mat-label>
-                <input matInput disabled value="{{this.usuario.telefono}}">
+                <input matInput disabled value="{{this.user.telefono}}">
               </mat-form-field>
             </div>
             <div>
-              <button mat-stroked-button class="ml-3">
-                <mat-icon class="material-icons-round" [inline]="true">edit</mat-icon> Editar
+              <button mat-stroked-button class="ml-3" (click)="onEditPhone()">
+                <mat-icon class="material-icons" [inline]="true">edit</mat-icon> Editar
               </button>
             </div>
           </div>
@@ -59,8 +59,8 @@
               </mat-form-field>
             </div>
             <div>
-              <button mat-stroked-button class="ml-3">
-                <mat-icon class="material-icons-round" [inline]="true" (click)="onForgotPassword()">edit</mat-icon> Actualizar
+              <button mat-stroked-button class="ml-3" (click)="onEditPassword()">
+                <mat-icon class="material-icons" [inline]="true">edit</mat-icon> Editar
               </button>
             </div>
           </div>

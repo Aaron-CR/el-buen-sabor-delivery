@@ -5,37 +5,41 @@ import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layo
 import { map, shareReplay } from 'rxjs/operators';
 import { DialogService } from '../dialogs/dialog.service';
 import { ShoppingCartService } from '../../shopping-cart/shopping-cart.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Usuario } from 'src/app/core/models/usuarios/usuario';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription();
+  public user: Usuario;
   public userExists = false;
-  public userName = '';
-  public userLastName = '';
-  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(map(result => result.matches), shareReplay());
+  public isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset).pipe(map(result => result.matches), shareReplay());
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    public dialogService: DialogService,
     public authService: AuthService,
-    private router: Router,
-    public cartService: ShoppingCartService
+    public dialogService: DialogService,
+    public cartService: ShoppingCartService,
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
   ) { }
 
-  ngOnInit(): void {
-    this.authService.user.subscribe(user => {
+  ngOnInit() {
+    this.subscription.add(this.authService.user.subscribe((user) => {
       if (!!user) {
+        this.user = user;
         this.userExists = true;
-        this.userName = user.nombre;
-        this.userLastName = user.apellido;
       }
-    });
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   onSignUp() {

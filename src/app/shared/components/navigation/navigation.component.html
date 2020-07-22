@@ -14,7 +14,7 @@
         <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
           <div class="mat-button-wrapper">
             <img src="assets/images/avatars/customer.png" class="avatar">
-            <span [hidden]="(isHandset$ | async)" class="mx-2"> {{userName}} {{userLastName}}</span>
+            <span [hidden]="(isHandset$ | async)" class="mx-2"> {{user.nombre}} {{user.apellido}}</span>
             <mat-icon [hidden]="(isHandset$ | async)" class="material-icons-round" [inline]="true">keyboard_arrow_down
             </mat-icon>
           </div>
