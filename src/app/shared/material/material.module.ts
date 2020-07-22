@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 
-// Saturn Datepicker
-// import { SatDatepickerModule } from 'saturn-datepicker';
-// import { SatNativeDateModule } from 'saturn-datepicker';
-
 // Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -55,9 +51,6 @@ import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   exports: [
-    // Saturn Datepicker
-    // SatDatepickerModule,
-    // SatNativeDateModule,
     // Form Controls
     MatAutocompleteModule,
     MatCheckboxModule,

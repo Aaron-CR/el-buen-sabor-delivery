@@ -1,15 +1,15 @@
-import { AuthService } from './../authentication/auth.service';
-import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take, map, tap } from 'rxjs/operators';
+import { AuthService } from './../authentication/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService,  private snackBar: MatSnackBar, private router: Router) {}
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
 
     return this.authService.user.pipe(
       take(1),
-      map((user) => !!user && (user.rol.denominacion === 'cliente' || user.rol.denominacion === 'administrador') ),
+      map((user) => !!user && (user.rol.denominacion === 'cliente' || user.rol.denominacion === 'administrador')),
       tap((auth) => {
         if (!auth) {
           this.router.navigate(['/index']);

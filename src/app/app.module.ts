@@ -13,9 +13,7 @@ import { SharedModule } from './shared/shared.module';
 registerLocaleData(localeEsAr, 'es-Ar');
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

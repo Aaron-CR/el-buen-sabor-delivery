@@ -1,9 +1,9 @@
-import { Base } from './../../core/models/base';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Base } from 'src/app/core/models/base';
 
 @Injectable({
   providedIn: 'root'
