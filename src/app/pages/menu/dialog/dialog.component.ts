@@ -22,6 +22,10 @@ export class DialogComponent implements OnInit {
     return this.data.categoria ? `${this.data.categoria.denominacion}` : `${this.data.rubro.denominacion}`;
   }
 
+  get esInsumo() {
+    return this.localData.esInsumo !== undefined;
+  }
+
   get ingredientes() {
     if (this.localData.detallesReceta) {
       return this.localData.detallesReceta.map((detalle) => {
@@ -47,8 +51,8 @@ export class DialogComponent implements OnInit {
     const detail: DetalleOrden = {
       cantidad: Number(this.cantidad),
       precioTotal: this.localData.precio * Number(this.cantidad),
-      articuloManufacturado: this.localData,
-      insumo: null
+      articuloManufacturado: this.esInsumo ? null : this.localData,
+      insumo: this.esInsumo ? this.localData : null
     };
     this.cartService.addDetail(detail);
   }

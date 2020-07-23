@@ -139,7 +139,7 @@ export class ShoppingCartService {
   findManufacturado(detail: DetalleOrden) {
     if (detail.articuloManufacturado) {
       return this.shoppingCartForm.value.detalles.find(({ articuloManufacturado }) =>
-        articuloManufacturado.id === detail.articuloManufacturado.id);
+        articuloManufacturado?.id === detail.articuloManufacturado?.id);
     }
     return false;
   }
@@ -147,7 +147,7 @@ export class ShoppingCartService {
   findInsumo(detail: DetalleOrden) {
     if (detail.insumo) {
       return this.shoppingCartForm.value.detalles.find(({ insumo }) =>
-        insumo.id === detail.insumo.id);
+        insumo?.id === detail.insumo?.id);
     }
     return false;
   }
