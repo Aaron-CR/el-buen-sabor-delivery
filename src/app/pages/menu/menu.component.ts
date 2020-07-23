@@ -1,12 +1,12 @@
-import { ArticuloManufacturado } from './../../core/models/articulos/articulo-manufacturado';
-import { ArticuloInsumo } from './../../core/models/articulos/articulo-insumo';
-import { SupplyService } from './../../shared/services/supply.service';
-import { ManufacturedService } from './../../shared/services/manufactured.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
+import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
+import { ManufacturedService } from 'src/app/shared/services/manufactured.service';
+import { SupplyService } from 'src/app/shared/services/supply.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,12 +16,11 @@ import { ActivatedRoute } from '@angular/router';
 export class MenuComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
-  public drinks: any;
-  public index: number;
   public category: string;
-  public filteredManufactured: ArticuloManufacturado[] = [];
+  public articles: any[] = [];
+  public filteredArticles: any[] = [];
   public manufactured: ArticuloManufacturado[] = [];
-  public allProducts: object[] = [];
+  public supplies: ArticuloInsumo[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -30,11 +29,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     private supplyService: SupplyService
   ) { }
 
-
   ngOnInit(): void {
-    this.findAllManufactured();
-    this.findAllDrinks();
-    this.getSelectedCategory();
+    this.getArticles();
   }
 
   ngOnDestroy(): void {
@@ -50,32 +46,32 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
   }
 
-  findAllManufactured() {
-    this.subscription.add(this.manufacturedService.findAllUnpaged().subscribe(data => {
-      this.manufactured = data;
-      this.filterManufactured();
-    }));
-  }
-
-  findAllDrinks() {
-    this.subscription.add(this.supplyService.getBebidas()
-      .subscribe(data => this.drinks = data));
+  getArticles() {
+    forkJoin([this.manufacturedService.getAllPublic(), this.supplyService.getAllPublic()])
+      .subscribe(data => {
+        this.manufactured = data[0];
+        this.supplies = data[1];
+        this.articles = [...data[0], ...data[1]];
+        this.getSelectedCategory();
+      });
   }
 
   getSelectedCategory() {
     this.subscription.add(this.route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
-      this.filterManufactured();
+      this.filterArticles();
     }));
   }
 
-  filterManufactured() {
-    this.filteredManufactured = this.manufactured.filter((article) => {
-      if (!!this.category) {
-        return article.categoria.denominacion.toLowerCase() === this.category.toLowerCase();
-      }
-      return this.manufactured;
-    });
+  filterArticles() {
+    if (this.category === 'bebidas') {
+      this.filteredArticles = this.supplies;
+    } else if (!!this.category) {
+      this.filteredArticles = this.manufactured.filter((article) =>
+        article.categoria.denominacion.toLowerCase() === this.category);
+    } else {
+      this.filteredArticles = this.articles;
+    }
   }
 
 }

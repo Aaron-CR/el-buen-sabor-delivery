@@ -27,7 +27,7 @@
   <app-categories></app-categories>
 
   <div class="row mb-5">
-    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let item of filteredManufactured">
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let item of filteredArticles">
       <app-card [data]="item" (click)="openDialog(item)"> </app-card>
     </div>
   </div>
