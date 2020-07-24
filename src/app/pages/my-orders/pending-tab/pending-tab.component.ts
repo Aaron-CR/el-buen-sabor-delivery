@@ -4,6 +4,7 @@ import { Orden } from 'src/app/core/models/comprobantes/orden';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
 import { catchError, finalize } from 'rxjs/operators';
+import { DialogService } from 'src/app/shared/components/dialogs/dialog.service';
 
 @Component({
   selector: 'app-pending-tab',
@@ -21,7 +22,8 @@ export class PendingTabComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +35,10 @@ export class PendingTabComponent implements OnInit {
         this.dataSubject.next(response);
         return this.lengthSubject.next(this.dataSubject.value.length);
       });
+  }
+
+  openDialog(item: object) {
+    this.dialogService.orderSuccess(item);
   }
 
 }

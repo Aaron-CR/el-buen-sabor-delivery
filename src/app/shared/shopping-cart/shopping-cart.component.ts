@@ -34,7 +34,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   openMap() {
-    console.log('open map');
+    this.dialogService.ourLocation();
   }
 
 }

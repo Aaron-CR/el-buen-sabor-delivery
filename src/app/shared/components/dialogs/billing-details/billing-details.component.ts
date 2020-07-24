@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.service';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
+import { DialogService } from '../dialog.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class BillingDetailsComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private authService: AuthService,
+    private dialogService: DialogService,
     public cartService: ShoppingCartService
   ) { }
 
@@ -29,7 +31,7 @@ export class BillingDetailsComponent implements OnInit {
     this.orderService.post(this.cartService.shoppingCartForm.value, this.authService.uid).subscribe((res) => {
       if (res.id) {
         this.cartService.resetOrder();
-        alert('Añadido! Se ha añadido correctamente.');
+        this.dialogService.orderSuccess(res);
       }
     });
   }

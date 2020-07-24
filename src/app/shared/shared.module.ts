@@ -27,6 +27,8 @@ import { DialogService } from './components/dialogs/dialog.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from './../../environments/environment';
+import { OurLocationComponent } from './components/dialogs/our-location/our-location.component';
+import { OrderSuccessComponent } from './components/dialogs/order-success/order-success.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { environment } from './../../environments/environment';
     ScheduleComponent,
     BillingDetailsComponent,
     ForgotPasswordComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    OurLocationComponent,
+    OrderSuccessComponent
   ],
   imports: [
     CommonModule,

@@ -55,7 +55,9 @@ export class ShoppingCartService {
   }
 
   get subtotal() {
-    return this.shoppingCartForm.value.detalles.reduce((acc, val) => acc += val.precioTotal * val.cantidad, 0);
+    return this.shoppingCartForm.value.detalles.reduce((acc, val) => acc += val.insumo
+      ? val.insumo.precio * val.cantidad
+      : val.articuloManufacturado.precio * val.cantidad, 0);
   }
 
   constructor(

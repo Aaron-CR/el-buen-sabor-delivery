@@ -39,10 +39,13 @@
       </mat-form-field>
     </div>
     <div class="d-flex flex-fill">
-      <button mat-raised-button color="primary" class="card-button px-4 ml-auto" [mat-dialog-close]="true"
-        (click)="addProductToCart()">
-        Agregar a mi orden
-      </button>
+      <div class="ml-auto" matTooltip="Este articulo se encuentra fuera de stock" matTooltipPosition="above"
+        [matTooltipDisabled]="!outOfStock">
+        <button mat-raised-button color="primary" class="card-button px-4" [mat-dialog-close]="true"
+          [disabled]="outOfStock" (click)="addProductToCart()">
+          Agregar a mi orden
+        </button>
+      </div>
     </div>
   </div>
 </mat-dialog-content>

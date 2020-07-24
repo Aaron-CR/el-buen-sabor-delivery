@@ -39,7 +39,7 @@ export class CategoriesComponent implements OnInit {
 
   getPublicCategories() {
     this.categoryService.findAllUnpaged().subscribe((data) => {
-      this.categories = data;
+      this.categories = data.filter((category) => category.oculto);
     });
   }
 

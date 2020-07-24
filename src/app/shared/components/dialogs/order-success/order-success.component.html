@@ -1,0 +1,31 @@
+<app-dialog title="Orden #{{localData.id}}">
+  <div class="title pb-2">Detalle de entrega</div>
+  <ng-container *ngIf="localData.delivery; else enTienda">
+    <div class="address"> Delivery • {{ address  }} </div>
+    <small> Su orden llegará aproximadamente a las {{ localData.horarioEntrega | date:'shortTime' }} </small>
+  </ng-container>
+  <ng-template #enTienda>
+    <div class="address"> Retiro en tienda • San Martín 454, Mendoza </div>
+    <small> Su orden estará listo a las {{ localData.horarioEntrega | date:'shortTime' }} </small>
+  </ng-template>
+  <div class="title pb-2 pt-3">Detalle de entrega</div>
+  <mat-table [dataSource]="localData.detalles" class="mb-4">
+    <ng-container matColumnDef="detalle">
+      <mat-header-cell *matHeaderCellDef> DETALLE </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.cantidad}} x
+        {{ row.articuloManufacturado ? row.articuloManufacturado.denominacion : row.insumo.denominacion }}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> Total: </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="precio">
+      <mat-header-cell *matHeaderCellDef> PRECIO </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.precioTotal | currency:"ARS":"symbol"}} </mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{ localData.total | currency:"ARS":"symbol" }} </mat-footer-cell>
+    </ng-container>
+    <mat-row *matRowDef="let row; columns: detailColumns"></mat-row>
+    <mat-footer-row *matFooterRowDef="detailColumns"></mat-footer-row>
+  </mat-table>
+  <div class="title pb-2">Forma de pago</div>
+  <div class="address mb-4"> {{ localData.formaPago | titlecase }} </div>
+</app-dialog>

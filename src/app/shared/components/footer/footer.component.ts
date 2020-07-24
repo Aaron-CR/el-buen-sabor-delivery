@@ -23,12 +23,8 @@ export class FooterComponent implements OnInit {
     this.dialogService.signIn();
   }
 
-  onFormAddress() {
-    this.dialogService.formAddress({});
-  }
-
-  onSelectAddress() {
-    this.dialogService.selectAddress();
+  ourLocation() {
+    this.dialogService.ourLocation();
   }
 
   onSchedule() {

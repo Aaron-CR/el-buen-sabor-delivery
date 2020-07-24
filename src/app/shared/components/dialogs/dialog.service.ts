@@ -7,6 +7,8 @@ import { SelectAddressComponent } from './select-address/select-address.componen
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BillingDetailsComponent } from './billing-details/billing-details.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { OurLocationComponent } from './our-location/our-location.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
 
 @Injectable({
   providedIn: 'root'
@@ -47,9 +49,11 @@ export class DialogService {
 
   billingDetails() {
     this.matDialog.open(BillingDetailsComponent, {
-      panelClass: 'app-dialog'
+      panelClass: 'app-dialog',
+      width: '420px'
     });
   }
+
   schedule() {
     this.matDialog.open(ScheduleComponent, {
       panelClass: 'app-dialog',
@@ -61,6 +65,22 @@ export class DialogService {
     this.matDialog.open(ForgotPasswordComponent, {
       panelClass: 'app-dialog',
       width: '500px'
+    });
+  }
+
+  ourLocation() {
+    this.matDialog.open(OurLocationComponent, {
+      panelClass: 'app-dialog',
+      width: '90%',
+      maxWidth: '900px'
+    });
+  }
+
+  orderSuccess(object: any) {
+    this.matDialog.open(OrderSuccessComponent, {
+      panelClass: 'app-dialog',
+      width: '420px',
+      data: object,
     });
   }
 
