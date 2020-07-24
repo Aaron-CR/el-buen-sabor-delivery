@@ -8,10 +8,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CardComponent } from './card/card.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { ResultsComponent } from './results/results.component';
 
 
 @NgModule({
-  declarations: [MenuComponent, CardComponent, DialogComponent, CategoriesComponent],
+  declarations: [MenuComponent, CardComponent, DialogComponent, CategoriesComponent, ResultsComponent],
   imports: [
     CommonModule,
     CarouselModule,

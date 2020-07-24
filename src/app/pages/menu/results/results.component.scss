@@ -1,0 +1,30 @@
+/* TABLE */
+.app-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+}
+
+/* RESULTS */
+.results {
+  margin-top: 50px;
+}
+
+.results h2 {
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.results span {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+.results p {
+  opacity: 0.7;
+  font-size: 18px;
+}

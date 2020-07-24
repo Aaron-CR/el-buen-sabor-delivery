@@ -90,9 +90,9 @@
           </div>
           <div class="row">
             <div class="col-md-6">
-              <p><a class="scroll-link" href="/index">Inicio</a></p>
-              <p><a href="/index#como-funciona">Cómo funciona</a></p>
-              <p><a href="/index#nosotros">Nosotros</a></p>
+              <p><a [routerLink]="['index']">Inicio</a></p>
+              <p><a [routerLink]="['index']" fragment="como-funciona">Cómo funciona</a></p>
+              <p><a [routerLink]="['index']" fragment="nosotros">Nosotros</a></p>
             </div>
             <div class="col-md-6">
               <p><a [routerLink]="[]" (click)="onSelectAddress()">Select Address</a></p>

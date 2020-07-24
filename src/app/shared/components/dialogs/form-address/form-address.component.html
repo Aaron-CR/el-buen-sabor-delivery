@@ -48,7 +48,7 @@
         <!-- Localidad Select -->
         <mat-form-field class="w-100">
           <mat-label>Localidad</mat-label>
-          <mat-select formControlName="localidad" required>
+          <mat-select formControlName="localidad" [compareWith]="compareWith" required>
             <mat-option *ngFor="let localidad of localidades" [value]="localidad">
               {{ localidad.nombre | titlecase }}
             </mat-option>

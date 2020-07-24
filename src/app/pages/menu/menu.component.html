@@ -7,9 +7,11 @@
     <p>Listado de los mejores platos, postres, desayunos, bebidas…</p>
     <div class="d-flex flex-row">
       <div class="flex-fill app-search">
-        <input matInput placeholder="Por ejemplo, pizza, hamburguesa ...">
+        <input #input matInput placeholder="Por ejemplo, pizza, hamburguesa ..." (keyup.enter)="onSearch()">
       </div>
-      <button mat-flat-button color="primary" class="ml-3"> Buscar </button>
+      <button mat-flat-button color="primary" class="ml-3" (click)="onSearch()">
+        Buscar
+      </button>
     </div>
   </section>
   <!-- Search section end -->
@@ -33,7 +35,5 @@
   </div>
 
   <!-- Remover cuando sea necesario -->
-  <mat-form-field hidden="true">
-    <input matInput placeholder="Ex. Pizza" value="Sushi">
-  </mat-form-field>
+  <mat-form-field hidden="true"><input matInput></mat-form-field>
 </div>

@@ -10,13 +10,13 @@
 
             <div *ngIf="userExists == false; else elseBlock">
               <button mat-flat-button color="primary" (click)="onSignIn()">
-                ¿Listo para ordenar?
+                Empezar ahora
               </button>
             </div>
 
             <ng-template #elseBlock>
               <button mat-flat-button color="primary" routerLink="/menu">
-                ¿Listo para ordenar?
+                Empezar ahora
               </button>
             </ng-template>
 

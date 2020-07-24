@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DialogService } from 'src/app/shared/components/dialogs/dialog.service';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { Usuario } from 'src/app/core/models/usuarios/usuario';
 
 @Component({
@@ -12,34 +11,23 @@ import { Usuario } from 'src/app/core/models/usuarios/usuario';
 export class MyProfileComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
-  public user: Usuario;
+  public userSubject = new BehaviorSubject<Usuario>(null);
   public edit = false;
-  public userExists = false;
 
-  constructor(
-    private dialogService: DialogService,
-    private authService: AuthService,
-  ) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.subscription.add(this.authService.user.subscribe((user) => {
-      if (!!user) {
-        this.user = user;
-        this.userExists = true;
-      }
-    }));
+    this.subscription.add(this.authService.user.subscribe((user) =>
+      this.userSubject.next(user))
+    );
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  onEditPhone() {
-    //  this.dialogService.editPhone();
-  }
-
   onEditPassword() {
-    this.authService.resetPassword(this.user.email);
+    this.authService.resetPassword(this.userSubject.value.email);
   }
 
   toggleEdit() {

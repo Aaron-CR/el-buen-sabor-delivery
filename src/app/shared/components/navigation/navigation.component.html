@@ -4,7 +4,7 @@
     <app-shopping-cart></app-shopping-cart>
   </mat-sidenav>
   <mat-sidenav-content>
-    <ng-container *ngIf="userExists; else elseTemplate">
+    <ng-container *ngIf="(user$ | async); else elseTemplate">
       <mat-toolbar class="example-toolbar">
         <a>
           <img class="logo-icon ml-2" routerLink="/menu" src="assets/images/logos/logo.png">
@@ -14,7 +14,9 @@
         <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
           <div class="mat-button-wrapper">
             <img src="assets/images/avatars/customer.png" class="avatar">
-            <span [hidden]="(isHandset$ | async)" class="mx-2"> {{user.nombre}} {{user.apellido}}</span>
+            <span [hidden]="(isHandset$ | async)" class="mx-2">
+              {{userSubject.value.nombre}} {{userSubject.value.apellido}}
+            </span>
             <mat-icon [hidden]="(isHandset$ | async)" class="material-icons-round" [inline]="true">keyboard_arrow_down
             </mat-icon>
           </div>
@@ -62,7 +64,9 @@
         <a mat-flat-button class="text-decoration-none ml-3" color="primary" (click)="onSignIn()">Ingresar</a>
       </mat-toolbar>
     </ng-template>
-    <ng-content></ng-content>
+    <div class="content">
+      <ng-content></ng-content>
+    </div>
     <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

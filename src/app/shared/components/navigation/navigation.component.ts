@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map, shareReplay } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
+import { map, shareReplay, finalize } from 'rxjs/operators';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { DialogService } from '../dialogs/dialog.service';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
@@ -17,10 +17,10 @@ import { Usuario } from 'src/app/core/models/usuarios/usuario';
 export class NavigationComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
-  public user: Usuario;
-  public userExists = false;
-  public isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset).pipe(map(result => result.matches), shareReplay());
+  public userSubject = new BehaviorSubject<Usuario>(null);
+  public user$ = this.userSubject.asObservable();
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(map(result => result.matches), shareReplay());
 
   @ViewChild('drawer') drawer: MatSidenav;
 
@@ -33,12 +33,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.subscription.add(this.authService.user.subscribe((user) => {
-      if (!!user) {
-        this.user = user;
-        this.userExists = true;
-      }
-    }));
+    this.subscription.add(this.authService.user.subscribe((user) =>
+      this.userSubject.next(user))
+    );
   }
 
   ngOnDestroy(): void {
@@ -54,8 +51,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   onSignOut() {
-    this.userExists = false;
     this.drawer.close();
+    this.userSubject.next(null);
     this.authService.logoutUser();
     this.router.navigate(['']);
   }

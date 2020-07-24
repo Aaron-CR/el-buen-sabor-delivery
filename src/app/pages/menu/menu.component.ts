@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { Subscription, forkJoin } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
 import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 import { ManufacturedService } from 'src/app/shared/services/manufactured.service';
 import { SupplyService } from 'src/app/shared/services/supply.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-menu',
@@ -21,12 +22,15 @@ export class MenuComponent implements OnInit, OnDestroy {
   public filteredArticles: any[] = [];
   public manufactured: ArticuloManufacturado[] = [];
   public supplies: ArticuloInsumo[] = [];
+  @ViewChild('input') input: ElementRef;
 
   constructor(
-    private dialog: MatDialog,
-    private route: ActivatedRoute,
     private manufacturedService: ManufacturedService,
-    private supplyService: SupplyService
+    private supplyService: SupplyService,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -51,7 +55,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.manufactured = data[0];
         this.supplies = data[1];
-        this.articles = [...data[0], ...data[1]];
+        this.articles = [...this.manufactured, ...this.supplies];
         this.getSelectedCategory();
       });
   }
@@ -74,4 +78,11 @@ export class MenuComponent implements OnInit, OnDestroy {
     }
   }
 
+  onSearch() {
+    if (this.input.nativeElement.value) {
+      this.router.navigate(['menu/results'], { queryParams: { search_query: this.input.nativeElement.value } });
+    } else {
+      this.snackBar.open('No ingresaste ninguna palabra', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+    }
+  }
 }
