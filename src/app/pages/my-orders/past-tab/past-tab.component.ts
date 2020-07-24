@@ -35,5 +35,4 @@ export class PastTabComponent implements OnInit {
       });
   }
 
-
 }

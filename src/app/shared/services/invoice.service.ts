@@ -11,7 +11,7 @@ export class InvoiceService extends ApiService<Factura> {
 
   protected endpoint = 'http://localhost:8080/api/v1/comprobantes/facturas';
 
-  getOneByOrderId(ordenId: number): Observable<Factura> {
+  getInvoice(ordenId: number): Observable<Factura> {
     return this.httpClient.get<Factura>(`${this.endpoint}/orden/${ordenId}`)
       .pipe(catchError(error => this.handleError(error)));
   }

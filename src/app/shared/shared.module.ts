@@ -19,6 +19,7 @@ import { BaseComponent } from './components/dialogs/base/base.component';
 import { ScheduleComponent } from './components/dialogs/schedule/schedule.component';
 import { BillingDetailsComponent } from './components/dialogs/billing-details/billing-details.component';
 import { ForgotPasswordComponent } from './components/dialogs/forgot-password/forgot-password.component';
+import { InvoiceComponent } from './components/dialogs/invoice/invoice.component';
 
 import { DialogService } from './components/dialogs/dialog.service';
 
@@ -39,7 +40,8 @@ import { environment } from './../../environments/environment';
     BaseComponent,
     ScheduleComponent,
     BillingDetailsComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    InvoiceComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +66,8 @@ import { environment } from './../../environments/environment';
     SignUpComponent,
     SignInComponent,
     FormAddressComponent,
-    SelectAddressComponent
+    SelectAddressComponent,
+    InvoiceComponent
   ],
   providers: [
     DialogService,

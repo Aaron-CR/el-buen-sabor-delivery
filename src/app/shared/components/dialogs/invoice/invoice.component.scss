@@ -1,0 +1,122 @@
+.app-dialog {
+  background-color: #e4e4e4 !important;
+  color: #000000bb !important;
+  padding: 24px !important;
+  margin-bottom: 0 !important;
+}
+
+.app-content {
+  font-size: 14px;
+  color: #0000008a;
+  line-height: 1.4 !important;
+  letter-spacing: -0.1px !important;
+}
+
+.app-card {
+  padding: 64px 88px;
+}
+
+.invoice-date {
+  font-size: 16px;
+  margin-bottom: 32px;
+  line-height: 19.6px;
+}
+
+.customer {
+  align-self: center;
+}
+
+.invoice-number .title {
+  font-size: 18px;
+}
+
+.invoice-number .number {
+  font-size: 18px;
+  padding-left: 6px;
+  color: #000000de;
+}
+
+.accent {
+  background-color: #ffc107 !important;
+  margin-right: -88px;
+}
+
+.issuer .logo {
+  width: 96px;
+  padding: 0 8px;
+  align-self: center;
+  border-right: 1px solid #0000008a;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+.issuer .info {
+  padding: 16px;
+  font-weight: 500;
+}
+
+.mat-column-precio,
+.mat-column-cantidad,
+.mat-column-total {
+  flex: 0 0 120px !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mat-footer-cell {
+  font-size: 16px !important;
+  padding: 8px 24px;
+}
+
+.footer {
+  padding: 8px 24px;
+}
+
+.footer-border {
+  padding: 8px 24px;
+  border-bottom: 1px solid #cecece;
+}
+
+.discount-text {
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+.total-text {
+  margin: 8px 0;
+  font-size: 30px !important;
+  color: #000000de;
+}
+
+/* BUTTON */
+.mat-flat-button {
+  height: 42px;
+  padding: 0 30px;
+  border-radius: 25px;
+  font-size: 18px;
+}
+
+.mat-icon.icon {
+  height: 80px;
+  width: 80px;
+  font-size: 80px;
+  margin-right: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

@@ -17,7 +17,7 @@
     <button mat-stroked-button class="w-100 mr-2" matTooltip="Esta característica aun no está disponible">
       <mat-icon class="material-icons" [inline]="true">sync</mat-icon> Repetir orden
     </button>
-    <button mat-stroked-button class="w-100 ml-2" [class]="getHiddenClass(data.estado.denominacion)">
+    <button mat-stroked-button class="w-100 ml-2" [class]="getHiddenClass()" (click)="openDialog()">
       <mat-icon class="material-icons" [inline]="true">receipt</mat-icon> Ver factura
     </button>
   </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
+import { MatDialog } from '@angular/material/dialog';
+import { InvoiceComponent } from 'src/app/shared/components/dialogs/invoice/invoice.component';
 
 @Component({
   selector: 'app-order-card',
@@ -19,7 +21,7 @@ export class OrderCardComponent implements OnInit {
     return orderDetail;
   }
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -28,10 +30,17 @@ export class OrderCardComponent implements OnInit {
     return status.replace(/\s+/g, '-');
   }
 
-  getHiddenClass(status: string) {
-    if (status === 'cancelado') {
+  getHiddenClass() {
+    if (this.data.estado.denominacion !== 'entregado') {
       return 'hide';
     }
+  }
+
+  openDialog() {
+    this.dialog.open(InvoiceComponent, {
+      panelClass: 'app-dialog',
+      data: this.data.id
+    });
   }
 
 }
