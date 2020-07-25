@@ -24,7 +24,7 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  sendEmail(form: FormGroup){
+  sendEmail(form: FormGroup) {
     this.authService.resetPassword(form.value.email);
   }
 

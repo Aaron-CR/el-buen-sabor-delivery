@@ -15,8 +15,8 @@ import { catchError, finalize } from 'rxjs/operators';
 export class ResultsComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
-  private loadingSubject = new BehaviorSubject<boolean>(true);
   private articlesSubject = new BehaviorSubject<any[]>([]);
+  private loadingSubject = new BehaviorSubject<boolean>(true);
   private lengthSubject = new BehaviorSubject<number>(null);
   public articles$ = this.articlesSubject.asObservable();
   public loading$ = this.loadingSubject.asObservable();
@@ -59,16 +59,14 @@ export class ResultsComponent implements OnInit, OnDestroy {
   }
 
   getArticles() {
-    forkJoin([
+    this.subscription.add(forkJoin([
       this.manufacturedService.getAllPublic(this.searchQuery),
       this.supplyService.getAllPublic(this.searchQuery)
-    ]).pipe(
-      catchError(() => of([])),
-      finalize(() => this.loadingSubject.next(false)))
+    ]).pipe(finalize(() => this.loadingSubject.next(false)))
       .subscribe(data => {
         this.articlesSubject.next([...data[0], ...data[1]]);
         this.lengthSubject.next(this.articlesSubject.value.length);
-      });
+      }));
   }
 
 }

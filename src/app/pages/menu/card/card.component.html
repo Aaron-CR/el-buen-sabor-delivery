@@ -1,9 +1,7 @@
 <div class="card">
   <div class="card-img">
     <img onerror="this.src='assets/images/cards/card.jpg'" [src]="data.imagen">
-    <div class="card-time">
-      <span>{{time}}</span>
-    </div>
+    <div class="card-time"> {{time}} </div>
   </div>
   <div class="card-info">
     <div class="card-title">{{ data.denominacion | titlecase }}</div>

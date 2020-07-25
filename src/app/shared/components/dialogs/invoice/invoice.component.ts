@@ -58,7 +58,6 @@ export class InvoiceComponent implements OnInit, OnDestroy {
     html2canvas(data).then(canvas => {
       const imgWidth = 208;
       const imgHeight = canvas.height * imgWidth / canvas.width;
-
       const contentDataURL = canvas.toDataURL('image/png');
       const pdf = new jspdf('p', 'mm', 'a4');
       const position = 0;

@@ -2,18 +2,14 @@
   <img src="assets/images/backgrounds/background.jpg">
   <div class="bottom-left">Mi perfil</div>
 </div>
-<div class="container">
+<div class="container" *ngIf="(user$ | async) as user">
   <div class="d-flex flex-wrap justify-content-center" *ngIf="!edit; else editForm">
     <div class="m-4 d-flex flex-row">
       <img src="assets/images/avatars/customer.png" class="avatar">
     </div>
     <div class="flex-row ml-4 mt-4 mr-auto">
-      <h2>
-        {{userSubject.value.nombre}} {{userSubject.value.apellido}}
-      </h2>
-      <span>
-        {{userSubject.value.email}}
-      </span>
+      <h2> {{user.nombre}} {{user.apellido}} </h2>
+      <span> {{user.email}} </span>
       <button mat-raised-button color="primary" class="ml-3" (click)="toggleEdit()">
         Editar datos
       </button>
@@ -27,19 +23,19 @@
       <div class="m-4 flex-row flex-grow-1">
         <mat-form-field class="w-100">
           <mat-label>Nombre</mat-label>
-          <input matInput disabled value="{{userSubject.value.nombre}}">
+          <input matInput disabled value="{{user.nombre}}">
         </mat-form-field>
         <mat-form-field class="w-100">
           <mat-label>Apellido</mat-label>
-          <input matInput disabled value="{{userSubject.value.apellido}}">
+          <input matInput disabled value="{{user.apellido}}">
         </mat-form-field>
         <mat-form-field class="w-100">
           <mat-label>Email</mat-label>
-          <input matInput disabled value="{{userSubject.value.email}}">
+          <input matInput disabled value="{{user.email}}">
         </mat-form-field>
         <mat-form-field class="w-100">
           <mat-label>Telefono</mat-label>
-          <input matInput disabled value="{{userSubject.value.telefono}}">
+          <input matInput disabled value="{{user.telefono}}">
         </mat-form-field>
         <div class="d-flex">
           <div class="flex-grow-1">
@@ -54,9 +50,7 @@
             </button>
           </div>
         </div>
-        <button mat-raised-button color="primary" (click)="toggleEdit()">
-          Cancelar
-        </button>
+        <button mat-raised-button color="primary" (click)="toggleEdit()"> Cancelar </button>
       </div>
     </div>
   </ng-template>

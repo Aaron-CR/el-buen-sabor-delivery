@@ -1,21 +1,16 @@
 <div class="container">
   <!-- Search section -->
   <section class="search">
-    <h2>Encuentra las mejores ofertas en
-      <br><span>Mendoza</span>
-    </h2>
+    <h2>Encuentra las mejores ofertas en <br><span>Mendoza</span> </h2>
     <p>Listado de los mejores platos, postres, desayunos, bebidas…</p>
     <div class="d-flex flex-row">
       <div class="flex-fill app-search">
-        <input #input matInput placeholder="Por ejemplo, pizza, hamburguesa ..." (keyup.enter)="onSearch()">
+        <input #input class="search-input" placeholder="Por ejemplo, pizza, hamburguesa ..." (keyup.enter)="onSearch()">
       </div>
-      <button mat-flat-button color="primary" class="ml-3" (click)="onSearch()">
-        Buscar
-      </button>
+      <button mat-flat-button color="primary" class="ml-3" (click)="onSearch()"> Buscar </button>
     </div>
   </section>
   <!-- Search section end -->
-
   <!-- Discount section -->
   <section class="d-flex align-items-center discount">
     <div class="flex-grow-1">
@@ -25,15 +20,14 @@
     <img src="assets/images/menu/discount.png" alt="">
   </section>
   <!-- Discount section end -->
-
   <app-categories></app-categories>
-
   <div class="row mb-5">
-    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let item of filteredArticles">
+    <!-- Spinner -->
+    <div class="app-spinner" *ngIf="loading$ | async">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let item of filteredArticles$ | async">
       <app-card [data]="item" (click)="openDialog(item)"> </app-card>
     </div>
   </div>
-
-  <!-- Remover cuando sea necesario -->
-  <mat-form-field hidden="true"><input matInput></mat-form-field>
 </div>

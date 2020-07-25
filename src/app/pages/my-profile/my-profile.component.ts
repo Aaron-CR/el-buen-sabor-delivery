@@ -11,7 +11,8 @@ import { Usuario } from 'src/app/core/models/usuarios/usuario';
 export class MyProfileComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
-  public userSubject = new BehaviorSubject<Usuario>(null);
+  private userSubject = new BehaviorSubject<Usuario>(null);
+  public user$ = this.userSubject.asObservable();
   public edit = false;
 
   constructor(private authService: AuthService) { }

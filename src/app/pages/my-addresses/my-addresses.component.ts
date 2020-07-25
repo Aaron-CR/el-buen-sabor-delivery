@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'src/app/shared/components/dialogs/dialog.service';
 import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-delivery';
-import { BehaviorSubject, of } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,7 +17,7 @@ export class MyAddressesComponent implements OnInit {
 
   private dataSubject = new BehaviorSubject<DireccionDelivery[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
-  public lengthSubject = new BehaviorSubject<number>(null);
+  private lengthSubject = new BehaviorSubject<number>(null);
   public data$ = this.dataSubject.asObservable();
   public loading$ = this.loadingSubject.asObservable();
   public length$ = this.lengthSubject.asObservable();
@@ -27,7 +27,8 @@ export class MyAddressesComponent implements OnInit {
     private dialogService: DialogService,
     private authService: AuthService,
     private addressService: AddressService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.loadPage();
@@ -35,12 +36,10 @@ export class MyAddressesComponent implements OnInit {
 
   loadPage() {
     this.customerService.getDirecciones(this.authService.uid)
-      .pipe(
-        catchError(() => of([])),
-        finalize(() => this.loadingSubject.next(false)))
+      .pipe(finalize(() => this.loadingSubject.next(false)))
       .subscribe((response) => {
         this.dataSubject.next(response);
-        return this.lengthSubject.next(this.dataSubject.value.length);
+        this.lengthSubject.next(this.dataSubject.value.length);
       });
   }
 

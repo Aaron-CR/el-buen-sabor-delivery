@@ -7,19 +7,12 @@
           <div class="hs-text">
             <h2>Tus <span>platos</span> favoritos.</h2>
             <p>Ordena tu comida desde la comodidad de tu casa.</p>
-
-            <div *ngIf="userExists == false; else elseBlock">
-              <button mat-flat-button color="primary" (click)="onSignIn()">
-                Empezar ahora
-              </button>
+            <div *ngIf="!userExists; else elseBlock">
+              <button mat-flat-button color="primary" (click)="onSignIn()"> Empezar ahora </button>
             </div>
-
             <ng-template #elseBlock>
-              <button mat-flat-button color="primary" routerLink="/menu">
-                Empezar ahora
-              </button>
+              <button mat-flat-button color="primary" routerLink="/menu"> Empezar ahora </button>
             </ng-template>
-
           </div>
         </div>
         <div class="col-lg-6">
@@ -31,7 +24,6 @@
     </div>
   </section>
   <!-- Hero section end -->
-
   <!-- How section -->
   <section id="como-funciona" class="how-section spad set-bg">
     <div class="section-title">
@@ -68,7 +60,6 @@
     </div>
   </section>
   <!-- How section end -->
-
   <!-- Concept section -->
   <section id="nosotros" class="concept-section spad">
     <div class="row">

@@ -1,3 +1,8 @@
+/* SPINNER */
+.app-spinner {
+  margin: 90px auto;
+}
+
 /* SEARCH */
 .search {
   margin-top: 50px;
@@ -27,6 +32,12 @@
   border-color: lightgrey;
   padding: 6px 25px;
   border-radius: 25px;
+}
+
+.search-input {
+  caret-color: #ffc107;
+  border: none;
+  width: 100%;
 }
 
 .mat-flat-button {

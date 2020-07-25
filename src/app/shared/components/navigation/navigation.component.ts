@@ -51,10 +51,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   onSignOut() {
-    this.drawer.close();
-    this.userSubject.next(null);
-    this.authService.logoutUser();
-    this.router.navigate(['']);
+    this.authService.logoutUser()
+      .then((resolve) => {
+        this.drawer.close();
+        this.userSubject.next(null);
+        this.router.navigate(['']);
+      }, (reject) => {
+        console.log('error ', reject);
+      });
   }
 
 }

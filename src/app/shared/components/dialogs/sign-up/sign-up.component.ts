@@ -57,55 +57,55 @@ export class SignUpComponent implements OnInit {
 
   onSignUp(signUpFormGroup: FormGroup) {
     this.authService.registerUser(signUpFormGroup.value.email, signUpFormGroup.value.password)
-    .then((res) => {
-      this.authService.isAuth().subscribe(
-        user => {
-          if (user) {
-            this.usuario.uid = user.uid;
-            this.usuario.email = user.email;
-            this.usuario.nombre = signUpFormGroup.value.nombre;
-            this.usuario.apellido = signUpFormGroup.value.apellido;
-            this.usuario.telefono = signUpFormGroup.value.telefono;
+      .then((res) => {
+        this.authService.isAuth().subscribe(
+          user => {
+            if (user) {
+              this.usuario.uid = user.uid;
+              this.usuario.email = user.email;
+              this.usuario.nombre = signUpFormGroup.value.nombre;
+              this.usuario.apellido = signUpFormGroup.value.apellido;
+              this.usuario.telefono = signUpFormGroup.value.telefono;
 
-            console.log(this.usuario);
+              console.log(this.usuario);
 
-            this.userService.create(this.usuario).subscribe( cliente => {
-              this.onSignUpRedirect();
-            });
-          }
-        },
-        err => {
-          this.snackBar.open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
-      });
-    }).catch(err => {
+              this.userService.create(this.usuario).subscribe(cliente => {
+                this.onSignUpRedirect();
+              });
+            }
+          },
+          err => {
+            this.snackBar.open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+          });
+      }).catch(err => {
         this.snackBar.open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
-    });
+      });
   }
 
-  onGoogleSignUp(){
+  onGoogleSignUp() {
     this.authService.loginGoogleUser()
-    .then((res) => {
-      this.authService.isAuth().subscribe(
-        user => {
-          if (user) {
-            this.usuario.uid = user.uid;
-            this.usuario.email = user.email;
-            this.usuario.nombre = user.displayName;
-            this.usuario.telefono = user.phoneNumber;
+      .then((res) => {
+        this.authService.isAuth().subscribe(
+          user => {
+            if (user) {
+              this.usuario.uid = user.uid;
+              this.usuario.email = user.email;
+              this.usuario.nombre = user.displayName;
+              this.usuario.telefono = user.phoneNumber;
 
-            console.log(this.usuario);
+              console.log(this.usuario);
 
-            this.userService.create(this.usuario).subscribe( cliente => {
-              this.onSignUpRedirect();
-            });
-          }
-        },
-        err => {
-          this.snackBar.open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+              this.userService.create(this.usuario).subscribe(cliente => {
+                this.onSignUpRedirect();
+              });
+            }
+          },
+          err => {
+            this.snackBar.open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+          });
+      }).catch(err => {
+        this.snackBar.open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
       });
-    }).catch(err => {
-      this.snackBar.open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
-    });
   }
 
   onSignIn() {

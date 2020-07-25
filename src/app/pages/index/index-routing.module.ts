@@ -6,7 +6,7 @@ import { IndexComponent } from './index.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
-  {path: 'auth/resetPassword', component: ResetPasswordComponent }
+  { path: 'auth/resetPassword', component: ResetPasswordComponent }
 ];
 
 @NgModule({

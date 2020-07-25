@@ -19,7 +19,15 @@ export class FormAddressComponent implements OnInit {
   public zoom = 15;
 
   get address(): string {
-    return `${this.addressFormGroup.get('calle').value ? this.addressFormGroup.get('calle').value : 'A completar'}, ${this.addressFormGroup.get('numero').value ? this.addressFormGroup.get('numero').value : ''}`;
+    return this.calle ? `${this.calle}, ${this.numero}` : 'A completar';
+  }
+
+  get calle(): string {
+    return this.addressFormGroup.get('calle').value;
+  }
+
+  get numero(): string {
+    return this.addressFormGroup.get('numero').value;
   }
 
   get latitude(): number {

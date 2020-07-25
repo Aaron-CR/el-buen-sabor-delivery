@@ -6,26 +6,16 @@
         <mat-icon class="material-icons-outlined"> close </mat-icon>
       </button>
     </div>
-    <div class="card-time">
-      <span>{{ time }}</span>
-    </div>
+    <div class="card-time"> {{ time }} </div>
   </div>
 </div>
 <mat-dialog-content class="app-content mx-0 py-4">
   <div class="d-flex justify-content-between">
-    <div class="card-title">
-      {{ data.denominacion | titlecase }}
-    </div>
-    <div class="card-price">
-      {{ data.precio | currency:"ARS":"symbol" }}
-    </div>
+    <div class="card-title"> {{ data.denominacion | titlecase }} </div>
+    <div class="card-price"> {{ data.precio | currency:"ARS":"symbol" }} </div>
   </div>
-  <div class="my-2">
-    {{ categoria | titlecase }}
-  </div>
-  <div class="my-2">
-    {{ localData.descripcion | titlecase }}
-  </div>
+  <div class="my-2"> {{ categoria | titlecase }} </div>
+  <div class="my-2"> {{ localData.descripcion | titlecase }} </div>
   <p class="card-ingredients" *ngIf="ingredientes">Ingredientes: {{ ingredientes }}</p>
   <div class="d-flex flex-wrap justify-content-between align-items-center">
     <div class="d-flex flex-grow-1 align-items-center">
@@ -39,8 +29,8 @@
       </mat-form-field>
     </div>
     <div class="d-flex flex-fill">
-      <div class="ml-auto" matTooltip="Este articulo se encuentra fuera de stock" matTooltipPosition="above"
-        [matTooltipDisabled]="!outOfStock">
+      <div class="ml-auto" matTooltipPosition="above" [matTooltipDisabled]="!outOfStock"
+        matTooltip="Este articulo se encuentra fuera de stock">
         <button mat-raised-button color="primary" class="card-button px-4" [mat-dialog-close]="true"
           [disabled]="outOfStock" (click)="addProductToCart()">
           Agregar a mi orden

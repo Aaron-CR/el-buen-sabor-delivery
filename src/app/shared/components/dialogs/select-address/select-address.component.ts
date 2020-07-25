@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-delivery';
 import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.service';
 
@@ -10,10 +10,11 @@ import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.
   templateUrl: './select-address.component.html',
   styleUrls: ['./select-address.component.scss']
 })
-export class SelectAddressComponent implements OnInit {
+export class SelectAddressComponent implements OnInit, OnDestroy {
 
-  private addressSubject = new BehaviorSubject<DireccionDelivery[]>([]);
-  public address$ = this.addressSubject.asObservable();
+  private subscription: Subscription = new Subscription();
+  private addressesSubject = new BehaviorSubject<DireccionDelivery[]>([]);
+  public addresses$ = this.addressesSubject.asObservable();
   public direccion: DireccionDelivery;
 
   constructor(
@@ -23,8 +24,16 @@ export class SelectAddressComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.customerService.getDirecciones(this.authService.uid)
-      .subscribe((response) => this.addressSubject.next(response));
+    this.getAddresses();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  getAddresses() {
+    this.subscription.add(this.customerService.getDirecciones(this.authService.uid)
+      .subscribe((response) => this.addressesSubject.next(response)));
   }
 
   onSelect() {

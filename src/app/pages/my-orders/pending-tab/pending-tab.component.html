@@ -3,7 +3,6 @@
   <div class="empty-state" *ngIf="loading$ | async">
     <mat-spinner></mat-spinner>
   </div>
-
   <!-- Empty State -->
   <div class="empty-state" *ngIf="(length$ | async) === 0">
     <mat-icon class="material-icons">room_service</mat-icon>

@@ -8,7 +8,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
 
 @NgModule({
-  declarations: [IndexComponent, ResetPasswordComponent],
+  declarations: [
+    IndexComponent,
+    ResetPasswordComponent
+  ],
   imports: [
     CommonModule,
     IndexRoutingModule,

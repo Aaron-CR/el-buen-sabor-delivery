@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
 import { MatDialog } from '@angular/material/dialog';
 import { InvoiceComponent } from 'src/app/shared/components/dialogs/invoice/invoice.component';
@@ -8,23 +8,20 @@ import { InvoiceComponent } from 'src/app/shared/components/dialogs/invoice/invo
   templateUrl: './order-card.component.html',
   styleUrls: ['./order-card.component.scss']
 })
-export class OrderCardComponent implements OnInit {
+export class OrderCardComponent {
 
   @Input()
   public data: Orden;
 
   get orderDetail() {
-    let orderDetail = '';
-    this.data.detalles.map((detalle) => {
-      orderDetail += `${detalle.cantidad}x ${detalle.articuloManufacturado ? detalle.articuloManufacturado.denominacion : detalle.insumo.denominacion},  `;
-    });
-    return orderDetail;
+    return this.data.detalles.map((detalle) =>
+      ` ${detalle.cantidad}x ${detalle.articuloManufacturado
+        ? detalle.articuloManufacturado.denominacion
+        : detalle.insumo.denominacion}`
+    );
   }
 
   constructor(private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-  }
 
   getStatusClass(status: string) {
     return status.replace(/\s+/g, '-');

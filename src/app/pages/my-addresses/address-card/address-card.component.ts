@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { DialogService } from 'src/app/shared/components/dialogs/dialog.service';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-delivery';
 
 @Component({
@@ -7,20 +6,18 @@ import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-deliv
   templateUrl: './address-card.component.html',
   styleUrls: ['./address-card.component.scss']
 })
-export class AddressCardComponent implements OnInit {
+export class AddressCardComponent {
 
   @Input() public data: DireccionDelivery;
   @Output() public update = new EventEmitter<DireccionDelivery>();
   @Output() public delete = new EventEmitter<object>();
 
   get address() {
-    return `${this.data.calle} ${this.data.numero}, ${this.data.localidad.nombre}, ${this.data.localidad.provincia.nombre}`;
+    const { calle, numero, localidad } = this.data;
+    return `${calle} ${numero}, ${localidad.nombre}, ${localidad.provincia.nombre}`;
   }
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   onUpdate(item: DireccionDelivery) {
     this.update.emit(item);

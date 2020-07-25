@@ -14,7 +14,7 @@
   <div class="date pt-1">{{ data.fecha | date:'medium' }}</div>
   <div class="details"> {{ orderDetail }} </div>
   <div class="d-flex pt-3">
-    <button mat-stroked-button class="w-100 mr-2" matTooltip="Esta característica aun no está disponible">
+    <button mat-stroked-button class="w-100 mr-2" matTooltip="Esta característica aún no está disponible">
       <mat-icon class="material-icons" [inline]="true">sync</mat-icon> Repetir orden
     </button>
     <button mat-stroked-button class="w-100 ml-2" [class]="getHiddenClass()" (click)="openDialog()">

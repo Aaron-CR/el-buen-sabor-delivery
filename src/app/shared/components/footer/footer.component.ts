@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DialogService } from '../dialogs/dialog.service';
 
 @Component({
@@ -6,14 +6,11 @@ import { DialogService } from '../dialogs/dialog.service';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   public year = new Date().getFullYear();
 
   constructor(private dialogService: DialogService) { }
-
-  ngOnInit(): void {
-  }
 
   onSignUp() {
     this.dialogService.signUp();
