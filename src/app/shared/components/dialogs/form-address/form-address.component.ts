@@ -4,7 +4,6 @@ import { Localidad } from 'src/app/core/models/direccion/localidad';
 import { HttpClient } from '@angular/common/http';
 import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-delivery';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { environment } from 'src/environments/environment';
 import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
@@ -14,7 +13,6 @@ import { AppEndpoints } from 'src/app/app-endpoints';
 })
 export class FormAddressComponent implements OnInit {
 
-  private readonly API_URL = environment.API_URL;
   public localData: DireccionDelivery;
   public action: string;
   public addressFormGroup: FormGroup;
@@ -99,7 +97,7 @@ export class FormAddressComponent implements OnInit {
   }
 
   getLocalidades() {
-    return this.http.get(this.API_URL + AppEndpoints.LOCATIONS_ALL).pipe()
+    return this.http.get(AppEndpoints.LOCATIONS_ALL).pipe()
       .subscribe((data: Array<Localidad>) => this.localidades = data);
   }
 
