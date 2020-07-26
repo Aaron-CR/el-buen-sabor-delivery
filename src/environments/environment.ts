@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://elbuensabor-api.herokuapp.com/api/v1',
+  API_URL: 'http://localhost:8080/api/v1',
   firebaseConfig: {
     apiKey: 'AIzaSyCcVf7VISioriT8I7gyGB9Tgxng6ETdQGo',
     authDomain: 'elbuensabor-delivery.firebaseapp.com',
@@ -13,7 +13,7 @@ export const environment = {
     storageBucket: 'elbuensabor-delivery.appspot.com',
     messagingSenderId: '126762949811',
     appId: '1:126762949811:web:f8cbae9415e5dff80624c6',
-   measurementId: 'G-SPSBJX3N7P'
+    measurementId: 'G-SPSBJX3N7P'
   }
 };
 

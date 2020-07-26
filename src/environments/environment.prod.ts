@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  API_URL: 'http://localhost:8080/api/v1',
+  API_URL: 'https://elbuensabor-api.herokuapp.com/api/v1',
   firebaseConfig: {
     apiKey: 'AIzaSyCcVf7VISioriT8I7gyGB9Tgxng6ETdQGo',
     authDomain: 'elbuensabor-delivery.firebaseapp.com',
