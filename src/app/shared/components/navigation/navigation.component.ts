@@ -55,6 +55,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
       .then((resolve) => {
         this.drawer.close();
         this.userSubject.next(null);
+        this.subscription.unsubscribe();
         this.router.navigate(['']);
       }, (reject) => {
         console.log('error ', reject);

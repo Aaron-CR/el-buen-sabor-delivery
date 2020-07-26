@@ -8,8 +8,8 @@
       <img src="assets/images/avatars/customer.png" class="avatar">
     </div>
     <div class="flex-row ml-4 mt-4 mr-auto">
-      <h2> {{user.nombre}} {{user.apellido}} </h2>
-      <span> {{user.email}} </span>
+      <h2> {{cliente.nombre}} {{cliente.apellido}} </h2>
+      <span> {{cliente.email}} </span>
       <button mat-raised-button color="primary" class="ml-3" (click)="toggleEdit()">
         Editar datos
       </button>
@@ -21,36 +21,48 @@
         <img src="assets/images/avatars/customer.png" class="avatar">
       </div>
       <div class="m-4 flex-row flex-grow-1">
-        <mat-form-field class="w-100">
-          <mat-label>Nombre</mat-label>
-          <input matInput disabled value="{{user.nombre}}">
-        </mat-form-field>
-        <mat-form-field class="w-100">
-          <mat-label>Apellido</mat-label>
-          <input matInput disabled value="{{user.apellido}}">
-        </mat-form-field>
-        <mat-form-field class="w-100">
-          <mat-label>Email</mat-label>
-          <input matInput disabled value="{{user.email}}">
-        </mat-form-field>
-        <mat-form-field class="w-100">
-          <mat-label>Telefono</mat-label>
-          <input matInput disabled value="{{user.telefono}}">
-        </mat-form-field>
-        <div class="d-flex">
-          <div class="flex-grow-1">
-            <mat-form-field class="w-100">
-              <mat-label>Contraseña</mat-label>
-              <input matInput type="password" disabled value="•••••••••••••">
-            </mat-form-field>
+        <form novalidate [formGroup]="profileForm">
+          <mat-form-field class="w-100">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" placeholder="Ingrese su nombre">
+            <mat-error *ngIf="errorHandling('nombre', 'required')">
+              El nombre es <strong>obligatorio</strong>.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="apellido" placeholder="Ingrese su apellido">
+            <mat-error *ngIf="errorHandling('apellido', 'required')">
+              El apellido es <strong>obligatorio</strong>.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Telefono</mat-label>
+            <input matInput formControlName="telefono" placeholder="Ingrese su número de teléfono">
+            <mat-error *ngIf="errorHandling('telefono', 'required')">
+              El teléfono es <strong>obligatorio</strong>.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Email</mat-label>
+            <input matInput readonly class="form-control" value="{{user.email}}">
+          </mat-form-field>
+          <div class="d-flex">
+            <div class="flex-grow-1">
+              <mat-form-field class="w-100">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" disabled value="•••••••••••••">
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-stroked-button class="ml-3" (click)="onEditPassword()">
+                <mat-icon class="material-icons" [inline]="true">edit</mat-icon> Editar
+              </button>
+            </div>
           </div>
-          <div>
-            <button mat-stroked-button class="ml-3" (click)="onEditPassword()">
-              <mat-icon class="material-icons" [inline]="true">edit</mat-icon> Editar
-            </button>
-          </div>
-        </div>
-        <button mat-raised-button color="primary" (click)="toggleEdit()"> Cancelar </button>
+          <button mat-raised-button color="primary" (click)="toggleEdit()"> Cancelar </button>
+          <button mat-raised-button color="primary" class="ml-1" (click)="onSubmit()"> Editar </button>
+        </form>
       </div>
     </div>
   </ng-template>
