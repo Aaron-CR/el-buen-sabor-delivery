@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpParams } from '@angular/common/http';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService extends ApiService<Orden> {
 
-  protected endpoint = 'http://localhost:8080/api/v1/comprobantes/ordenes';
+  protected endpoint = AppEndpoints.ORDERS;
 
   post(object: any, clienteUid: string): Observable<Orden> {
     return this.httpClient.post<Orden>(`${this.endpoint}/save?clienteUid=${clienteUid}`, object)

@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DireccionDelivery } from 'src/app/core/models/direccion/direccion-delivery';
 import { HttpParams } from '@angular/common/http';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService extends ApiService<Cliente> {
 
-  protected endpoint = 'http://localhost:8080/api/v1/usuarios/clientes';
+  protected endpoint = AppEndpoints.CUSTOMERS;
 
   findByUid(uid: string): Observable<Cliente> {
     return this.httpClient.get<Cliente>(`${this.endpoint}/current/${uid}`)

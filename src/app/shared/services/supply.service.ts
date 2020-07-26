@@ -4,13 +4,14 @@ import { ApiService } from './api.service';
 import { catchError } from 'rxjs/operators';
 import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupplyService extends ApiService<ArticuloInsumo> {
 
-  protected endpoint = 'http://localhost:8080/api/v1/articulos/insumos';
+  protected endpoint = AppEndpoints.SUPPLY;
 
   getAllPublic(filter = ''): Observable<ArticuloInsumo[]> {
     return this.httpClient.get<ArticuloInsumo[]>(`${this.endpoint}/allPublic`, {

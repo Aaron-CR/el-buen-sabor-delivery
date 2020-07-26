@@ -3,6 +3,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 import { Base } from 'src/app/core/models/base';
 
 @Injectable({
@@ -10,12 +11,13 @@ import { Base } from 'src/app/core/models/base';
 })
 export class ApiService<E extends Base> {
 
+  private readonly API_URL = environment.API_URL;
   protected endpoint: string;
 
   constructor(protected httpClient: HttpClient, protected snackBar: MatSnackBar) { }
 
   findAll(filter = '', page = 0, size = 8, sortBy = 'ultimaActualizacion', direction = 'desc'): Observable<object> {
-    return this.httpClient.get(this.endpoint, {
+    return this.httpClient.get(`${this.API_URL}${this.endpoint}`, {
       params: new HttpParams()
         .set('filter', filter)
         .set('page', page.toString())
@@ -26,34 +28,34 @@ export class ApiService<E extends Base> {
   }
 
   findAllUnpaged(filter = ''): Observable<E[]> {
-    return this.httpClient.get<E[]>(`${this.endpoint}/all`, {
+    return this.httpClient.get<E[]>(`${this.API_URL}${this.endpoint}/all`, {
       params: new HttpParams()
         .set('filter', filter)
     }).pipe(catchError(error => this.handleError(error)));
   }
 
   findById(id: number): Observable<E> {
-    return this.httpClient.get<E>(`${this.endpoint}/${id}`)
+    return this.httpClient.get<E>(`${this.API_URL}${this.endpoint}/${id}`)
       .pipe(catchError(error => this.handleError(error)));
   }
 
   create(object: object): Observable<object> {
-    return this.httpClient.post(this.endpoint, object)
+    return this.httpClient.post(`${this.API_URL}${this.endpoint}`, object)
       .pipe(catchError(error => this.handleError(error)));
   }
 
   update(object: object, id: number): Observable<object> {
-    return this.httpClient.put(`${this.endpoint}/${id}`, object)
+    return this.httpClient.put(`${this.API_URL}${this.endpoint}/${id}`, object)
       .pipe(catchError(error => this.handleError(error)));
   }
 
   delete(object: object, id: number): Observable<object> {
-    return this.httpClient.delete(`${this.endpoint}/${id}`, object)
+    return this.httpClient.delete(`${this.API_URL}${this.endpoint}/${id}`, object)
       .pipe(catchError(error => this.handleError(error)));
   }
 
   undo(object: object, id: number): Observable<object> {
-    return this.httpClient.put(`${this.endpoint}/undoDelete/${id}`, object)
+    return this.httpClient.put(`${this.API_URL}${this.endpoint}/undoDelete/${id}`, object)
       .pipe(catchError(error => this.handleError(error)));
   }
 
