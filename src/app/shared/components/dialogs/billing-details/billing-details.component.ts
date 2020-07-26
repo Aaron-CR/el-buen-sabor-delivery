@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.service';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
-<<<<<<< HEAD
-=======
-import { database } from 'firebase';
->>>>>>> local
 import { DialogService } from '../dialog.service';
 
 
@@ -23,13 +19,8 @@ export class BillingDetailsComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private authService: AuthService,
-<<<<<<< HEAD
-    private dialogService: DialogService,
-    public cartService: ShoppingCartService
-=======
     public cartService: ShoppingCartService,
     private dialogService: DialogService,
->>>>>>> local
   ) { }
 
   ngOnInit(): void {
