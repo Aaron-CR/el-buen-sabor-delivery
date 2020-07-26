@@ -57,7 +57,7 @@ export class DialogService {
   schedule() {
     this.matDialog.open(ScheduleComponent, {
       panelClass: 'app-dialog',
-      width: '420px'
+      width: '500px'
     });
   }
 
