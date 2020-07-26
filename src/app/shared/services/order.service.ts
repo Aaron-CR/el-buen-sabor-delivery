@@ -32,4 +32,8 @@ export class OrderService extends ApiService<Orden> {
     }).pipe(catchError(error => this.handleError(error)));
   }
 
+  getTime(): Observable<any> {
+    return this.httpClient.get<any>(`${this.endpoint}/time`).pipe(catchError(error => this.handleError(error)));
+  }
+
 }

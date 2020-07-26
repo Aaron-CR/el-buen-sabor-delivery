@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from 'src/app/shared/shopping-cart/shopping-cart.service';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
+import { database } from 'firebase';
+import { DialogService } from '../dialog.service';
 
 
 @Component({
@@ -18,13 +20,46 @@ export class BillingDetailsComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private authService: AuthService,
-    public cartService: ShoppingCartService
+    public cartService: ShoppingCartService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  patchValues() {
+    this.cartService.shoppingCartForm.patchValue({ formaPago: this.formaPago });
+    this.cartService.shoppingCartForm.patchValue({ aclaraciones: this.aclaraciones });
+  }
+
+  onSubmit(){
+    let date: Date;
+    this.orderService.getTime().subscribe( res => {
+      date = new Date(res.date);
+      this.validateTime(date, res.time);
+    }
+    );
+  }
+
+  validateTime(date: Date, time: string){
+    switch (date.getDay()){
+      case 0: case 6:
+        if ((time > '20:00:00' && time < '23:59:59') || (time > '13:00:00' && time < '15:00:00')){
+          this.postOrder();
+        } else {
+          this.dialogService.schedule();
+        }
+        break;
+      default:
+        if (time > '20:00:00' && time < '23:59:59'){
+          this.postOrder();
+        } else {
+          this.dialogService.schedule();
+        }
+    }
+  }
+
+  postOrder() {
     this.patchValues();
     this.orderService.post(this.cartService.shoppingCartForm.value, this.authService.uid).subscribe((res) => {
       if (res.id) {
@@ -32,11 +67,6 @@ export class BillingDetailsComponent implements OnInit {
         alert('Añadido! Se ha añadido correctamente.');
       }
     });
-  }
-
-  patchValues() {
-    this.cartService.shoppingCartForm.patchValue({ formaPago: this.formaPago });
-    this.cartService.shoppingCartForm.patchValue({ aclaraciones: this.aclaraciones });
   }
 
 }
