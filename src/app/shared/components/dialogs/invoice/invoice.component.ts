@@ -14,24 +14,11 @@ import html2canvas from 'html2canvas';
 export class InvoiceComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
-  public orderId: number;
   public invoice: Factura;
-  public total: number;
+  public orderId: number;
+  public subtotal: number;
+  public address: string;
   public invoiceColumns: string[] = ['producto', 'precio', 'cantidad', 'total'];
-
-  get address() {
-    if (this.invoice.orden.delivery) {
-      const { calle, numero, localidad } = this.invoice.orden.direccionEntrega;
-      return `${calle} ${numero}, ${localidad.nombre}, ${localidad.provincia.nombre}`;
-    } else {
-      if (this.invoice.orden.cliente.direccionesEnvio[0] === undefined) {
-        return '';
-      } else {
-        const { calle, numero, localidad } = this.invoice.orden.cliente.direccionesEnvio[0];
-        return `${calle} ${numero}, ${localidad.nombre}, ${localidad.provincia.nombre}`;
-      }
-    }
-  }
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: number,
@@ -50,7 +37,11 @@ export class InvoiceComponent implements OnInit, OnDestroy {
 
   getOrderInvoice() {
     this.subscription.add(this.invoiceService.getInvoice(this.orderId)
-      .subscribe(res => this.invoice = res));
+      .subscribe(res => {
+        this.invoice = res;
+        this.subtotal = this.getSubTotal();
+        this.address = this.getAddress();
+      }));
   }
 
   downloadInvoice() {
@@ -64,6 +55,24 @@ export class InvoiceComponent implements OnInit, OnDestroy {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save(`invoice-${this.invoice.id}.pdf`);
     });
+  }
+
+  getSubTotal() {
+    return this.invoice.orden.detalles.reduce((acc, value) => acc += value.precioTotal, 0);
+  }
+
+  getAddress() {
+    if (this.invoice.orden.delivery) {
+      const { calle, numero, localidad } = this.invoice.orden.direccionEntrega;
+      return `${calle} ${numero}, ${localidad.nombre}, ${localidad.provincia.nombre}`;
+    } else {
+      if (this.invoice.orden.cliente.direccionesEnvio[0] === undefined) {
+        return '';
+      } else {
+        const { calle, numero, localidad } = this.invoice.orden.cliente.direccionesEnvio[0];
+        return `${calle} ${numero}, ${localidad.nombre}, ${localidad.provincia.nombre}`;
+      }
+    }
   }
 
 }

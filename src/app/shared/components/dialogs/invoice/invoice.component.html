@@ -75,17 +75,21 @@
         <div class="d-flex justify-content-between footer-border">
           <ng-container *ngIf="invoice.orden.delivery; else enTienda">
             <div class="d-flex flex-column">
+              <div class="discount-text"> SUBTOTAL </div>
               <div class="discount-text"> ENVÍO </div>
             </div>
             <div class="d-flex flex-column">
+              <div class="discount-text"> {{ subtotal | currency:"ARS":"symbol" }} </div>
               <div class="discount-text"> {{ '50' | currency:"ARS":"symbol" }} </div>
             </div>
           </ng-container>
           <ng-template #enTienda>
             <div class="d-flex flex-column">
+              <div class="discount-text"> SUBTOTAL </div>
               <div class="discount-text"> DESCUENTO </div>
             </div>
             <div class="d-flex flex-column">
+              <div class="discount-text"> {{ subtotal | currency:"ARS":"symbol" }} </div>
               <div class="discount-text"> -{{ invoice.orden.montoDescuento | currency:"ARS":"symbol" }} </div>
             </div>
           </ng-template>
