@@ -11,7 +11,12 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-flat-button color="primary" class="w-100 mb-4" [mat-dialog-close]="true" (click)="onSelect()">
+  <button mat-raised-button color="primary" class="w-100 mb-1" [mat-dialog-close]="true" (click)="onSelect()">
     Continuar
   </button>
+  <a routerLink="/my-addresses">
+    <button mat-flat-button color="gestion-button" class="w-100 mb-4" [mat-dialog-close]="true">
+      Gestionar direcciones
+    </button>
+  </a>
 </app-dialog>
