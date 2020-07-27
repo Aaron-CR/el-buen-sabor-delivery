@@ -20,11 +20,12 @@ export class SelectAddressComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private customerService: CustomerService,
-    public cartService: ShoppingCartService
+    public cartService: ShoppingCartService,
   ) { }
 
   ngOnInit(): void {
     this.getAddresses();
+    this.direccion = this.cartService.addressValue;
   }
 
   ngOnDestroy(): void {

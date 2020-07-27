@@ -50,6 +50,10 @@ export class ShoppingCartService {
       : 'No seleccionaste ninguna dirección';
   }
 
+  get addressValue(){
+    return this.direccionEntrega.value;
+  }
+
   get itemsLength() {
     return this.shoppingCartForm.value.detalles.reduce((acc, val) => acc += val.cantidad, 0);
   }

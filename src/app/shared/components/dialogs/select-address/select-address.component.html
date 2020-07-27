@@ -6,6 +6,9 @@
         <span>{{direccion.alias}}</span> |
         <small>Dirección: {{direccion.calle}} {{direccion.numero}}</small>
       </mat-option>
+      <mat-option [value]="null">
+        <span>No seleccionar</span>
+      </mat-option>
     </mat-select>
   </mat-form-field>
   <button mat-flat-button color="primary" class="w-100 mb-4" [mat-dialog-close]="true" (click)="onSelect()">

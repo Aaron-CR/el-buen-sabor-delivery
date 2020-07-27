@@ -21,8 +21,6 @@ export class AuthGuard implements CanActivate {
       tap((auth) => {
         if (!auth) {
           this.router.navigate(['/index']);
-          /* this.snackBar.open
-          ('¡No tienes los permisos necesarios para acceder!', 'OK', { duration: 10000, panelClass: ['app-snackbar'] }); */
         }
       })
     );
